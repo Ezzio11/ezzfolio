@@ -7,10 +7,7 @@ import 'katex/dist/katex.min.css';
 import { useSearchParams } from 'react-router-dom';
 import { Link as LinkIcon, Check } from 'lucide-react';
 
-// Manual list of posts to avoid complex backend setup
-const POSTS = [
-    { slug: 'welcome', title: 'Hello World', date: 'Jan 08, 2026', tags: ['General'], readTime: '2 min read' },
-];
+import { POSTS } from '../data/posts';
 
 const TagColors = {
     'General': '#0eb5ff', // Bright Blue
