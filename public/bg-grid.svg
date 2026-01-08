@@ -1,0 +1,84 @@
+<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='800' height='560' preserveAspectRatio='none' viewBox='0 0 800 560'>
+  <defs>
+    <path d='M2 -2 L-2 2z' id='p1'/>
+    <path d='M6 -6 L-6 6z' id='p2'/>
+  </defs>
+  <symbol id='sym'>
+    <!-- The Grid Pattern (Small diamonds) -->
+    <use xlink:href='#p1' x='30' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='30' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='30' y='210' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='30' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='30' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='30' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='90' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='90' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='90' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='90' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='90' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p1' x='150' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='150' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='150' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='150' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='150' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='150' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='150' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p1' x='210' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='210' y='210' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='210' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='210' y='390' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='210' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='270' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='270' y='210' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='270' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='270' y='390' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='270' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p1' x='330' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='330' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='330' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='330' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p1' x='390' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='390' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+    
+    <use xlink:href='#p2' x='450' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='450' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='450' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='450' y='390' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='450' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='510' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='510' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='510' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='510' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='510' y='390' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='510' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='570' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='570' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='570' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='630' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='630' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='630' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='630' y='210' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='630' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='630' y='330' stroke='rgba(53, 196, 255, 0.2)'/>
+
+    <use xlink:href='#p2' x='690' y='30' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='690' y='90' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='690' y='150' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p2' x='690' y='270' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='690' y='330' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='690' y='450' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='690' y='510' stroke='rgba(53, 196, 255, 0.2)'/>
+    <use xlink:href='#p1' x='690' y='570' stroke='rgba(53, 196, 255, 0.2)'/>
+  </symbol>
+  <use xlink:href='#sym' x='0' y='0'/>
+  <use xlink:href='#sym' x='720' y='0'/>
+</svg>

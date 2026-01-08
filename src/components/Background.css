@@ -1,0 +1,117 @@
+/* src/components/Background.css */
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3;
+  overflow: hidden;
+
+  /* --main-color: #0d0d0c; REMOVED to use global var */
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+/* Base styles for parallax layers */
+.parallax-layer {
+  position: absolute;
+  top: -10vh;
+  left: -10vw;
+  width: 120vw;
+  height: 120vh;
+  background-size: cover;
+  /* or contain, depending on preference */
+  background-repeat: repeat;
+  /* Ensure it tiles if needed */
+  pointer-events: none;
+}
+
+/* Layer 1: The Grid (Background, moves slowly) */
+.layer-grid {
+  background-image: url("/bg-grid.svg");
+  opacity: 0.6;
+  transition: filter 0.3s ease;
+}
+
+.light-mode .layer-grid {
+  filter: invert(1) opacity(0.5);
+  /* Makes light grid dark */
+}
+
+/* Layer 2: The Shapes (Foreground, moves faster) */
+.layer-shapes {
+  background-image: url("/bg-shapes.svg");
+  transition: filter 0.3s ease;
+  animation: colorShiftDark 60s infinite linear;
+  /* Slow dreamy shift */
+}
+
+@keyframes colorShiftDark {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.light-mode .layer-shapes {
+  animation: colorShiftLight 60s infinite linear;
+}
+
+@keyframes colorShiftLight {
+  0% {
+    filter: hue-rotate(180deg) brightness(0.8) contrast(1.2);
+  }
+
+  100% {
+    filter: hue-rotate(540deg) brightness(0.8) contrast(1.2);
+  }
+}
+
+/* Layer 3: Editorial Accents */
+.layer-accents {
+  z-index: -1;
+  /* Behind content but in front of grid/shapes */
+}
+
+.accent-mark {
+  position: absolute;
+  color: var(--grid-line);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 300;
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.accent-mark.crosshair {
+  font-size: 2rem;
+  animation: floatingAccent 10s ease-in-out infinite;
+}
+
+.accent-mark.v-line {
+  border-left: 1px dashed var(--grid-line);
+  animation: floatingAccent 15s ease-in-out infinite reverse;
+}
+
+.accent-mark.h-line {
+  border-top: 1px dashed var(--grid-line);
+  animation: floatingAccent 12s ease-in-out infinite 2s;
+}
+
+@keyframes floatingAccent {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translate(10px, -10px);
+    opacity: 0.6;
+  }
+}

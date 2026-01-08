@@ -1,0 +1,391 @@
+:root {
+    --bg-color: #050510;
+    --terminal-bg: #0a0a12;
+    --neon-pink: #ff2a6d;
+    --neon-blue: #05d9e8;
+    --neon-green: #00ff9f;
+    --text-main: #FFFFFF;
+    --text-dim: rgba(255, 255, 255, 0.6);
+    --grid-line: rgba(5, 217, 232, 0.1);
+    --scanline-color: rgba(0, 0, 0, 0.5);
+    --roman-overlay-bg: #000000;
+}
+
+.light-mode {
+    --bg-color: #e6e6e6;
+    /* Concrete/White */
+    --terminal-bg: #ffffff;
+    --neon-pink: #ff0055;
+    --neon-blue: #00AEEF;
+    /* Cyan that works on white */
+    --neon-green: #000000;
+    /* Stark black for accents */
+    --text-main: #000000;
+    /* Strictly Black */
+    --text-dim: rgba(0, 0, 0, 0.75);
+    --grid-line: rgba(0, 0, 0, 0.15);
+    /* Visible dark grid */
+    --scanline-color: rgba(0, 0, 0, 0.02);
+    --roman-overlay-bg: #ffffff;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Light Mode Overrides for Project Overlay */
+body.light-mode .project-overlay h1 {
+    color: #1a1a1a !important;
+    /* Force dark text */
+}
+
+/* REMOVED: body.light-mode .project-overlay span override to allow SyntaxHighlighter to work */
+
+body.light-mode .project-overlay .bg-pattern {
+    opacity: 0.15 !important;
+    /* Fade pattern significantly */
+    filter: invert(0) grayscale(100%) !important;
+    /* Keep it grey/white, don't invert to black */
+}
+
+/* Light Mode - Project Cards High Contrast */
+body.light-mode .project-card h3 {
+    color: #000 !important;
+    text-shadow: none !important;
+}
+
+body.light-mode .project-card .card-category {
+    color: #000 !important;
+    background: transparent !important;
+    padding: 0;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    /* Thick white halo to lift text off pattern without a box */
+    text-shadow:
+        3px 0 0 #fff, -3px 0 0 #fff, 0 3px 0 #fff, 0 -3px 0 #fff,
+        2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff !important;
+}
+
+/* Icon handled by React now */
+body.light-mode .project-card .card-category::before {
+    content: none !important;
+}
+
+/* White Pattern */
+body.light-mode .project-card .bg-pattern {
+    opacity: 0.15 !important;
+    filter: invert(1) brightness(1.5) !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Restore Ulafala */
+body.light-mode .project-card .card-overlay {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* Faint bloody gradient */
+body.light-mode .project-card .bloody-gradient {
+    opacity: 0.05 !important;
+}
+
+/* Editorial Mask override for Light Mode */
+body.light-mode .editorial-mask {
+    background: linear-gradient(to right, var(--bg-color) 30%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+/* Light Mode Social Hover - High Contrast Editorial */
+body.light-mode .social-link:hover,
+body.light-mode .social-link.is-active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* --- CRT/GRAIN REMOVED FOR CLEAN LOOK --- */
+
+/* --- VIGNETTE & GLOW --- */
+
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Syne', sans-serif;
+    text-transform: none;
+    /* Let the font's character shine */
+    letter-spacing: -0.02em;
+    /* Tighter for display feel */
+    font-weight: 700;
+    margin: 0;
+}
+
+h1 {
+    font-size: 4rem;
+    /* Big and bold */
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 0 0 8px var(--neon-blue);
+}
+
+button {
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* --- UTILITIES --- */
+.glitch-text {
+    position: relative;
+    color: var(--text-main);
+}
+
+.glow-pink {
+    text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+}
+
+.glow-blue {
+    text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+}
+
+.grid-bg {
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    width: 100%;
+    height: 100%;
+}
+
+.social-link {
+    color: var(--text-dim);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding: 12px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link:hover,
+.social-link.is-active {
+    background: var(--grid-line);
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px var(--grid-line);
+    transform: translateY(-5px) scale(1.1);
+}
+
+.section-title {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--grid-line);
+    font-size: 1.2rem;
+    font-weight: normal;
+    opacity: 0.8;
+    padding-bottom: 0.5rem;
+    color: var(--text-main);
+    font-family: 'Syne', sans-serif;
+}
+
+.project-card:hover,
+.project-card.is-mobile-active {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px var(--grid-line);
+    border-color: var(--neon-blue) !important;
+}
+
+/* --- REFACTORED UTILITIES --- */
+
+.theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--terminal-bg);
+    border: 1px solid var(--grid-line);
+    color: var(--text-main);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+.footer-status {
+    margin-top: 6rem;
+    border-top: 1px solid var(--grid-line);
+    padding-top: 2rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: none;
+    color: var(--text-main);
+    min-height: 4rem;
+}
+
+/* --- RESPONSIVE OPTIMIZATIONS --- */
+.main-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        /* Smaller title */
+        min-height: auto;
+    }
+
+    .main-container {
+        padding: 2rem 1.5rem;
+        /* Less padding */
+    }
+
+    .theme-toggle {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- MSTAG AURORA (Tuned for Project Card) --- */
+@keyframes jumbo {
+    from {
+        background-position: 50% 50%, 50% 50%;
+    }
+
+    to {
+        background-position: 350% 50%, 350% 50%;
+    }
+}
+
+.jumbo {
+    --stripes: repeating-linear-gradient(100deg,
+            #fff 0%,
+            #fff 7%,
+            transparent 10%,
+            transparent 12%,
+            #fff 16%);
+    --stripesDark: repeating-linear-gradient(100deg,
+            #000 0%,
+            #000 7%,
+            transparent 10%,
+            transparent 12%,
+            #000 16%);
+    /* BASE LAYER */
+    /* BASE LAYER */
+    /* EXACT SOURCE COLORS (Reverted Tuning) */
+    --rainbow: repeating-linear-gradient(100deg,
+            #60a5fa 10%,
+            #e879f9 15%,
+            #60a5fa 20%,
+            #5eead4 25%,
+            #60a5fa 30%);
+
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    /* User requested original size */
+    background-position: 50% 50%, 50% 50%;
+
+    /* ORIGINAL LIGHT MODE LOGIC */
+    filter: invert(100%);
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 1;
+    mix-blend-mode: normal;
+    /* Reset mix-blend-mode from previous debug */
+}
+
+.jumbo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 100%;
+    animation: jumbo 60s linear infinite;
+
+    /* Safely using scroll to allow card transforms */
+    background-attachment: scroll;
+    mix-blend-mode: difference;
+}
+
+/* Dark Mode Adaptation (Original Logic mapped to Project Theme) */
+body:not(.light-mode) .jumbo {
+    background-image: var(--stripesDark), var(--rainbow);
+    /* The 'Dark' version removes the invert and applies blur/saturation */
+    filter: blur(10px) opacity(50%) saturate(200%);
+    mask-image: none;
+    /* Remove mask in dark mode if desired, or keep it. Original .dark implies different handling. */
+}
+
+body:not(.light-mode) .jumbo::after {
+    background-image: var(--stripesDark), var(--rainbow);
+}

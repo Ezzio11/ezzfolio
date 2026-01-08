@@ -1,0 +1,4 @@
+{
+    "step1": "🦈 Initializing Shark for Regression Demo...\n\nTraining Linear Regression model...\n\n✅ Model successfully trained!",
+    "step2": "🦈 Entering the Model Battle Arena! ⚔️\nDataset: Iris Species Classification\nContenders: Logistic Regression, Random Forest, XGBoost\n\n🏆 Champion Model: xgboost\n🥇 Score: 0.9600"
+}
