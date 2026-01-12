@@ -357,15 +357,19 @@ export default function ProjectList({ theme }) {
                                                 {isComponent ? (
                                                     <Stamp size={80} strokeWidth={1.5} />
                                                 ) : (
-                                                    <div style={{
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        backgroundImage: `url(${Stamp})`,
-                                                        backgroundSize: 'contain',
-                                                        backgroundRepeat: 'no-repeat',
-                                                        backgroundPosition: 'center',
-                                                        filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))'
-                                                    }} />
+                                                    <img
+                                                        src={Stamp}
+                                                        alt="Project Stamp"
+                                                        loading="lazy"
+                                                        width="80"
+                                                        height="80"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            objectFit: 'contain',
+                                                            filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))'
+                                                        }}
+                                                    />
                                                 )}
                                             </div>
                                         );
@@ -838,6 +842,9 @@ export default function ProjectList({ theme }) {
                                                 <img
                                                     src={Stamp}
                                                     alt={`${project.title} logo`}
+                                                    loading="lazy"
+                                                    width="160"
+                                                    height="160"
                                                     style={{
                                                         width: '160px',
                                                         height: '160px',

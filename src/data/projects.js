@@ -20,7 +20,7 @@ export const projects = [
         link: null, // Internal Tool - No public link
         darkPattern: true,
         techStack: ['Next.js', 'Supabase', 'Tailwind', 'Vite'],
-        stamp: '/assets/ssc2-logo.png', // Image Stamp
+        stamp: '/assets/ssc2-logo.webp', // Image Stamp
         gallery: [
             '/assets/ssc2-gallery-1.png',
             '/assets/ssc2-gallery-2.png',
@@ -55,7 +55,7 @@ export const projects = [
         description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
         link: 'https://nhphi.netlify.app',
         techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
-        stamp: '/assets/null-logo.png', // Custom Logo Image
+        stamp: '/assets/null-logo.webp', // Custom Logo Image
         gallery: [
             '/assets/null-hero',        // Adaptive (hero-dark/light)
             '/assets/null-lab',        // Adaptive (lab-dark/light)
@@ -88,7 +88,7 @@ export const projects = [
         overlayImage: '/assets/ulafala.webp',
         darkPattern: true, // New flag for styling
         techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
-        stamp: '/assets/roman-hand.png', // Restored Stamp
+        stamp: '/assets/roman-hand.webp', // Restored Stamp
         gallery: [
             '/assets/roman-gallery-1.png',
             '/assets/roman-gallery-2.png',
@@ -175,7 +175,7 @@ export const projects = [
             { icon: 'Scikit-learn', name: 'Scikit-learn', type: 'simple-icon' },
             { icon: 'Plotly', name: 'Shapash', type: 'simple-icon' } // Using Plotly/generic for Visualization
         ],
-        stamp: '/assets/sharkpy-logo.png',
+        stamp: '/assets/sharkpy-logo.webp',
         notebookCells: [
             // Markdown: Introduction
             {
