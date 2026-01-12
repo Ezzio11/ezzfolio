@@ -39,7 +39,7 @@ export const projects = [
         description: "As a team manager at EMAM Research Center, I developed a full-stack app for managing papers and searching through archives. That was because we didn't want to send grades in a PDF just like any other normal human being.",
         link: null, // Internal Tool - No public link
         techStack: ['Node.js', 'Supabase', 'Tailwind', 'Vite'],
-        stamp: '/assets/erc-logo.png', // Image Stamp
+        stamp: '/assets/erc-logo.webp', // Image Stamp
         gallery: [
             '/assets/erc-login',
             '/assets/erc-dashboard',
@@ -84,8 +84,8 @@ export const projects = [
         color: '#D00000', // Bloody Red
         description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
         link: 'https://1316reign.netlify.app',
-        bgImage: '/assets/samoan-pattern.png',
-        overlayImage: '/assets/ulafala.png',
+        bgImage: '/assets/samoan-pattern.webp',
+        overlayImage: '/assets/ulafala.webp',
         darkPattern: true, // New flag for styling
         techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
         stamp: '/assets/roman-hand.png', // Restored Stamp
@@ -144,7 +144,7 @@ export const projects = [
         title: 'The Decline of The Polymath',
         category: 'Interactive Story',
         color: '#E0DCD3', // Beige / Parchment Text Color
-        bgImage: '/assets/polymath/rice-paper.png',
+        bgImage: '/assets/polymath/rice-paper.webp',
         description: "My very first data-meets-web project. I wanted to explore the idea of a 'Polymath' and whatever happened to the ones who once were. I used ECharts to create interactive visualizations and a timeline of 1000+ years of history.",
         link: '/polymath.html',
         techStack: [
