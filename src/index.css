@@ -314,12 +314,12 @@ button {
 
 /* --- MSTAG AURORA (Tuned for Project Card) --- */
 @keyframes jumbo {
-    0% {
-        transform: translateX(0);
+    from {
+        background-position: 50% 50%, 50% 50%;
     }
 
-    100% {
-        transform: translateX(-50%);
+    to {
+        background-position: 350% 50%, 350% 50%;
     }
 }
 
@@ -337,7 +337,6 @@ button {
             transparent 12%,
             #000 16%);
     /* BASE LAYER */
-    /* BASE LAYER */
     /* EXACT SOURCE COLORS (Reverted Tuning) */
     --rainbow: repeating-linear-gradient(100deg,
             #60a5fa 10%,
@@ -346,50 +345,29 @@ button {
             #5eead4 25%,
             #60a5fa 30%);
 
-    /* REMOVED background-image from here, moved to children for transform performance */
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    /* User requested original size */
+    background-position: 50% 50%, 50% 50%;
+
+    /* ORIGINAL LIGHT MODE LOGIC */
+    filter: invert(100%);
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+    pointer-events: none;
     position: absolute;
     inset: 0;
-    overflow: hidden;
-    /* Contain the sliding element */
-    pointer-events: none;
     z-index: 0;
     opacity: 1;
-    /* Keep opacity for the container */
-    mix-blend-mode: normal;
-    /* Reset mix-blend-mode from previous debug */
-    filter: invert(100%);
-    /* Keep filter for the container */
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-    /* Keep mask for the container */
+    animation: jumbo 60s linear infinite;
 }
 
-/* Create a sliding container */
-.jumbo-slider {
+.jumbo::after {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    /* Double width for strict repetition */
-    height: 100%;
-
-    /* Variables from original .jumbo */
-    --stripes: repeating-linear-gradient(100deg,
-            #fff 0%,
-            #fff 7%,
-            transparent 10%,
-            transparent 12%,
-            #fff 16%);
-    --rainbow: repeating-linear-gradient(100deg,
-            #60a5fa 10%,
-            #e879f9 15%,
-            #60a5fa 20%,
-            #5eead4 25%,
-            #60a5fa 30%);
-
+    inset: 0;
     background-image: var(--stripes), var(--rainbow);
-    background-size: 50% 100%, 50% 100%;
-    /* Repeat twice within 200% width (so 100% is one cycle) */
-
+    background-size: 200%, 100%;
     animation: jumbo 60s linear infinite;
 
     /* Safely using scroll to allow card transforms */

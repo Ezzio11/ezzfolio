@@ -309,9 +309,7 @@ export default function ProjectList({ theme }) {
                                         inset: 0,
                                         zIndex: 0,
                                         opacity: 0.5 // Slightly increased from 0.3 as per user request
-                                    }}>
-                                        <div className="jumbo-slider" />
-                                    </div>
+                                    }} />
                                 )}
 
                                 {/* Polymath (ID 7) - Parchment (Light) / Deep Brown (Dark) Background */}
@@ -558,9 +556,7 @@ export default function ProjectList({ theme }) {
                                     inset: 0,
                                     zIndex: -1,
                                     opacity: 0.5 // Slightly increased from 0.3 as per user request
-                                }}>
-                                    <div className="jumbo-slider" />
-                                </div>
+                                }} />
                             )}
 
                             {/* Logo stamps removed from here - now in left column above title */}
