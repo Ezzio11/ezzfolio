@@ -1096,39 +1096,7 @@ export default function ProjectList({ theme }) {
 
                                                 // Code cells (input/output)
 
-                                                // Custom Jupyter Themes (Matches official Jupyter colors)
-                                                // Light Mode (Classic Notebook)
-                                                const jupyterLight = {
-                                                    'hljs': {
-                                                        display: 'block',
-                                                        overflowX: 'auto',
-                                                        padding: '0.5em',
-                                                        color: '#212121', // Official Black/Dark Gray
-                                                        background: 'transparent'
-                                                    },
-                                                    'hljs-keyword': { color: '#008000', fontWeight: 'bold' }, // Green Bold
-                                                    'hljs-string': { color: '#BA2121' }, // Red
-                                                    'hljs-number': { color: '#008000' }, // Green
-                                                    'hljs-comment': { color: '#408080', fontStyle: 'italic' }, // Teal Italic
-                                                    'hljs-meta': { color: '#AA22FF' }, // Purple (Decorators/magics)
-                                                    'hljs-doc">keyword': { color: '#008000', fontWeight: 'bold' } // Docstrings
-                                                };
-
-                                                // Dark Mode (JupyterLab Dark) - basing on atomOneDark but ensuring clean fit
-                                                // JupyterLab Dark uses similar One Dark-ish colors
-                                                const jupyterDark = {
-                                                    ...atomOneDark,
-                                                    'hljs': {
-                                                        ...atomOneDark['hljs'],
-                                                        background: 'transparent',
-                                                        color: '#ffffff' // Pure white text for contrast
-                                                    },
-                                                    // Ensure keywords pop
-                                                    'hljs-keyword': { color: '#C678DD', fontWeight: 'bold' },
-                                                    'hljs-string': { color: '#98c379' },
-                                                };
-
-                                                const activeTheme = isDark ? jupyterDark : jupyterLight;
+                                                // Code cells (input/output)
                                                 const isInput = cell.type === 'input';
                                                 const count = cell.count || 1;
 
