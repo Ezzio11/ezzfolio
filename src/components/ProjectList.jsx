@@ -2,14 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ExternalLink, X, Globe, Languages } from 'lucide-react';
 import { projects, techIcons, getCategoryIcon } from '../data/projects';
 const Lightbox = React.lazy(() => import('./Lightbox')); // Lazy load modal
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+const CodeViewer = React.lazy(() => import('./CodeViewer')); // Lazy load syntax highlighter
 
 import { useSpring, useTransition, animated, config } from '@react-spring/web';
-
-
-SyntaxHighlighter.registerLanguage('python', python);
 
 
 export default function ProjectList({ theme }) {
@@ -314,7 +309,9 @@ export default function ProjectList({ theme }) {
                                         inset: 0,
                                         zIndex: 0,
                                         opacity: 0.5 // Slightly increased from 0.3 as per user request
-                                    }} />
+                                    }}>
+                                        <div className="jumbo-slider" />
+                                    </div>
                                 )}
 
                                 {/* Polymath (ID 7) - Parchment (Light) / Deep Brown (Dark) Background */}
@@ -561,7 +558,9 @@ export default function ProjectList({ theme }) {
                                     inset: 0,
                                     zIndex: -1,
                                     opacity: 0.5 // Slightly increased from 0.3 as per user request
-                                }} />
+                                }}>
+                                    <div className="jumbo-slider" />
+                                </div>
                             )}
 
                             {/* Logo stamps removed from here - now in left column above title */}
@@ -1150,15 +1149,14 @@ export default function ProjectList({ theme }) {
                                                         flexDirection: 'row',
                                                         gap: '10px',
                                                         margin: '1rem 0',
-                                                        alignItems: 'flex-start' // align top? or stretch
-                                                        // Actually 'flex-start' is better for alignment
+                                                        alignItems: 'flex-start'
                                                     }}>
                                                         {/* GUTTER LABEL */}
                                                         <div style={{
                                                             flexShrink: 0,
                                                             minWidth: '4.5em',
                                                             textAlign: 'right',
-                                                            paddingTop: '0.4em', // optically align with code padding
+                                                            paddingTop: '0.4em',
                                                             fontFamily: 'monospace',
                                                             fontSize: '0.75rem',
                                                             color: labelColor,
@@ -1170,28 +1168,20 @@ export default function ProjectList({ theme }) {
                                                         {/* CONTENT AREA */}
                                                         <div style={{
                                                             flexGrow: 1,
-                                                            // RESTORED BOX STYLING FOR ALL (INPUT & OUTPUT)
                                                             borderRadius: '4px',
                                                             background: isDark ? 'rgba(0,0,0,0.3)' : '#f5f5f5',
                                                             border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : '#e0e0e0'}`,
                                                             overflow: 'hidden',
-                                                            maxWidth: '100%' // Ensure code doesn't overflow container
+                                                            maxWidth: '100%'
                                                         }}>
-                                                            <SyntaxHighlighter
-                                                                language={isInput ? "python" : "text"} // No syntax highlighting for output usually
-                                                                style={activeTheme}
-                                                                customStyle={{
-                                                                    margin: 0,
-                                                                    padding: '0.5rem', // Tighter padding
-                                                                    fontSize: '0.85rem',
-                                                                    lineHeight: '1.5',
-                                                                    fontFamily: 'monospace',
-                                                                    background: 'transparent', // Handled by container
-                                                                }}
-                                                                wrapLongLines={false} // Output might need wrap? Usually strictly code doesn't.
-                                                            >
-                                                                {cell.content}
-                                                            </SyntaxHighlighter>
+                                                            <React.Suspense fallback={<div style={{ padding: '1rem', color: 'var(--text-dim)', fontStyle: 'italic' }}>Loading code...</div>}>
+                                                                <CodeViewer
+                                                                    code={cell.content}
+                                                                    isDark={isDark}
+                                                                    isInput={isInput}
+                                                                    count={count}
+                                                                />
+                                                            </React.Suspense>
                                                         </div>
                                                     </div>
                                                 );
