@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ExternalLink, X, Globe, Languages } from 'lucide-react';
 import { projects, techIcons, getCategoryIcon } from '../data/projects';
-import Lightbox from './Lightbox';
+const Lightbox = React.lazy(() => import('./Lightbox')); // Lazy load modal
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -1297,10 +1297,12 @@ export default function ProjectList({ theme }) {
 
                                     {/* --- LIGHTBOX MODAL --- */}
                                     {expandedImg && (
-                                        <Lightbox
-                                            src={expandedImg}
-                                            onClose={() => setExpandedImg(null)}
-                                        />
+                                        <React.Suspense fallback={null}>
+                                            <Lightbox
+                                                src={expandedImg}
+                                                onClose={() => setExpandedImg(null)}
+                                            />
+                                        </React.Suspense>
                                     )}
 
                                 </div>
@@ -1324,10 +1326,12 @@ export default function ProjectList({ theme }) {
             {/* --- LIGHTBOX MODAL --- */}
             {
                 expandedImg && (
-                    <Lightbox
-                        src={expandedImg}
-                        onClose={() => setExpandedImg(null)}
-                    />
+                    <React.Suspense fallback={null}>
+                        <Lightbox
+                            src={expandedImg}
+                            onClose={() => setExpandedImg(null)}
+                        />
+                    </React.Suspense>
                 )
             }
 
