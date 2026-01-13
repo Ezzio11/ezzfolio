@@ -7,7 +7,7 @@ import 'katex/dist/katex.min.css';
 import { useSearchParams } from 'react-router-dom';
 import { Link as LinkIcon, Check } from 'lucide-react';
 
-import { POSTS } from '../data/posts';
+const GIST_BASE_URL = 'https://gist.githubusercontent.com/Ezzio11/454a4a619287b03ae0fea1caa11a854d/raw/';
 
 const TagColors = {
     'General': '#0eb5ff', // Bright Blue
@@ -26,17 +26,54 @@ export default function Blog({ theme }) {
     const codeBg = isDark ? '#0a0a0a' : '#f5f5f5';
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [selectedPost, setSelectedPost] = useState(null); // Stores the full post object now, not just slug
+    const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedPost, setSelectedPost] = useState(null);
     const [content, setContent] = useState('');
     const [scrollProgress, setScrollProgress] = useState(0);
     const [copied, setCopied] = useState(false);
     const contentRef = useRef(null);
 
+    // Fetch Manifest on Mount
+    useEffect(() => {
+        const fetchManifest = async () => {
+            if (GIST_BASE_URL.includes('YOUR_GIST')) {
+                // Fallback for demo/dev if user hasn't set it up
+                console.warn("Gist URL not set. Using empty list.");
+                setIsLoading(false);
+                return;
+            }
+
+            try {
+                // We append a query param ?t=Date.now() to bypass caching for the manifest
+                const res = await fetch(`${GIST_BASE_URL}manifest.json?t=${Date.now()}`);
+                if (!res.ok) throw new Error('Failed to load manifest');
+                const data = await res.json();
+                setPosts(data);
+            } catch (err) {
+                console.error("Blog Error:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchManifest();
+    }, []);
+
     const loadPostContent = async (slug) => {
         try {
-            const response = await fetch(`/posts/${slug}.md`);
-            if (!response.ok) throw new Error('Post not found');
-            const text = await response.text();
+            // First try fetching from Gist
+            const gistResponse = await fetch(`${GIST_BASE_URL}${slug}.md`);
+            if (gistResponse.ok) {
+                const text = await gistResponse.text();
+                setContent(text);
+                return;
+            }
+
+            // Fallback to local if Gist fails (optional, good for migration)
+            const localResponse = await fetch(`/posts/${slug}.md`);
+            if (!localResponse.ok) throw new Error('Post not found');
+            const text = await localResponse.text();
             setContent(text);
         } catch (error) {
             setContent("# 404\n\nGhost in the machine. Post not found.");
@@ -46,8 +83,8 @@ export default function Blog({ theme }) {
     // Effect: Handle URL params on mount and change
     useEffect(() => {
         const postSlug = searchParams.get('post');
-        if (postSlug) {
-            const post = POSTS.find(p => p.slug === postSlug);
+        if (postSlug && posts.length > 0) {
+            const post = posts.find(p => p.slug === postSlug);
             if (post) {
                 if (selectedPost?.slug !== postSlug) {
                     setSelectedPost(post);
@@ -60,11 +97,10 @@ export default function Blog({ theme }) {
                 setSelectedPost(null);
             }
         }
-    }, [searchParams]);
+    }, [searchParams, posts]);
 
     const openPost = (post) => {
         setSearchParams({ post: post.slug });
-        // The useEffect will handle the loading
     };
 
     const closePost = () => {
@@ -104,55 +140,66 @@ export default function Blog({ theme }) {
 
 
             <ul style={{ listStyle: 'none', padding: 0 }}>
-                {POSTS.map(post => (
-                    <li key={post.slug} style={{ marginBottom: '1rem' }}>
-                        <button
-                            onClick={() => openPost(post)}
-                            style={{
-                                background: 'transparent',
-                                border: `1px solid ${borderMain}`,
-                                color: textMain,
-                                padding: '1rem',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                width: '100%',
-                                textAlign: 'left',
-                                transition: 'all 0.2s',
-                                cursor: 'pointer'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor = 'var(--neon-blue)';
-                                e.currentTarget.style.background = isDark ? 'rgba(14, 181, 255, 0.1)' : 'rgba(14, 181, 255, 0.05)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.borderColor = borderMain;
-                                e.currentTarget.style.background = 'transparent';
-                            }}
-                        >
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                <span style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: '1.2rem', color: textMain }}>{post.title}</span>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                    {post.tags && post.tags.map(tag => (
-                                        <span key={tag} style={{
-                                            fontSize: '0.8rem',
-                                            padding: '2px 8px',
-                                            borderRadius: '12px',
-                                            border: `1px solid ${TagColors[tag] || textDim}`,
-                                            color: TagColors[tag] || textDim,
-                                            fontFamily: 'Space Grotesk, sans-serif'
-                                        }}>
-                                            {tag}
-                                        </span>
-                                    ))}
+                {isLoading ? (
+                    <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif' }}>
+                        Fetching latest transmission...
+                    </div>
+                ) : posts.length === 0 ? (
+                    <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif', padding: '1rem', border: `1px dashed ${borderMain}`, borderRadius: '8px' }}>
+                        {GIST_BASE_URL.includes('YOUR_GIST')
+                            ? "Waiting for connection... (Add your Gist URL in Blog.jsx)"
+                            : "No posts found."}
+                    </div>
+                ) : (
+                    posts.map(post => (
+                        <li key={post.slug} style={{ marginBottom: '1rem' }}>
+                            <button
+                                onClick={() => openPost(post)}
+                                style={{
+                                    background: 'transparent',
+                                    border: `1px solid ${borderMain}`,
+                                    color: textMain,
+                                    padding: '1rem',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    width: '100%',
+                                    textAlign: 'left',
+                                    transition: 'all 0.2s',
+                                    cursor: 'pointer'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.borderColor = 'var(--neon-blue)';
+                                    e.currentTarget.style.background = isDark ? 'rgba(14, 181, 255, 0.1)' : 'rgba(14, 181, 255, 0.05)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.borderColor = borderMain;
+                                    e.currentTarget.style.background = 'transparent';
+                                }}
+                            >
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                    <span style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: '1.2rem', color: textMain }}>{post.title}</span>
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        {post.tags && post.tags.map(tag => (
+                                            <span key={tag} style={{
+                                                fontSize: '0.8rem',
+                                                padding: '2px 8px',
+                                                borderRadius: '12px',
+                                                border: `1px solid ${TagColors[tag] || textDim}`,
+                                                color: TagColors[tag] || textDim,
+                                                fontFamily: 'Space Grotesk, sans-serif'
+                                            }}>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                            <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                <span style={{ opacity: 0.8, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.date}</span>
-                                <span style={{ fontSize: '0.8rem', opacity: 0.6, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.readTime}</span>
-                            </div>
-                        </button>
-                    </li>
-                ))}
+                                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+                                    <span style={{ opacity: 0.8, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.date}</span>
+                                    <span style={{ fontSize: '0.8rem', opacity: 0.6, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.readTime}</span>
+                                </div>
+                            </button>
+                        </li>
+                    )))}
             </ul>
 
 

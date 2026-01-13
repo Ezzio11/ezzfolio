@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Hero from './components/Hero';
-import ProjectList from './components/ProjectList';
-import Blog from './components/Blog';
+// Lazy load heavy variants to split bundle
+const ProjectList = React.lazy(() => import('./components/ProjectList'));
+const Blog = React.lazy(() => import('./components/Blog'));
 import Background from './components/Background';
 import Clock from './components/Clock';
 import { Sun, Moon } from 'lucide-react';
@@ -39,8 +40,10 @@ export default function App() {
                 <Hero />
 
                 <main>
-                    <ProjectList theme={theme} />
-                    <Blog theme={theme} />
+                    <Suspense fallback={<div style={{ height: '50vh' }} />}>
+                        <ProjectList theme={theme} />
+                        <Blog theme={theme} />
+                    </Suspense>
                 </main>
 
                 <footer className="footer-status">
