@@ -16,6 +16,7 @@ export const projects = [
         title: 'SSC2 League',
         category: 'Web',
         color: '#00E5FF', // Neon Cyan
+        lightColor: '#0891b2', // Deep Cyan/Teal for Light Mode
         description: "My biggest project yet with a 52.6% adoption rate (and we announced it after the midterm exams). Collaborated with T.A. Ahmed Tawfik of FEPS to develop a GLMS (Gamified Learning Management System) for the course SSC2. It features everything you'd expect from a GLMS and more, be it a leaderboard, a weekly performance chart, XP rewards, or a comprehensive questions bank.",
         link: null, // Internal Tool - No public link
         darkPattern: true,
@@ -36,6 +37,7 @@ export const projects = [
         title: 'EMAM Research Center',
         category: 'Web',
         color: '#00ff9f',
+        lightColor: '#059669', // Emerald Green for Light Mode
         description: "As a team manager at EMAM Research Center, I developed a full-stack app for managing papers and searching through archives. That was because we didn't want to send grades in a PDF just like any other normal human being.",
         link: null, // Internal Tool - No public link
         techStack: ['Node.js', 'Supabase', 'Tailwind', 'Vite'],
@@ -52,6 +54,7 @@ export const projects = [
         title: 'The Null Hypothesis',
         category: 'Web',
         color: '#D4A373', // Sepia/Bronze (Dark Academia)
+        lightColor: '#8c5e2a', // Deep Leather for Light Mode
         description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
         link: 'https://nhphi.netlify.app',
         techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
@@ -67,6 +70,7 @@ export const projects = [
         title: 'MSTAG',
         category: 'Web',
         color: '#0066FF', // Brand Blue
+        lightColor: '#1d4ed8', // Deep Blue
         description: "Our startup platform! I tried going for something very tech-y, very premium looking, that'd reflect our systems quality. Thank you random, kind stranger on CodePen (dyaezEN) for the amazing aurora background!",
         link: 'https://ms-tag.netlify.app',
         techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Framer Motion'],
@@ -82,6 +86,7 @@ export const projects = [
         title: '1316: The Reign',
         category: 'Web',
         color: '#D00000', // Bloody Red
+        lightColor: '#b91c1c', // Deep Red
         description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
         link: 'https://1316reign.netlify.app',
         bgImage: '/assets/samoan-pattern.webp',
@@ -102,6 +107,7 @@ export const projects = [
         title: 'Graphic Designs',
         category: 'Art',
         color: '#FF0055', // Neon Pink/Red
+        lightColor: '#be123c', // Rose-700
         description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
         link: null,
         techStack: ['Photopea', 'Figma'],
@@ -144,6 +150,7 @@ export const projects = [
         title: 'The Decline of The Polymath',
         category: 'Interactive Story',
         color: '#E0DCD3', // Beige / Parchment Text Color
+        lightColor: '#78716c', // Stone-500
         bgImage: '/assets/polymath/rice-paper.webp',
         description: "My very first data-meets-web project. I wanted to explore the idea of a 'Polymath' and whatever happened to the ones who once were. I used ECharts to create interactive visualizations and a timeline of 1000+ years of history.",
         link: '/polymath.html',
@@ -167,6 +174,7 @@ export const projects = [
         title: 'SharkPy',
         category: 'Machine Learning',
         color: '#0077BE', // Ocean Blue
+        lightColor: '#1d4ed8', // Deep Indigo Blue for Light Mode
         description: "Weird fact: it's named after Ferran Torres, the 'shark' that saved Barcelona in the 2025 Copa del Rey final against Real Madrid. Oh, and it's an XAI-first machine learning package, with Sklearn, XGBoost, and SHAPASH integration.",
         link: 'https://github.com/Ezzio11/sharkpy',
         techStack: [

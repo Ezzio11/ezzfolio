@@ -69,9 +69,11 @@ body.light-mode .project-card .card-category {
     font-weight: 800;
     letter-spacing: 0.1em;
     /* Thick white halo to lift text off pattern without a box */
-    text-shadow:
-        3px 0 0 #fff, -3px 0 0 #fff, 0 3px 0 #fff, 0 -3px 0 #fff,
-        2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff !important;
+    /* Optimized Performance Halo */
+    -webkit-text-stroke: 4px #fff;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 0 #fff;
+    /* Single shadow backup */
 }
 
 /* Icon handled by React now */
@@ -338,6 +340,8 @@ button {
             #000 16%);
     /* BASE LAYER */
     /* EXACT SOURCE COLORS (Reverted Tuning) */
+    /* BASE LAYER */
+    /* Dark Mode (Default) Rainbow */
     --rainbow: repeating-linear-gradient(100deg,
             #60a5fa 10%,
             #e879f9 15%,
@@ -345,14 +349,24 @@ button {
             #5eead4 25%,
             #60a5fa 30%);
 
+    /* Light Mode Rainbow (Pre-inverted to save GPU)
+       Original: 60a5fa -> 9f5a05
+       Original: e879f9 -> 178606
+       Original: 5eead4 -> a1152b
+    */
+    --rainbowLight: repeating-linear-gradient(100deg,
+            #9f5a05 10%,
+            #178606 15%,
+            #9f5a05 20%,
+            #a1152b 25%,
+            #9f5a05 30%);
+
     background-image: var(--stripes), var(--rainbow);
     background-size: 300%, 200%;
-    /* User requested original size */
     background-position: 50% 50%, 50% 50%;
 
-    /* ORIGINAL LIGHT MODE LOGIC */
-    filter: invert(100%);
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    filter: blur(10px) opacity(50%) saturate(200%);
+    mask-image: none;
 
     pointer-events: none;
     position: absolute;
@@ -362,6 +376,14 @@ button {
     animation: jumbo 60s linear infinite;
 }
 
+/* Light Mode Override */
+body.light-mode .jumbo {
+    background-image: var(--stripes), var(--rainbowLight);
+    filter: blur(10px) opacity(30%) saturate(200%);
+    /* Lighter opacity for light mode */
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+}
+
 .jumbo::after {
     content: "";
     position: absolute;
@@ -369,19 +391,21 @@ button {
     background-image: var(--stripes), var(--rainbow);
     background-size: 200%, 100%;
     animation: jumbo 60s linear infinite;
-
-    /* Safely using scroll to allow card transforms */
     background-attachment: scroll;
     mix-blend-mode: difference;
 }
 
-/* Dark Mode Adaptation (Original Logic mapped to Project Theme) */
+body.light-mode .jumbo::after {
+    background-image: var(--stripes), var(--rainbowLight);
+}
+
+/* Dark Mode Adaptation - Keep Defaults */
 body:not(.light-mode) .jumbo {
     background-image: var(--stripesDark), var(--rainbow);
-    /* The 'Dark' version removes the invert and applies blur/saturation */
-    filter: blur(10px) opacity(50%) saturate(200%);
-    mask-image: none;
-    /* Remove mask in dark mode if desired, or keep it. Original .dark implies different handling. */
+}
+
+body:not(.light-mode) .jumbo::after {
+    background-image: var(--stripesDark), var(--rainbow);
 }
 
 body:not(.light-mode) .jumbo::after {

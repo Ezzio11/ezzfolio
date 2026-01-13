@@ -148,31 +148,43 @@ export default function ProjectList({ theme }) {
                                     }} />
                                 )}
 
+                                {/* UNIVERSAL LIGHT MODE GRADIENT (The "1316 Treatment") */}
+                                {theme !== 'dark' && project.id !== 1 && project.id !== 5 && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        bottom: 0,
+                                        left: 0,
+                                        right: 0,
+                                        height: '60%',
+                                        background: `linear-gradient(to top, ${(project.lightColor || project.color)}66, transparent)`, // ~40% opacity
+                                        zIndex: 0,
+                                        pointerEvents: 'none'
+                                    }} />
+                                )}
+
                                 {/* --- INHERITED GRID VISUALS --- */}
 
                                 {/* SSC2 (ID 0) Visuals */}
                                 {project.id === 0 && (
                                     <>
-                                        {/* Light Mode Tint */}
-                                        {theme !== 'dark' && (
-                                            <div style={{
-                                                position: 'absolute', inset: 0,
-                                                background: '#f0f9ff', // AliceBlue
-                                                zIndex: 0, pointerEvents: 'none'
-                                            }} />
+                                        {/* Light Mode Tint REMOVED */}
+                                        {/* Blobs only in Dark Mode for CLEAN Look in Light Mode */}
+                                        {theme === 'dark' && (
+                                            <>
+                                                <div style={{
+                                                    position: 'absolute', top: '-20%', left: '-20%', width: '140%', height: '140%',
+                                                    background: 'rgba(34, 211, 238, 0.2)',
+                                                    borderRadius: '9999px', filter: 'blur(60px)',
+                                                    zIndex: 0, pointerEvents: 'none'
+                                                }} />
+                                                <div style={{
+                                                    position: 'absolute', bottom: '-20%', right: '-20%', width: '140%', height: '140%',
+                                                    background: 'rgba(6, 182, 212, 0.2)',
+                                                    borderRadius: '9999px', filter: 'blur(60px)',
+                                                    zIndex: 0, pointerEvents: 'none'
+                                                }} />
+                                            </>
                                         )}
-                                        <div style={{
-                                            position: 'absolute', top: '-20%', left: '-20%', width: '140%', height: '140%',
-                                            background: 'rgba(34, 211, 238, 0.2)', // Boosted
-                                            borderRadius: '9999px', filter: 'blur(60px)',
-                                            zIndex: 0, pointerEvents: 'none'
-                                        }} />
-                                        <div style={{
-                                            position: 'absolute', bottom: '-20%', right: '-20%', width: '140%', height: '140%',
-                                            background: 'rgba(6, 182, 212, 0.2)', // Boosted
-                                            borderRadius: '9999px', filter: 'blur(60px)',
-                                            zIndex: 0, pointerEvents: 'none'
-                                        }} />
                                         <div style={{
                                             position: 'absolute', inset: 0,
                                             backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)',
@@ -186,14 +198,7 @@ export default function ProjectList({ theme }) {
                                 {/* Null Hypothesis (ID 3) Visuals */}
                                 {project.id === 3 && (
                                     <>
-                                        {/* Light Mode Paper Tint */}
-                                        {theme !== 'dark' && (
-                                            <div style={{
-                                                position: 'absolute', inset: 0,
-                                                background: '#F5F5F0', // Warm darker paper tone
-                                                zIndex: 0, pointerEvents: 'none'
-                                            }} />
-                                        )}
+                                        {/* Light Mode Tint REMOVED */}
                                         <div style={{
                                             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
                                             opacity: theme === 'dark' ? 0.08 : 0.15, // Boosted noise
@@ -217,20 +222,14 @@ export default function ProjectList({ theme }) {
                                 {/* Emam Research System (ID 4) Visuals */}
                                 {project.id === 4 && (
                                     <>
-                                        {/* Light Mode Tint */}
-                                        {theme !== 'dark' && (
+                                        {/* Light Mode Tint REMOVED */}
+                                        {/* Full Gradient only in Dark Mode */}
+                                        {theme === 'dark' && (
                                             <div style={{
-                                                position: 'absolute', inset: 0,
-                                                background: '#f0fdf4', // Green-50
-                                                zIndex: 0, pointerEvents: 'none'
+                                                position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                                                background: 'linear-gradient(to bottom right, rgba(48, 124, 60, 0.4), transparent)'
                                             }} />
                                         )}
-                                        <div style={{
-                                            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-                                            background: theme === 'dark'
-                                                ? 'linear-gradient(to bottom right, rgba(48, 124, 60, 0.4), transparent)'
-                                                : 'linear-gradient(to bottom right, rgba(48, 124, 60, 0.2), transparent)' // Boosted
-                                        }} />
                                         <div style={{
                                             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
                                             opacity: 0.2,
@@ -251,22 +250,18 @@ export default function ProjectList({ theme }) {
                                 {/* Graphic Designs (ID 6) - Added Visuals */}
                                 {project.id === 6 && (
                                     <>
-                                        {/* Light Mode Tint */}
-                                        {theme !== 'dark' && (
+                                        {/* Light Mode Tint REMOVED */}
+                                        {/* Blueprint Dotted Grid */}
+                                        {/* Blueprint Grid only in Dark Mode */}
+                                        {theme === 'dark' && (
                                             <div style={{
                                                 position: 'absolute', inset: 0,
-                                                background: '#fff1f2', // Rose-50
+                                                backgroundImage: 'radial-gradient(#e11d48 1px, transparent 1px)',
+                                                backgroundSize: '20px 20px',
+                                                opacity: 0.15,
                                                 zIndex: 0, pointerEvents: 'none'
                                             }} />
                                         )}
-                                        {/* Blueprint Dotted Grid */}
-                                        <div style={{
-                                            position: 'absolute', inset: 0,
-                                            backgroundImage: 'radial-gradient(#e11d48 1px, transparent 1px)',
-                                            backgroundSize: '20px 20px',
-                                            opacity: theme === 'dark' ? 0.15 : 0.1,
-                                            zIndex: 0, pointerEvents: 'none'
-                                        }} />
                                         <div style={{
                                             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
                                             background: `linear-gradient(to top, ${project.color}22, transparent)`,
@@ -278,19 +273,15 @@ export default function ProjectList({ theme }) {
                                 {/* SharkPy (ID 8) - Added Visuals */}
                                 {project.id === 8 && (
                                     <>
-                                        {/* Light Mode Tint */}
-                                        {theme !== 'dark' && (
+                                        {/* Light Mode Tint REMOVED */}
+                                        {/* Ocean Wave Gradient */}
+                                        {/* Ocean Gradient only in Dark Mode */}
+                                        {theme === 'dark' && (
                                             <div style={{
-                                                position: 'absolute', inset: 0,
-                                                background: '#eff6ff', // Blue-50
-                                                zIndex: 0, pointerEvents: 'none'
+                                                position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                                                background: 'linear-gradient(135deg, rgba(0,119,190,0.1) 0%, transparent 100%)'
                                             }} />
                                         )}
-                                        {/* Ocean Wave Gradient */}
-                                        <div style={{
-                                            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-                                            background: `linear-gradient(135deg, ${theme === 'dark' ? 'rgba(0,119,190,0.1)' : 'rgba(0,119,190,0.05)'} 0%, transparent 100%)`
-                                        }} />
                                         {/* Subtle Scale Pattern (CSS only) */}
                                         <div style={{
                                             position: 'absolute', inset: 0,
@@ -308,7 +299,7 @@ export default function ProjectList({ theme }) {
                                         position: 'absolute',
                                         inset: 0,
                                         zIndex: 0,
-                                        opacity: 0.5 // Slightly increased from 0.3 as per user request
+                                        opacity: 0.9
                                     }} />
                                 )}
 
@@ -1093,8 +1084,6 @@ export default function ProjectList({ theme }) {
                                                         </div>
                                                     );
                                                 }
-
-                                                // Code cells (input/output)
 
                                                 // Code cells (input/output)
                                                 const isInput = cell.type === 'input';

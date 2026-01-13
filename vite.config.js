@@ -16,9 +16,6 @@ export default defineConfig({
             if (id.includes('framer-motion') || id.includes('@react-spring')) {
               return 'animations';
             }
-            if (id.includes('react-syntax-highlighter') || id.includes('katex')) {
-              return 'utils';
-            }
           }
         }
       }
