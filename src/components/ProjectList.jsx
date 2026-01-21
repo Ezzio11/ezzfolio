@@ -428,7 +428,7 @@ export default function ProjectList({ theme }) {
                                                     opacity: 0.3, // Subtle but visible
                                                     fill: 'white',
                                                     stroke: 'white',
-                                                    mixBlendMode: 'luminosity', // Clean integration without color washout
+                                                    // mixBlendMode: 'luminosity', // REMOVED FOR PERFORMANCE
                                                     pointerEvents: 'none',
                                                     color: project.color,
                                                     transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' // Spring-like transition
@@ -446,7 +446,7 @@ export default function ProjectList({ theme }) {
                                                             width: '100%',
                                                             height: '100%',
                                                             objectFit: 'contain',
-                                                            filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))'
+                                                            // filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.3))' // REMOVED FOR PERFORMANCE
                                                         }}
                                                     />
                                                 )}

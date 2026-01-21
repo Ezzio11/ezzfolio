@@ -35,27 +35,11 @@
 }
 
 .light-mode .layer-grid {
-  filter: invert(1) opacity(0.5);
-  /* Makes light grid dark */
+  opacity: 0.1;
+  /* Simply reduce opacity instead of inverting */
 }
 
-/* Layer 2: The Shapes (Foreground, moves faster) */
-.layer-shapes {
-  background-image: url("/bg-shapes.svg");
-  transition: filter 0.3s ease;
-  animation: colorShiftDark 60s infinite linear;
-  /* Slow dreamy shift */
-}
-
-@keyframes colorShiftDark {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}
+/* ... */
 
 .light-mode .layer-shapes {
   animation: colorShiftLight 60s infinite linear;
@@ -63,11 +47,12 @@
 
 @keyframes colorShiftLight {
   0% {
-    filter: hue-rotate(180deg) brightness(0.8) contrast(1.2);
+    filter: hue-rotate(180deg);
+    /* Dropped brightness/contrast */
   }
 
   100% {
-    filter: hue-rotate(540deg) brightness(0.8) contrast(1.2);
+    filter: hue-rotate(540deg);
   }
 }
 
