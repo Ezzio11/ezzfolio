@@ -951,7 +951,7 @@ export default function ProjectList({ theme }) {
                                     let stampSrc = Stamp;
                                     if (project.id === 3) {
                                         // User Request: Dark Logo in Light Mode, Light Logo in Dark Mode
-                                        stampSrc = theme === 'dark' ? '/assets/null-logo.webp' : '/assets/null-logo-dark.webp';
+                                        stampSrc = theme === 'dark' ? '/assets/null/logo.webp' : '/assets/null/logo-dark.webp';
                                     }
 
                                     return (
