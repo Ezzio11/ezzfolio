@@ -401,7 +401,7 @@ export default function Blog({ theme }) {
                         width: '100%',
                         height: '100%',
                         overflowY: 'auto',
-                        padding: '4rem 2rem',
+                        padding: isMobile ? '4rem 1rem' : '4rem 2rem',
                         boxSizing: 'border-box',
                         display: 'flex',
                         flexDirection: 'column',
@@ -466,12 +466,14 @@ export default function Blog({ theme }) {
                             <div style={{ marginBottom: '4rem', textAlign: 'center', borderBottom: `1px solid ${borderMain}`, paddingBottom: '2rem' }}>
                                 <h1 style={{
                                     fontFamily: 'Syne',
-                                    fontSize: '4rem',
+                                    fontSize: 'clamp(2rem, 8vw, 4rem)',
                                     fontWeight: 800,
                                     marginBottom: '1rem',
                                     color: textMain,
                                     lineHeight: 1.1,
-                                    letterSpacing: '-2px'
+                                    letterSpacing: '-2px',
+                                    wordBreak: 'break-word',
+                                    overflowWrap: 'break-word'
                                 }}>
                                     {selectedPost.title}
                                 </h1>
@@ -497,8 +499,8 @@ export default function Blog({ theme }) {
                                 rehypePlugins={[rehypeKatex]}
                                 components={{
                                     h1: ({ node, ...props }) => <h1 style={{ display: 'none' }} {...props} />, // Hide markdown h1 since we render title manually
-                                    h2: ({ node, ...props }) => <h2 style={{ fontFamily: 'Syne', fontSize: '2.5rem', fontWeight: 700, marginTop: '4rem', marginBottom: '1.5rem', color: textMain, letterSpacing: '-0.5px' }} {...props} />,
-                                    h3: ({ node, ...props }) => <h3 style={{ fontFamily: 'Syne', fontSize: '2rem', fontWeight: 700, marginTop: '3rem', marginBottom: '1rem', color: textMain }} {...props} />,
+                                    h2: ({ node, ...props }) => <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 700, marginTop: '4rem', marginBottom: '1.5rem', color: textMain, letterSpacing: '-0.5px' }} {...props} />,
+                                    h3: ({ node, ...props }) => <h3 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginTop: '3rem', marginBottom: '1rem', color: textMain }} {...props} />,
                                     p: ({ node, children, ...props }) => {
                                         // Check if children contains a figure element (our img wrapper)
                                         // If so, return children directly to avoid <p><figure> nesting
