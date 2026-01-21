@@ -49,7 +49,9 @@ export default function Blog({ theme }) {
                 const res = await fetch(`${GIST_BASE_URL}manifest.json?t=${Date.now()}`);
                 if (!res.ok) throw new Error('Failed to load manifest');
                 const data = await res.json();
-                setPosts(data);
+                // Sort by date descending
+                const sortedData = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                setPosts(sortedData);
             } catch (err) {
                 console.error("Blog Error:", err);
             } finally {
@@ -134,73 +136,216 @@ export default function Blog({ theme }) {
 
     return (
         <div style={{ position: 'relative' }}>
-            <h2 className="section-title">
+            <h2 className="section-title" style={{ fontSize: '2rem' }}>
                 Writing
             </h2>
 
 
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-                {isLoading ? (
-                    <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif' }}>
-                        Fetching latest transmission...
-                    </div>
-                ) : posts.length === 0 ? (
-                    <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif', padding: '1rem', border: `1px dashed ${borderMain}`, borderRadius: '8px' }}>
-                        {GIST_BASE_URL.includes('YOUR_GIST')
-                            ? "Waiting for connection... (Add your Gist URL in Blog.jsx)"
-                            : "No posts found."}
-                    </div>
-                ) : (
-                    posts.map(post => (
-                        <li key={post.slug} style={{ marginBottom: '1rem' }}>
-                            <button
-                                onClick={() => openPost(post)}
-                                style={{
-                                    background: 'transparent',
-                                    border: `1px solid ${borderMain}`,
-                                    color: textMain,
-                                    padding: '1rem',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    width: '100%',
-                                    textAlign: 'left',
-                                    transition: 'all 0.2s',
-                                    cursor: 'pointer'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.borderColor = 'var(--neon-blue)';
-                                    e.currentTarget.style.background = isDark ? 'rgba(14, 181, 255, 0.1)' : 'rgba(14, 181, 255, 0.05)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.borderColor = borderMain;
-                                    e.currentTarget.style.background = 'transparent';
-                                }}
-                            >
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    <span style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: '1.2rem', color: textMain }}>{post.title}</span>
-                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                        {post.tags && post.tags.map(tag => (
-                                            <span key={tag} style={{
-                                                fontSize: '0.8rem',
-                                                padding: '2px 8px',
-                                                borderRadius: '12px',
-                                                border: `1px solid ${TagColors[tag] || textDim}`,
-                                                color: TagColors[tag] || textDim,
-                                                fontFamily: 'Space Grotesk, sans-serif'
+            {isLoading ? (
+                <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif' }}>
+                    Fetching latest writings...
+                </div>
+            ) : posts.length === 0 ? (
+                <div style={{ color: textDim, fontFamily: 'Space Grotesk, sans-serif', padding: '1rem', border: `1px dashed ${borderMain}`, borderRadius: '8px' }}>
+                    {GIST_BASE_URL.includes('YOUR_GIST')
+                        ? "Waiting for connection... (Add your Gist URL in Blog.jsx)"
+                        : "No posts found."}
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+                    {/* Hero / Featured Post - Modern Magazine Style */}
+                    {posts.length > 0 && (() => {
+                        const featured = posts[0];
+                        return (
+                            <div className="featured-post" style={{
+                                marginBottom: '2rem',
+                                position: 'relative'
+                            }}>
+                                <div style={{
+                                    display: 'inline-block',
+                                    padding: '0.5rem 1rem',
+                                    background: 'var(--neon-pink)',
+                                    color: '#fff',
+                                    fontFamily: 'Space Grotesk, sans-serif',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '1px',
+                                    marginBottom: '1.5rem',
+                                    borderRadius: '4px'
+                                }}>
+                                    Latest Issue
+                                </div>
+
+                                <button
+                                    onClick={() => openPost(featured)}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        padding: 0,
+                                        textAlign: 'left',
+                                        cursor: 'pointer',
+                                        width: '100%',
+                                        display: 'block'
+                                    }}
+                                    className="hover-trigger"
+                                >
+                                    <h3 style={{
+                                        fontFamily: 'Syne, sans-serif',
+                                        fontSize: 'clamp(3rem, 8vw, 6rem)',
+                                        fontWeight: 800,
+                                        color: textMain,
+                                        lineHeight: 0.95,
+                                        marginTop: 0,
+                                        marginBottom: '1.5rem',
+                                        letterSpacing: '-2px',
+                                        textTransform: 'uppercase',
+                                        transition: 'color 0.3s ease'
+                                    }}
+                                        onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-blue)'}
+                                        onMouseLeave={e => e.currentTarget.style.color = textMain}
+                                    >
+                                        {featured.title}
+                                    </h3>
+
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                        gap: '2rem',
+                                        borderTop: `2px solid ${textMain}`,
+                                        paddingTop: '1.5rem'
+                                    }}>
+                                        <p style={{
+                                            fontFamily: 'Space Grotesk, sans-serif',
+                                            fontSize: '1.2rem',
+                                            color: textDim,
+                                            lineHeight: 1.5,
+                                            margin: 0,
+                                            maxWidth: '50ch'
+                                        }}>
+                                            {featured.description || "Read the latest thoughts on engineering, design, and the spaces in between."}
+                                        </p>
+
+                                        <div style={{
+                                            display: 'flex',
+                                            justifyContent: 'flex-end',
+                                            alignItems: 'flex-start'
+                                        }}>
+                                            <span style={{
+                                                fontFamily: 'IBM Plex Mono, monospace',
+                                                fontSize: '0.9rem',
+                                                color: textMain,
+                                                background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
+                                                padding: '0.5rem 1rem',
+                                                borderRadius: '4px'
                                             }}>
-                                                {tag}
+                                                READ STORY <span style={{ marginLeft: '10px' }}>→</span>
                                             </span>
-                                        ))}
+                                        </div>
                                     </div>
-                                </div>
-                                <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                    <span style={{ opacity: 0.8, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.date}</span>
-                                    <span style={{ fontSize: '0.8rem', opacity: 0.6, fontFamily: 'Space Grotesk, sans-serif', color: textMain }}>{post.readTime}</span>
-                                </div>
-                            </button>
-                        </li>
-                    )))}
-            </ul>
+                                </button>
+                            </div>
+                        );
+                    })()}
+
+                    {/* Recent Posts Grid - Structured Rows */}
+                    {posts.length > 1 && (
+                        <div>
+                            <h4 style={{
+                                fontFamily: 'Space Grotesk, sans-serif',
+                                textTransform: 'uppercase',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                letterSpacing: '1px',
+                                color: textMain,
+                                borderBottom: `4px solid ${textMain}`,
+                                paddingBottom: '0.5rem',
+                                marginBottom: '3rem'
+                            }}>
+                                More to read
+                            </h4>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0'
+                            }}>
+                                {posts.slice(1).map((post, index) => (
+                                    <div key={post.slug} className="recent-post" style={{
+                                        borderTop: index === 0 ? 'none' : `1px solid ${borderMain}`,
+                                        padding: '2rem 0',
+                                        position: 'relative'
+                                    }}>
+                                        <button
+                                            onClick={() => openPost(post)}
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                padding: 0,
+                                                textAlign: 'left',
+                                                cursor: 'pointer',
+                                                width: '100%',
+                                                display: 'grid',
+                                                gridTemplateColumns: '1fr 3fr auto',
+                                                alignItems: 'baseline',
+                                                gap: '2rem',
+                                                transition: 'transform 0.2s ease'
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.transform = 'translateX(10px)';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.transform = 'translateX(0)';
+                                            }}
+                                        >
+                                            <div style={{
+                                                fontFamily: 'IBM Plex Mono, monospace',
+                                                fontSize: '0.8rem',
+                                                color: textDim
+                                            }}>
+                                                {post.date}
+                                            </div>
+
+                                            <div>
+                                                <h4 style={{
+                                                    fontFamily: 'Syne, sans-serif',
+                                                    fontSize: '2rem',
+                                                    fontWeight: 700,
+                                                    color: textMain,
+                                                    margin: '0 0 0.5rem 0',
+                                                    lineHeight: 1.1,
+                                                    transition: 'color 0.2s'
+                                                }}>
+                                                    {post.title}
+                                                </h4>
+                                                <p style={{
+                                                    fontFamily: 'Space Grotesk, sans-serif',
+                                                    fontSize: '0.95rem',
+                                                    color: textDim,
+                                                    margin: 0,
+                                                    maxWidth: '60ch',
+                                                    display: 'none',
+                                                }} className="desktop-only-desc">
+                                                    {post.description}
+                                                </p>
+                                            </div>
+
+                                            <div style={{
+                                                fontFamily: 'Space Grotesk, sans-serif',
+                                                fontSize: '1.5rem',
+                                                color: textDim,
+                                                fontWeight: 300
+                                            }}>
+                                                ↗
+                                            </div>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+
 
 
             <div style={{
@@ -436,6 +581,6 @@ export default function Blog({ theme }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

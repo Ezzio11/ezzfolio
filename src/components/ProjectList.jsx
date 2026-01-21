@@ -152,7 +152,7 @@ export default function ProjectList({ theme }) {
 
     return (
         <div style={{ position: 'relative', marginBottom: '3rem' }}>
-            <h2 className="section-title">
+            <h2 className="section-title" style={{ fontSize: '2rem' }}>
                 Selected Works
             </h2>
             <p className="section-subtitle" style={{ fontSize: '0.8rem' }}>
@@ -356,7 +356,7 @@ export default function ProjectList({ theme }) {
                                             opacity: 0.4
                                         }} />
                                         <div style={{
-                                            position: 'absolute', top: '10%', left: '-5%',
+                                            position: 'absolute', top: '10%', right: '10%',
                                             transform: 'rotate(-15deg)',
                                             fontFamily: 'Bangers, cursive',
                                             color: '#ffed02',

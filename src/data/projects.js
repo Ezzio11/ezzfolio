@@ -21,15 +21,15 @@ export const projects = [
         link: null, // Internal Tool - No public link
         darkPattern: true,
         techStack: ['Next.js', 'Supabase', 'Tailwind', 'Vite'],
-        stamp: '/assets/ssc2-logo.webp', // Image Stamp
+        stamp: '/assets/ssc2/logo.webp', // Image Stamp
         gallery: [
-            '/assets/ssc2-gallery-1.webp',
-            '/assets/ssc2-gallery-2.webp',
-            '/assets/ssc2-gallery-3.webp',
-            '/assets/ssc2-gallery-4.webp',
-            '/assets/ssc2-gallery-5.webp',
-            '/assets/ssc2-gallery-6.webp',
-            '/assets/ssc2-gallery-7.webp'
+            '/assets/ssc2/gallery-1.webp',
+            '/assets/ssc2/gallery-2.webp',
+            '/assets/ssc2/gallery-3.webp',
+            '/assets/ssc2/gallery-4.webp',
+            '/assets/ssc2/gallery-5.webp',
+            '/assets/ssc2/gallery-6.webp',
+            '/assets/ssc2/gallery-7.webp'
         ]
     },
     {
@@ -41,13 +41,13 @@ export const projects = [
         description: "What happens when you combine artistic design with data-driven insights? Comic book tribute to the new era of FC Barcelona under Hansi Flick. A data-driven web application to celebrate and document the resurgence of FC Barcelona under the German coach. Featuring complete match statistics, player ratings, and a comprehensive history of the team with LLM-powered insights.",
         link: 'https://flickball.ezzio.me',
         techStack: ['Next.js 15', 'TypeScript', 'Tailwind v4', 'Google Gemini', 'Recharts'],
-        stamp: '/assets/flick.webp',
+        stamp: '/assets/flickball/logo.webp',
         gallery: [
-            '/assets/flick-gallery-1.webp',
-            '/assets/flick-gallery-2.webp',
-            '/assets/flick-gallery-3.webp',
-            '/assets/flick-gallery-4.webp',
-            '/assets/flick-gallery-5.webp',
+            '/assets/flickball/gallery-1.webp',
+            '/assets/flickball/gallery-2.webp',
+            '/assets/flickball/gallery-3.webp',
+            '/assets/flickball/gallery-4.webp',
+            '/assets/flickball/gallery-5.webp',
         ]
     },
     {
@@ -59,11 +59,11 @@ export const projects = [
         description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
         link: 'https://h0.ezzio.me',
         techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
-        stamp: '/assets/null-logo.webp', // Custom Logo Image
+        stamp: '/assets/null/logo.webp', // Custom Logo Image
         gallery: [
-            '/assets/null-hero',        // Adaptive (hero-dark/light)
-            '/assets/null-lab',        // Adaptive (lab-dark/light)
-            '/assets/null-folio'        // Adaptive (folio-dark/light)
+            '/assets/null/hero',        // Adaptive (hero-dark/light)
+            '/assets/null/lab',        // Adaptive (lab-dark/light)
+            '/assets/null/folio'        // Adaptive (folio-dark/light)
         ]
     },
     {
@@ -74,17 +74,17 @@ export const projects = [
         lightColor: '#991b1b', // Red-800
         description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
         link: 'https://1316.ezzio.me',
-        bgImage: '/assets/samoan-pattern.webp',
-        overlayImage: '/assets/ulafala.webp',
+        bgImage: '/assets/roman/samoan-pattern.webp',
+        overlayImage: '/assets/roman/ulafala.webp',
         darkPattern: true, // New flag for styling
         techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
-        stamp: '/assets/roman-hand.webp', // Restored Stamp
+        stamp: '/assets/roman/hand.webp', // Restored Stamp
         gallery: [
-            '/assets/roman-gallery-1.webp',
-            '/assets/roman-gallery-2.webp',
-            '/assets/roman-gallery-3.webp',
-            '/assets/roman-gallery-4.webp',
-            '/assets/roman-gallery-5.webp'
+            '/assets/roman/gallery-1.webp',
+            '/assets/roman/gallery-2.webp',
+            '/assets/roman/gallery-3.webp',
+            '/assets/roman/gallery-4.webp',
+            '/assets/roman/gallery-5.webp'
         ]
     },
     {
@@ -96,11 +96,11 @@ export const projects = [
         description: "Our startup platform! I tried going for something very tech-y, very premium looking, that'd reflect our systems quality. Thank you random, kind stranger on CodePen (dyaezEN) for the amazing aurora background!",
         link: 'https://ms-tag.netlify.app',
         techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Framer Motion'],
-        stamp: '/assets/mstag-logo.webp',
+        stamp: '/assets/mstag/logo.webp',
         gallery: [
-            '/assets/mstag-dashboard', // Adapts: mstag-dashboard-dark.png / light.png
-            '/assets/mstag-cases',     // Adapts: mstag-cases-dark.png / light.png
-            '/assets/mstag-fullcycle'  // Adapts: mstag-fullcycle-dark.png / light.png
+            '/assets/mstag/dashboard', // Adapts: mstag-dashboard-dark.png / light.png
+            '/assets/mstag/cases',     // Adapts: mstag-cases-dark.png / light.png
+            '/assets/mstag/fullcycle'  // Adapts: mstag-fullcycle-dark.png / light.png
         ]
     },
     {
@@ -117,7 +117,7 @@ export const projects = [
             { icon: 'Scikit-learn', name: 'Scikit-learn', type: 'simple-icon' },
             { icon: 'Plotly', name: 'Shapash', type: 'simple-icon' } // Using Plotly/generic for Visualization
         ],
-        stamp: '/assets/sharkpy-logo.webp',
+        stamp: '/assets/sharkpy/logo.webp',
         notebookCells: [
             // Markdown: Introduction
             {
@@ -387,12 +387,12 @@ catboost                     CatBoost Handles categorical features, reduced over
         description: "As a team manager at EMAM Research Center, I developed a full-stack app for managing papers and searching through archives. That was because we didn't want to send grades in a PDF just like any other normal human being.",
         link: null, // Internal Tool - No public link
         techStack: ['Node.js', 'Supabase', 'Tailwind', 'Vite'],
-        stamp: '/assets/erc-logo.webp', // Image Stamp
+        stamp: '/assets/erc/logo.webp', // Image Stamp
         gallery: [
-            '/assets/erc-login',
-            '/assets/erc-dashboard',
-            '/assets/erc-workshops',
-            '/assets/erc-resources',
+            '/assets/erc/login',
+            '/assets/erc/dashboard',
+            '/assets/erc/workshops',
+            '/assets/erc/resources',
         ]
     },
     {
