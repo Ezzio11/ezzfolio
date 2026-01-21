@@ -54,8 +54,7 @@ body.light-mode .project-overlay:not([data-id="9"]):not([data-id="0"]) h1 {
 body.light-mode .project-overlay .bg-pattern {
     opacity: 0.15 !important;
     /* Fade pattern significantly */
-    filter: invert(0) grayscale(100%) !important;
-    /* Keep it grey/white, don't invert to black */
+    /* REMOVED FILTER FOR PERFORMANCE */
 }
 
 
