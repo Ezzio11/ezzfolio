@@ -34,6 +34,15 @@ export default function Blog({ theme }) {
     const [copied, setCopied] = useState(false);
     const contentRef = useRef(null);
 
+    // Responsive Mobile Hook
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // Fetch Manifest on Mount
     useEffect(() => {
         const fetchManifest = async () => {
@@ -192,7 +201,7 @@ export default function Blog({ theme }) {
                                 >
                                     <h3 style={{
                                         fontFamily: 'Syne, sans-serif',
-                                        fontSize: 'clamp(3rem, 8vw, 6rem)',
+                                        fontSize: 'clamp(2rem, 9vw, 6rem)',
                                         fontWeight: 800,
                                         color: textMain,
                                         lineHeight: 0.95,
@@ -210,7 +219,7 @@ export default function Blog({ theme }) {
 
                                     <div style={{
                                         display: 'grid',
-                                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                                         gap: '2rem',
                                         borderTop: `2px solid ${textMain}`,
                                         paddingTop: '1.5rem'
@@ -285,9 +294,9 @@ export default function Blog({ theme }) {
                                                 cursor: 'pointer',
                                                 width: '100%',
                                                 display: 'grid',
-                                                gridTemplateColumns: '1fr 3fr auto',
+                                                gridTemplateColumns: isMobile ? '1fr' : '1fr 3fr auto',
                                                 alignItems: 'baseline',
-                                                gap: '2rem',
+                                                gap: isMobile ? '0.5rem' : '2rem',
                                                 transition: 'transform 0.2s ease'
                                             }}
                                             onMouseEnter={(e) => {
@@ -308,7 +317,7 @@ export default function Blog({ theme }) {
                                             <div>
                                                 <h4 style={{
                                                     fontFamily: 'Syne, sans-serif',
-                                                    fontSize: '2rem',
+                                                    fontSize: isMobile ? '1.5rem' : '2rem',
                                                     fontWeight: 700,
                                                     color: textMain,
                                                     margin: '0 0 0.5rem 0',
