@@ -4,6 +4,13 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // --- ADD THIS SECTION ---
+  server: {
+    allowedHosts: [
+      "restorable-nonconcentrically-katalina.ngrok-free.dev"
+    ]
+  },
+  // ------------------------
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
@@ -13,7 +20,7 @@ export default defineConfig({
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
               return 'vendor';
             }
-            if (id.includes('framer-motion') || id.includes('@react-spring')) {
+            if (id.includes('@react-spring')) {
               return 'animations';
             }
           }

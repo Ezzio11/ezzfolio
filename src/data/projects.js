@@ -1,62 +1,63 @@
 
 import {
-    Globe, LayoutDashboard, Languages, Smartphone, Zap, School, PenTool, Brain, Feather
+    Globe, LayoutDashboard, Languages, Smartphone, Zap, School, PenTool, Brain, Feather, Trophy
 } from 'lucide-react';
 
 import {
     siReact, siNextdotjs, siSupabase, siTailwindcss, siVite,
     siFramer, siPhotopea, siD3, siMapbox, siNodedotjs, siHuggingface,
     siPython, siVuedotjs, siSass, siLatex,
-    siPandas, siScikitlearn, siPlotly, siHtml5, siJavascript
+    siPandas, siScikitlearn, siPlotly, siHtml5, siJavascript, siTypescript, siGoogle
 } from 'simple-icons';
 
 export const projects = [
     {
         id: 0,
         title: 'SSC2 League',
-        category: 'Web',
+        category: 'Gamified Learning',
         color: '#00E5FF', // Neon Cyan
-        lightColor: '#0891b2', // Deep Cyan/Teal for Light Mode
+        lightColor: '#0e7490', // Cyan-700 (Darker for better contrast)
         description: "My biggest project yet with a 52.6% adoption rate (and we announced it after the midterm exams). Collaborated with T.A. Ahmed Tawfik of FEPS to develop a GLMS (Gamified Learning Management System) for the course SSC2. It features everything you'd expect from a GLMS and more, be it a leaderboard, a weekly performance chart, XP rewards, or a comprehensive questions bank.",
         link: null, // Internal Tool - No public link
         darkPattern: true,
         techStack: ['Next.js', 'Supabase', 'Tailwind', 'Vite'],
         stamp: '/assets/ssc2-logo.webp', // Image Stamp
         gallery: [
-            '/assets/ssc2-gallery-1.png',
-            '/assets/ssc2-gallery-2.png',
-            '/assets/ssc2-gallery-3.png',
-            '/assets/ssc2-gallery-4.png',
-            '/assets/ssc2-gallery-5.png',
-            '/assets/ssc2-gallery-6.png',
-            '/assets/ssc2-gallery-7.png'
+            '/assets/ssc2-gallery-1.webp',
+            '/assets/ssc2-gallery-2.webp',
+            '/assets/ssc2-gallery-3.webp',
+            '/assets/ssc2-gallery-4.webp',
+            '/assets/ssc2-gallery-5.webp',
+            '/assets/ssc2-gallery-6.webp',
+            '/assets/ssc2-gallery-7.webp'
         ]
     },
     {
-        id: 4,
-        title: 'EMAM Research Center',
-        category: 'Web',
-        color: '#00ff9f',
-        lightColor: '#059669', // Emerald Green for Light Mode
-        description: "As a team manager at EMAM Research Center, I developed a full-stack app for managing papers and searching through archives. That was because we didn't want to send grades in a PDF just like any other normal human being.",
-        link: null, // Internal Tool - No public link
-        techStack: ['Node.js', 'Supabase', 'Tailwind', 'Vite'],
-        stamp: '/assets/erc-logo.webp', // Image Stamp
+        id: 9,
+        title: 'FlickBall',
+        category: 'Sports Analytics',
+        color: '#DB0030', // New Era Red
+        lightColor: '#e31b45', // Lighter shade for contrast
+        description: "What happens when you combine artistic design with data-driven insights? Comic book tribute to the new era of FC Barcelona under Hansi Flick. A data-driven web application to celebrate and document the resurgence of FC Barcelona under the German coach. Featuring complete match statistics, player ratings, and a comprehensive history of the team with LLM-powered insights.",
+        link: 'https://flickball.ezzio.me',
+        techStack: ['Next.js 15', 'TypeScript', 'Tailwind v4', 'Google Gemini', 'Recharts'],
+        stamp: '/assets/flick.webp',
         gallery: [
-            '/assets/erc-login',
-            '/assets/erc-dashboard',
-            '/assets/erc-workshops',
-            '/assets/erc-resources',
+            '/assets/flick-gallery-1.webp',
+            '/assets/flick-gallery-2.webp',
+            '/assets/flick-gallery-3.webp',
+            '/assets/flick-gallery-4.webp',
+            '/assets/flick-gallery-5.webp',
         ]
     },
     {
         id: 3,
         title: 'The Null Hypothesis',
-        category: 'Web',
+        category: 'Learning Platform',
         color: '#D4A373', // Sepia/Bronze (Dark Academia)
-        lightColor: '#8c5e2a', // Deep Leather for Light Mode
+        lightColor: '#78350f', // Amber-900 (Rich Leather/Coffee)
         description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
-        link: 'https://nhphi.netlify.app',
+        link: 'https://h0.ezzio.me',
         techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
         stamp: '/assets/null-logo.webp', // Custom Logo Image
         gallery: [
@@ -66,15 +67,36 @@ export const projects = [
         ]
     },
     {
+        id: 1,
+        title: '1316: The Reign',
+        category: 'Scrollytelling',
+        color: '#D00000', // Bloody Red
+        lightColor: '#991b1b', // Red-800
+        description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
+        link: 'https://1316.ezzio.me',
+        bgImage: '/assets/samoan-pattern.webp',
+        overlayImage: '/assets/ulafala.webp',
+        darkPattern: true, // New flag for styling
+        techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
+        stamp: '/assets/roman-hand.webp', // Restored Stamp
+        gallery: [
+            '/assets/roman-gallery-1.webp',
+            '/assets/roman-gallery-2.webp',
+            '/assets/roman-gallery-3.webp',
+            '/assets/roman-gallery-4.webp',
+            '/assets/roman-gallery-5.webp'
+        ]
+    },
+    {
         id: 5,
         title: 'MSTAG',
-        category: 'Web',
-        color: '#0066FF', // Brand Blue
-        lightColor: '#1d4ed8', // Deep Blue
+        category: 'Startup Platform',
+        color: '#7a3ceb', // Brand Blue
+        lightColor: '#1e40af', // Blue-800
         description: "Our startup platform! I tried going for something very tech-y, very premium looking, that'd reflect our systems quality. Thank you random, kind stranger on CodePen (dyaezEN) for the amazing aurora background!",
         link: 'https://ms-tag.netlify.app',
         techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Framer Motion'],
-        stamp: Zap, // Icon Stamp
+        stamp: '/assets/mstag-logo.webp',
         gallery: [
             '/assets/mstag-dashboard', // Adapts: mstag-dashboard-dark.png / light.png
             '/assets/mstag-cases',     // Adapts: mstag-cases-dark.png / light.png
@@ -82,99 +104,11 @@ export const projects = [
         ]
     },
     {
-        id: 1,
-        title: '1316: The Reign',
-        category: 'Web',
-        color: '#D00000', // Bloody Red
-        lightColor: '#b91c1c', // Deep Red
-        description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
-        link: 'https://1316reign.netlify.app',
-        bgImage: '/assets/samoan-pattern.webp',
-        overlayImage: '/assets/ulafala.webp',
-        darkPattern: true, // New flag for styling
-        techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
-        stamp: '/assets/roman-hand.webp', // Restored Stamp
-        gallery: [
-            '/assets/roman-gallery-1.png',
-            '/assets/roman-gallery-2.png',
-            '/assets/roman-gallery-3.png',
-            '/assets/roman-gallery-4.png',
-            '/assets/roman-gallery-5.png'
-        ]
-    },
-    {
-        id: 6,
-        title: 'Graphic Designs',
-        category: 'Art',
-        color: '#FF0055', // Neon Pink/Red
-        lightColor: '#be123c', // Rose-700
-        description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
-        link: null,
-        techStack: ['Photopea', 'Figma'],
-        stamp: PenTool,
-        gallery: [
-            {
-                type: 'design',
-                src: '/assets/designs/RomanReigns.jpg',
-                title: 'OTC',
-                description: "The superhero landing pose-right before a Superman punch-from our tribal chief makes him look like an otherworldy figure. Combined with the Samoan tattoo, the ominous lightning bolt, and the dark background, it's a great acknowledgment for the OTC."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/DX.jpg',
-                title: 'Are You Ready?',
-                description: "My favorite WWE faction ever. I wanted to capture the rebellious energy of the Shawn Michaels and Triple H through a static poster. The neon-green glowing sticks is pretty much their most iconic piece, which made for a fantastic point of focus."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/WeTheOnes.jpg',
-                title: 'We The Ones',
-                description: "I wanted to design a motivating poster with the 'pointing up' gesture from the WWE faction, the Bloodline. Inspired by the brilliant propaganda posters from Bioshock. Ended up with a Red Dead Redemption-styled poster. Couldn't have turned out better."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/SonicCU.jpg',
-                title: 'Sonic & Co. Visit Cairo University',
-                description: "I'm a huge Sonic T. Hedgehog fan, and a student at Cairo University. I also love autumn. And it all clicked so naturally when I wanted a challenging project---changing the university atmosphere from summer to autumn."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/Poetry.jpg',
-                title: 'Poetry',
-                description: "My friend, Abdulrahman Mostafa, is a poet. He wrote something that resonated with me deeply, so I tried capturing how I felt with the 'Surrealist' style in typography and the emerald green color scheme."
-            }
-        ]
-    },
-    {
-        id: 7,
-        title: 'The Decline of The Polymath',
-        category: 'Interactive Story',
-        color: '#E0DCD3', // Beige / Parchment Text Color
-        lightColor: '#78716c', // Stone-500
-        bgImage: '/assets/polymath/rice-paper.webp',
-        description: "My very first data-meets-web project. I wanted to explore the idea of a 'Polymath' and whatever happened to the ones who once were. I used ECharts to create interactive visualizations and a timeline of 1000+ years of history.",
-        link: '/polymath.html',
-        techStack: [
-            { icon: 'HTML5', name: 'HTML5', type: 'simple-icon' },
-            { icon: 'TailwindCSS', name: 'Tailwind', type: 'simple-icon' },
-            { icon: 'D3.js', name: 'ECharts', type: 'simple-icon' }, // Using D3 icon as proxy or generic chart
-            { icon: 'Javascript', name: 'Vanilla JS', type: 'simple-icon' }
-        ],
-        stamp: Brain,
-        gallery: [
-            '/assets/polymath/polymath-preview.png',
-            '/assets/polymath/hall_of_fame.png',
-            '/assets/polymath/chart_time.png',
-            '/assets/polymath/map.png',
-            '/assets/polymath/treemap.png'
-        ]
-    },
-    {
         id: 8,
         title: 'SharkPy',
         category: 'Machine Learning',
         color: '#0077BE', // Ocean Blue
-        lightColor: '#1d4ed8', // Deep Indigo Blue for Light Mode
+        lightColor: '#1d4ed8', // Blue-700 (Keep)
         description: "Weird fact: it's named after Ferran Torres, the 'shark' that saved Barcelona in the 2025 Copa del Rey final against Real Madrid. Oh, and it's an XAI-first machine learning package, with Sklearn, XGBoost, and SHAPASH integration.",
         link: 'https://github.com/Ezzio11/sharkpy',
         techStack: [
@@ -443,6 +377,90 @@ catboost                     CatBoost Handles categorical features, reduced over
                 count: 9
             }
         ]
+    },
+    {
+        id: 4,
+        title: 'EMAM Research Center',
+        category: 'Research Tools',
+        color: '#00ff9f',
+        lightColor: '#15803d', // Green-700
+        description: "As a team manager at EMAM Research Center, I developed a full-stack app for managing papers and searching through archives. That was because we didn't want to send grades in a PDF just like any other normal human being.",
+        link: null, // Internal Tool - No public link
+        techStack: ['Node.js', 'Supabase', 'Tailwind', 'Vite'],
+        stamp: '/assets/erc-logo.webp', // Image Stamp
+        gallery: [
+            '/assets/erc-login',
+            '/assets/erc-dashboard',
+            '/assets/erc-workshops',
+            '/assets/erc-resources',
+        ]
+    },
+    {
+        id: 7,
+        title: 'The Decline of The Polymath',
+        category: 'Interactive Story',
+        color: '#E0DCD3', // Beige / Parchment Text Color
+        lightColor: '#b45309', // Amber-700 (Warm paper/map color)
+        bgImage: '/assets/polymath/rice-paper.webp',
+        description: "My very first data-meets-web project. I wanted to explore the idea of a 'Polymath' and whatever happened to the ones who once were. I used ECharts to create interactive visualizations and a timeline of 1000+ years of history.",
+        link: '/polymath.html',
+        techStack: [
+            { icon: 'HTML5', name: 'HTML5', type: 'simple-icon' },
+            { icon: 'TailwindCSS', name: 'Tailwind', type: 'simple-icon' },
+            { icon: 'D3.js', name: 'ECharts', type: 'simple-icon' }, // Using D3 icon as proxy or generic chart
+            { icon: 'Javascript', name: 'Vanilla JS', type: 'simple-icon' }
+        ],
+        stamp: Brain,
+        gallery: [
+            '/assets/polymath/polymath-preview.webp',
+            '/assets/polymath/hall_of_fame.webp',
+            '/assets/polymath/chart_time.webp',
+            '/assets/polymath/map.webp',
+            '/assets/polymath/treemap.webp'
+        ]
+    },
+    {
+        id: 6,
+        title: 'Graphic Designs',
+        category: 'Art',
+        color: '#FF0055', // Neon Pink/Red
+        lightColor: '#be123c', // Rose-700
+        description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
+        link: null,
+        techStack: ['Photopea', 'Figma'],
+        stamp: PenTool,
+        gallery: [
+            {
+                type: 'design',
+                src: '/assets/designs/RomanReigns.webp',
+                title: 'OTC',
+                description: "The superhero landing pose-right before a Superman punch-from our tribal chief makes him look like an otherworldy figure. Combined with the Samoan tattoo, the ominous lightning bolt, and the dark background, it's a great acknowledgment for the OTC."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/DX.webp',
+                title: 'Are You Ready?',
+                description: "My favorite WWE faction ever. I wanted to capture the rebellious energy of the Shawn Michaels and Triple H through a static poster. The neon-green glowing sticks is pretty much their most iconic piece, which made for a fantastic point of focus."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/WeTheOnes.webp',
+                title: 'We The Ones',
+                description: "I wanted to design a motivating poster with the 'pointing up' gesture from the WWE faction, the Bloodline. Inspired by the brilliant propaganda posters from Bioshock. Ended up with a Red Dead Redemption-styled poster. Couldn't have turned out better."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/SonicCU.webp',
+                title: 'Sonic & Co. Visit Cairo University',
+                description: "I'm a huge Sonic T. Hedgehog fan, and a student at Cairo University. I also love autumn. And it all clicked so naturally when I wanted a challenging project---changing the university atmosphere from summer to autumn."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/Poetry.webp',
+                title: 'Poetry',
+                description: "My friend, Abdulrahman Mostafa, is a poet. He wrote something that resonated with me deeply, so I tried capturing how I felt with the 'Surrealist' style in typography and the emerald green color scheme."
+            }
+        ]
     }
 ];
 
@@ -476,17 +494,29 @@ export const techIcons = {
     'React 19': siReact,
     'Tailwind v4': siTailwindcss,
     'Figma': siFramer, // Placeholder if Figma icon not imported
+    'TypeScript': siTypescript,
+    'Google Gemini': siGoogle,
+    'Next.js 15': siNextdotjs,
+    'Recharts': siReact, // Using React icon for Recharts
+    'Tailwind': siTailwindcss,
 };
 
 export const getCategoryIcon = (category) => {
     switch (category) {
+        case 'Sports Analytics': return Trophy; // Trophy icon for sports
+        case 'Gamified Learning': return School; // Educational focus
+        case 'Research Tools': return LayoutDashboard; // Dashboard/tools
+        case 'Learning Platform': return School; // Educational
+        case 'Startup Platform': return Zap; // Innovation/energy
+        case 'Scrollytelling': return Feather; // Story/narrative
+        case 'Art': return PenTool;
+        case 'Machine Learning': return Zap;
+        case 'Interactive Story': return Feather;
+        // Legacy fallbacks
         case 'Web': return Globe;
         case 'Dashboard': return LayoutDashboard;
         case 'Translation': return Languages;
         case 'App': return Smartphone;
-        case 'Art': return PenTool; // Added for Graphic Designs
-        case 'Machine Learning': return Zap;
-        case 'Interactive Story': return Feather;
         default: return Globe;
     }
 };

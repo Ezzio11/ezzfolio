@@ -32,7 +32,7 @@ export default React.memo(function Background() {
             if (shapesRef.current) {
                 shapesRef.current.style.transform = `
                     perspective(1000px)
-                    translate3d(${x * 1.5}px, ${y * 1.5}px, 50px)
+                    translate3d(${x * 1.5}px, ${y * 1.5}px, 10px)
                     rotateX(${y * 0.15}deg) 
                     rotateY(${x * 0.15}deg)
                     scale(1.1)

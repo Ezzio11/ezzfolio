@@ -12,6 +12,7 @@ export default function ProjectList({ theme }) {
     const [selectedId, setSelectedId] = useState(null);
     const [originRect, setOriginRect] = useState(null);
     const [expandedImg, setExpandedImg] = useState(null);
+    const [isAnimating, setIsAnimating] = useState(false); // For mobile optimization
 
     const overlayRef = useRef(null);
 
@@ -24,30 +25,87 @@ export default function ProjectList({ theme }) {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+
     const transitions = useTransition(selectedId, {
-        from: () => ({
-            top: originRect ? originRect.top : 0,
-            left: originRect ? originRect.left : 0,
-            width: originRect ? originRect.width : 0,
-            height: originRect ? originRect.height : 0,
-            opacity: 0
-        }),
-        enter: {
-            top: 0,
-            left: 0,
-            width: window.innerWidth,
-            height: window.innerHeight,
-            opacity: 1
+        from: () => {
+            if (!originRect) {
+                return { opacity: 0, transform: 'scale(0.9)' };
+            }
+
+            // Mobile: simple fade to avoid jank on real devices
+            if (isMobile) {
+                return { opacity: 0 };
+            }
+
+            // Desktop: Calculate transform values for GPU-accelerated animation
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const cardCenterX = originRect.left + originRect.width / 2;
+            const cardCenterY = originRect.top + originRect.height / 2;
+
+            // Translation needed to move card center to screen center
+            const translateX = centerX - cardCenterX;
+            const translateY = centerY - cardCenterY;
+
+            // Scale needed to grow from card size to screen size
+            const scaleX = originRect.width / window.innerWidth;
+            const scaleY = originRect.height / window.innerHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            return {
+                opacity: 0,
+                transform: `translate(${-translateX}px, ${-translateY}px) scale(${scale})`
+            };
         },
-        leave: () => ({
-            top: originRect ? originRect.top : 0,
-            left: originRect ? originRect.left : 0,
-            width: originRect ? originRect.width : 0,
-            height: originRect ? originRect.height : 0,
-            opacity: 0
-        }),
-        config: { mass: 1, tension: 180, friction: 22 },
+        enter: isMobile
+            ? { opacity: 1 } // Simple fade on mobile
+            : {
+                opacity: 1,
+                transform: 'translate(0px, 0px) scale(1)'
+            },
+        leave: () => {
+            if (!originRect) {
+                return { opacity: 0, transform: 'scale(0.9)' };
+            }
+
+            // Mobile: simple fade
+            if (isMobile) {
+                return { opacity: 0 };
+            }
+
+            // Desktop: Same calculation as 'from' for smooth reverse animation
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const cardCenterX = originRect.left + originRect.width / 2;
+            const cardCenterY = originRect.top + originRect.height / 2;
+
+            const translateX = centerX - cardCenterX;
+            const translateY = centerY - cardCenterY;
+
+            const scaleX = originRect.width / window.innerWidth;
+            const scaleY = originRect.height / window.innerHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            return {
+                opacity: 0,
+                transform: `translate(${-translateX}px, ${-translateY}px) scale(${scale})`
+            };
+        },
+        // Mobile: simple fade for performance on real devices
+        // Desktop: nick.computer-style morphing
+        config: isMobile
+            ? { mass: 0.5, tension: 280, friction: 35 } // Fast, simple fade
+            : { mass: 1, tension: 250, friction: 30 }, // Nick.computer style
+        onStart: () => {
+            // Hide content during animation on mobile only
+            if (isMobile) {
+                setIsAnimating(true);
+            }
+        },
         onRest: (result) => {
+            if (isMobile) {
+                setIsAnimating(false);
+            }
             if (selectedId === null && result.finished) {
                 setOriginRect(null);
                 document.body.style.overflow = '';
@@ -97,7 +155,9 @@ export default function ProjectList({ theme }) {
             <h2 className="section-title">
                 Selected Works
             </h2>
-
+            <p className="section-subtitle" style={{ fontSize: '0.8rem' }}>
+                (if you see the <ExternalLink /> icon, click to visit the project!)
+            </p>
 
             {/* --- GRID VIEW --- */}
             <div className="project-grid">
@@ -116,8 +176,8 @@ export default function ProjectList({ theme }) {
                             aria-label={`View details for ${project.title}`}
                             style={{
                                 animationDelay: `${1.2 + (index * 0.1)}s`, // Staggered delay
-                                background: 'var(--terminal-bg)',
-                                border: '1px solid var(--grid-line)',
+                                background: project.id === 0 ? '#0f172a' : '#0a0a12', // Fixed Dark Backgrounds
+                                border: '1px solid rgba(5, 217, 232, 0.1)', // Fixed Dark/Cyan Border
                                 padding: '1.5rem',
                                 minHeight: '260px',
                                 cursor: 'pointer',
@@ -148,19 +208,7 @@ export default function ProjectList({ theme }) {
                                     }} />
                                 )}
 
-                                {/* UNIVERSAL LIGHT MODE GRADIENT (The "1316 Treatment") */}
-                                {theme !== 'dark' && project.id !== 1 && project.id !== 5 && (
-                                    <div style={{
-                                        position: 'absolute',
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        height: '60%',
-                                        background: `linear-gradient(to top, ${(project.lightColor || project.color)}66, transparent)`, // ~40% opacity
-                                        zIndex: 0,
-                                        pointerEvents: 'none'
-                                    }} />
-                                )}
+
 
                                 {/* --- INHERITED GRID VISUALS --- */}
 
@@ -168,29 +216,27 @@ export default function ProjectList({ theme }) {
                                 {project.id === 0 && (
                                     <>
                                         {/* Light Mode Tint REMOVED */}
-                                        {/* Blobs only in Dark Mode for CLEAN Look in Light Mode */}
-                                        {theme === 'dark' && (
-                                            <>
-                                                <div style={{
-                                                    position: 'absolute', top: '-20%', left: '-20%', width: '140%', height: '140%',
-                                                    background: 'rgba(34, 211, 238, 0.2)',
-                                                    borderRadius: '9999px', filter: 'blur(60px)',
-                                                    zIndex: 0, pointerEvents: 'none'
-                                                }} />
-                                                <div style={{
-                                                    position: 'absolute', bottom: '-20%', right: '-20%', width: '140%', height: '140%',
-                                                    background: 'rgba(6, 182, 212, 0.2)',
-                                                    borderRadius: '9999px', filter: 'blur(60px)',
-                                                    zIndex: 0, pointerEvents: 'none'
-                                                }} />
-                                            </>
-                                        )}
+                                        {/* Blobs always active (Dark Mode Style) */}
+                                        <div style={{
+                                            position: 'absolute', top: '-20%', left: '-20%', width: '140%', height: '140%',
+                                            background: 'rgba(34, 211, 238, 0.2)',
+                                            borderRadius: '9999px', filter: 'blur(60px)',
+                                            zIndex: 0, pointerEvents: 'none'
+                                        }} />
+                                        <div style={{
+                                            position: 'absolute', bottom: '-20%', right: '-20%', width: '140%', height: '140%',
+                                            background: 'rgba(6, 182, 212, 0.2)',
+                                            borderRadius: '9999px', filter: 'blur(60px)',
+                                            zIndex: 0, pointerEvents: 'none'
+                                        }} />
+
                                         <div style={{
                                             position: 'absolute', inset: 0,
                                             backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)',
                                             backgroundSize: '16px 16px',
-                                            opacity: theme === 'dark' ? 0.15 : 0.3, // Significantly boosted for Light
-                                            zIndex: 1, pointerEvents: 'none'
+                                            opacity: 0.15, // Dark mode opacity
+                                            zIndex: 1, pointerEvents: 'none',
+                                            transition: 'opacity 0.3s ease'
                                         }} />
                                     </>
                                 )}
@@ -201,14 +247,14 @@ export default function ProjectList({ theme }) {
                                         {/* Light Mode Tint REMOVED */}
                                         <div style={{
                                             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-                                            opacity: theme === 'dark' ? 0.08 : 0.15, // Boosted noise
+                                            opacity: 0.08, // Dark mode opacity
                                             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                                             mixBlendMode: 'overlay'
                                         }} />
                                         <div style={{
                                             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
                                             opacity: 0.1, // Boosted grid
-                                            backgroundImage: `linear-gradient(${theme === 'dark' ? '#E0DCD3' : '#1F1D1B'} 1px, transparent 1px), linear-gradient(90deg, ${theme === 'dark' ? '#E0DCD3' : '#1F1D1B'} 1px, transparent 1px)`,
+                                            backgroundImage: `linear-gradient(#E0DCD3 1px, transparent 1px), linear-gradient(90deg, #E0DCD3 1px, transparent 1px)`,
                                             backgroundSize: '20px 20px'
                                         }} />
                                         <div style={{
@@ -224,16 +270,14 @@ export default function ProjectList({ theme }) {
                                     <>
                                         {/* Light Mode Tint REMOVED */}
                                         {/* Full Gradient only in Dark Mode */}
-                                        {theme === 'dark' && (
-                                            <div style={{
-                                                position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-                                                background: 'linear-gradient(to bottom right, rgba(48, 124, 60, 0.4), transparent)'
-                                            }} />
-                                        )}
+                                        <div style={{
+                                            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                                            background: 'linear-gradient(to bottom right, rgba(48, 124, 60, 0.4), transparent)'
+                                        }} />
                                         <div style={{
                                             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
                                             opacity: 0.2,
-                                            color: theme === 'dark' ? '#307c3c' : '#166534' // Darker green for light mode visibility
+                                            color: '#307c3c' // Darker green
                                         }}>
                                             <svg width="100%" height="100%">
                                                 <defs>
@@ -253,15 +297,14 @@ export default function ProjectList({ theme }) {
                                         {/* Light Mode Tint REMOVED */}
                                         {/* Blueprint Dotted Grid */}
                                         {/* Blueprint Grid only in Dark Mode */}
-                                        {theme === 'dark' && (
-                                            <div style={{
-                                                position: 'absolute', inset: 0,
-                                                backgroundImage: 'radial-gradient(#e11d48 1px, transparent 1px)',
-                                                backgroundSize: '20px 20px',
-                                                opacity: 0.15,
-                                                zIndex: 0, pointerEvents: 'none'
-                                            }} />
-                                        )}
+                                        {/* Blueprint Grid always active */}
+                                        <div style={{
+                                            position: 'absolute', inset: 0,
+                                            backgroundImage: 'radial-gradient(#e11d48 1px, transparent 1px)',
+                                            backgroundSize: '20px 20px',
+                                            opacity: 0.15,
+                                            zIndex: 0, pointerEvents: 'none'
+                                        }} />
                                         <div style={{
                                             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
                                             background: `linear-gradient(to top, ${project.color}22, transparent)`,
@@ -276,12 +319,11 @@ export default function ProjectList({ theme }) {
                                         {/* Light Mode Tint REMOVED */}
                                         {/* Ocean Wave Gradient */}
                                         {/* Ocean Gradient only in Dark Mode */}
-                                        {theme === 'dark' && (
-                                            <div style={{
-                                                position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-                                                background: 'linear-gradient(135deg, rgba(0,119,190,0.1) 0%, transparent 100%)'
-                                            }} />
-                                        )}
+                                        {/* Ocean Gradient always active */}
+                                        <div style={{
+                                            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                                            background: 'linear-gradient(135deg, rgba(0,119,190,0.1) 0%, transparent 100%)'
+                                        }} />
                                         {/* Subtle Scale Pattern (CSS only) */}
                                         <div style={{
                                             position: 'absolute', inset: 0,
@@ -290,6 +332,54 @@ export default function ProjectList({ theme }) {
                                             zIndex: 0, pointerEvents: 'none',
                                             mixBlendMode: 'overlay'
                                         }} />
+
+                                    </>
+                                )}
+
+                                {/* FlickBall (ID 9) - Comic Visuals */}
+                                {project.id === 9 && (
+                                    <>
+                                        {/* Background Gradient for Vibrancy */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            background: 'linear-gradient(to bottom right, #DB0030, #7f1d1d)', // vivid red to dark red
+                                            zIndex: 0,
+                                            pointerEvents: 'none'
+                                        }} />
+
+                                        <div className="comic-halftone" style={{
+                                            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                                            opacity: 0.4
+                                        }} />
+                                        <div style={{
+                                            position: 'absolute', top: '10%', left: '-5%',
+                                            transform: 'rotate(-15deg)',
+                                            fontFamily: 'Bangers, cursive',
+                                            color: '#ffed02',
+                                            fontSize: '1.8rem',
+                                            textShadow: '3px 3px 0 #000',
+                                            zIndex: 5,
+                                            pointerEvents: 'none'
+                                        }}>
+                                            ¡VISCA!
+                                        </div>
+                                        <div style={{
+                                            position: 'absolute', bottom: '15%', left: '5%',
+                                            transform: 'rotate(5deg)',
+                                            fontFamily: 'Bangers, cursive',
+                                            color: '#ffed02',
+                                            fontSize: '1.2rem',
+                                            textShadow: '2px 2px 0 #000',
+                                            zIndex: 5,
+                                            pointerEvents: 'none',
+                                            opacity: 0.8
+                                        }}>
+                                            HANSI FLICK ERA
+                                        </div>
                                     </>
                                 )}
 
@@ -309,7 +399,7 @@ export default function ProjectList({ theme }) {
                                         position: 'absolute',
                                         inset: 0,
                                         zIndex: 0,
-                                        background: theme === 'dark' ? '#3A2D23' : '#f5f0e6', // Deep Brown vs Parchment
+                                        background: '#3A2D23', // Deep Brown
                                         pointerEvents: 'none',
                                         transition: 'background-color 0.3s ease'
                                     }} />
@@ -322,24 +412,27 @@ export default function ProjectList({ theme }) {
                                         const Stamp = project.stamp;
                                         const isComponent = typeof Stamp !== 'string';
                                         return (
-                                            <div style={{
-                                                position: 'absolute',
-                                                bottom: '-10px',  // Bottom
-                                                right: '-10px',   // Right
-                                                width: '100px',
-                                                height: '100px',
-                                                zIndex: 2,
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                transform: 'rotate(-45deg)', // -45 degrees
-                                                opacity: theme === 'dark' ? 0.3 : 0.5,
-                                                fill: theme === 'dark' ? 'white' : 'black',
-                                                stroke: theme === 'dark' ? 'white' : 'black',
-
-                                                pointerEvents: 'none',
-                                                color: project.color
-                                            }}>
+                                            <div
+                                                className="project-card-logo"
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '10px',  // Moved inwards slightly
+                                                    right: '10px',   // Moved inwards slightly
+                                                    width: '90px',   // Slightly smaller base size
+                                                    height: '90px',
+                                                    zIndex: 2,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    // Transform handled in CSS now
+                                                    opacity: 0.3, // Subtle but visible
+                                                    fill: 'white',
+                                                    stroke: 'white',
+                                                    mixBlendMode: 'luminosity', // Clean integration without color washout
+                                                    pointerEvents: 'none',
+                                                    color: project.color,
+                                                    transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' // Spring-like transition
+                                                }}>
                                                 {isComponent ? (
                                                     <Stamp size={80} strokeWidth={1.5} />
                                                 ) : (
@@ -409,11 +502,13 @@ export default function ProjectList({ theme }) {
                                         margin: 0,
                                         fontFamily: 'Syne, sans-serif' // Enforce Syne explicitly
                                     }}>
-                                        {project.title}
+                                        <span style={{ color: project.id === 9 ? '#ffed02' : 'inherit' }}>
+                                            {project.title}
+                                        </span>
                                     </h3>
                                     <span className="card-category" style={{
                                         fontSize: '0.8rem',
-                                        color: 'var(--text-dim)',
+                                        color: 'rgba(255, 255, 255, 0.7)', // Fixed Light Text
                                         textTransform: 'uppercase',
                                         letterSpacing: '0.5px',
                                         display: 'flex',
@@ -452,7 +547,13 @@ export default function ProjectList({ theme }) {
                     // STRICT MONOCHROME: No overrides
                 } else if (item === 3) { // Null Hyp
                     const isDark = theme === 'dark';
-                    overlayBg = isDark ? '#141311' : '#ffffff';
+                    overlayBg = isDark ? '#141311' : '#F5F2EB'; // Creamy Light Mode
+                    if (!isDark) {
+                        variableOverrides = {
+                            '--text-main': '#000000',
+                            '--text-dim': 'rgba(0, 0, 0, 0.6)'
+                        };
+                    }
                     // STRICT MONOCHROME: No overrides
                 } else if (item === 7) { // Polymath
                     const isDark = theme === 'dark';
@@ -461,9 +562,10 @@ export default function ProjectList({ theme }) {
                 } else if (item === 1) { // Roman Reigns
                     overlayBg = 'var(--roman-overlay-bg)';
                 } else if (item === 0) { // SSC2
-                    const isDark = theme === 'dark';
-                    overlayBg = isDark ? '#0f172a' : '#ffffff'; // Adaptive background
+                    overlayBg = '#0f172a'; // Enforce Dark Mode Background
                     // STRICT MONOCHROME: No overrides
+                } else if (item === 9) { // FlickBall
+                    overlayBg = '#DB0030'; // Website Brand Red
                 } else {
                     overlayBg = 'var(--terminal-bg)';
                 }
@@ -475,39 +577,52 @@ export default function ProjectList({ theme }) {
                         ref={overlayRef}
                         style={{
                             position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            width: '100vw',
+                            height: '100vh',
                             zIndex: 9999,
                             background: overlayBg,
                             border: `1px solid ${project.color}`,
                             overflow: isMobile ? 'auto' : 'hidden', // Allow scrolling on mobile
+                            overflowX: 'hidden', // CRITICAL: Prevent ulafala from causing horizontal scroll
                             display: isMobile ? 'block' : 'grid', // specific fix: block on mobile lets child grow
                             gridTemplateColumns: isMobile ? 'none' : '40% 60%', // Full width on mobile
                             gridTemplateRows: isMobile ? 'none' : '1fr', // Stack vertically on mobile
                             boxShadow: '0 0 50px rgba(0,0,0,0.5)',
                             transition: 'background-color 0.3s ease, border-color 0.3s ease', // Smooth Theme Transition
-                            ...style, // Apply Spring Values (top, left, width, height)
+                            // GPU acceleration hints - only when active
+                            ...(selectedId !== null && { willChange: 'transform, opacity' }),
+                            backfaceVisibility: 'hidden',
+                            // Apply Spring transform values (GPU-accelerated)
+                            ...style, // Apply Spring Values (transform)
                             ...variableOverrides
                         }}
                         className="project-overlay"
+                        data-id={item}
                     >
 
                         {/* --- EXPANDED VISUALS --- */}
-                        {/* Elements inside fade in/out slightly delayed to let the box expand first */}
+                        {/* Mobile: Content visible immediately on open, fades on close */}
+                        {/* Desktop: Content visible (nick.computer style) */}
                         <div style={{
-                            height: isMobile ? 'auto' : '100%', // Allow growing on mobile
-                            minHeight: '100%', // Ensure it fills at least the screen
-                            position: isMobile ? 'relative' : 'absolute', // Relative flow on mobile
+                            height: isMobile ? 'auto' : '100%',
+                            minHeight: '100%',
+                            position: isMobile ? 'relative' : 'absolute',
                             top: 0,
                             left: 0,
-                            width: '100%', // Explicit width
+                            width: '100%',
+                            // Only fade on close, not on open
                             opacity: isClosing ? 0 : 1,
                             transform: isClosing ? 'translateY(20px)' : 'translateY(0)',
-                            transition: 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-                            transitionDelay: isClosing ? '0s' : '0.3s', // Wait slightly longer for box to expand
-                            display: isMobile ? 'flex' : 'grid', // Flex for vertical stacking on mobile
+                            transition: 'opacity 0.3s ease, transform 0.3s ease',
+                            display: isMobile ? 'flex' : 'grid',
                             flexDirection: isMobile ? 'column' : undefined,
-                            gridTemplateColumns: isMobile ? 'none' : '40% 60%', // Split Screen Desktop
+                            gridTemplateColumns: isMobile ? 'none' : '40% 60%',
                             gridTemplateRows: isMobile ? 'none' : '1fr',
-                            overflow: isMobile ? 'visible' : 'hidden' // Visible overflow for inner content on mobile scroll
+                            overflow: isMobile ? 'visible' : 'hidden'
                         }}>
                             {/* BACKGROUND PATTERNS (Global) */}
                             {project.bgImage && (
@@ -526,8 +641,8 @@ export default function ProjectList({ theme }) {
                                 }} className="bg-pattern" />
                             )}
 
-                            {/* Standardized Dynamic Gradient (Everyone gets this now except 1316 which has its own custom one) */}
-                            {project.id !== 1 && project.id !== 5 && (
+                            {/* Standardized Dynamic Gradient (Everyone gets this now except 1316, 5 and 9 and 3) */}
+                            {project.id !== 1 && project.id !== 5 && project.id !== 9 && project.id !== 3 && (
                                 <div style={{
                                     position: 'absolute',
                                     bottom: 0,
@@ -552,6 +667,42 @@ export default function ProjectList({ theme }) {
 
                             {/* Logo stamps removed from here - now in left column above title */}
 
+                            {/* FlickBall (ID 9) - Expanded Comic Bg */}
+                            {project.id === 9 && (
+                                <>
+                                    {/* 1. Halftone Background */}
+                                    <div className="comic-halftone" style={{
+                                        position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none',
+                                        opacity: 0.1,
+                                        backgroundSize: '30px 30px'
+                                    }} />
+
+                                    {/* 3. Floating Text Elements (Ambient) - Boosted Opacity */}
+                                    <div style={{
+                                        position: 'absolute', top: '5%', left: '20%',
+                                        fontFamily: 'Bangers, cursive',
+                                        color: 'rgba(255, 237, 2, 0.2)', // Faint Yellow
+                                        fontSize: '8rem',
+                                        transform: 'rotate(10deg)',
+                                        zIndex: -1,
+                                        pointerEvents: 'none'
+                                    }}>
+                                        CRACK!
+                                    </div>
+                                    <div style={{
+                                        position: 'absolute', bottom: '10%', left: '5%',
+                                        fontFamily: 'Bangers, cursive',
+                                        color: 'rgba(255, 237, 2, 0.15)', // Faint Yellow
+                                        fontSize: '6rem',
+                                        transform: 'rotate(-5deg)',
+                                        zIndex: -1,
+                                        pointerEvents: 'none'
+                                    }}>
+                                        THE FLICK ERA
+                                    </div>
+                                </>
+                            )}
+
                             {/* Original 1316 Logic (PRESERVED) */}
                             {project.id === 1 && (
                                 <div style={{
@@ -568,44 +719,37 @@ export default function ProjectList({ theme }) {
 
                             {project.id === 0 && (
                                 <>
-                                    {/* Light Mode Tint */}
-                                    {theme !== 'dark' && (
-                                        <div style={{
-                                            position: 'absolute', inset: 0,
-                                            background: '#f0f9ff', // AliceBlue tint
-                                            zIndex: -2, pointerEvents: 'none'
-                                        }} />
-                                    )}
-
-                                    {/* SSC2 Source Ambience: Top-Left Blob */}
+                                    {/* SSC2 Source Ambience: Top-Left Blob - FIXED DARK MODE */}
                                     <div style={{
                                         position: 'absolute',
                                         top: '-10%',
                                         left: '-10%',
                                         width: '500px',
                                         height: '500px',
-                                        background: theme === 'dark' ? 'rgba(34, 211, 238, 0.1)' : 'rgba(34, 211, 238, 0.25)', // Boosted for Light
+                                        background: 'rgba(34, 211, 238, 0.1)',
                                         borderRadius: '9999px',
                                         filter: 'blur(100px)',
                                         zIndex: -1,
-                                        pointerEvents: 'none'
+                                        pointerEvents: 'none',
+                                        transition: 'background 0.3s ease'
                                     }} />
 
-                                    {/* SSC2 Source Ambience: Bottom-Right Blob */}
+                                    {/* SSC2 Source Ambience: Bottom-Right Blob - FIXED DARK MODE */}
                                     <div style={{
                                         position: 'absolute',
                                         bottom: '-10%',
                                         right: '-10%',
                                         width: '500px',
                                         height: '500px',
-                                        background: theme === 'dark' ? 'rgba(6, 182, 212, 0.1)' : 'rgba(6, 182, 212, 0.25)', // Boosted for Light
+                                        background: 'rgba(6, 182, 212, 0.1)',
                                         borderRadius: '9999px',
                                         filter: 'blur(100px)',
                                         zIndex: -1,
-                                        pointerEvents: 'none'
+                                        pointerEvents: 'none',
+                                        transition: 'background 0.3s ease'
                                     }} />
 
-                                    {/* SSC2 Source Ambience: Dot Grid */}
+                                    {/* SSC2 Source Ambience: Dot Grid - FIXED DARK MODE */}
                                     <div style={{
                                         position: 'absolute',
                                         top: 0,
@@ -614,9 +758,10 @@ export default function ProjectList({ theme }) {
                                         bottom: 0,
                                         backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)', // Slate-400
                                         backgroundSize: '24px 24px',
-                                        opacity: theme === 'dark' ? 0.1 : 0.25, // Boosted for Light
+                                        opacity: 0.1,
                                         zIndex: -1,
-                                        pointerEvents: 'none'
+                                        pointerEvents: 'none',
+                                        transition: 'opacity 0.3s ease'
                                     }} />
                                 </>
                             )}
@@ -724,13 +869,7 @@ export default function ProjectList({ theme }) {
                                         mixBlendMode: 'overlay'
                                     }} />
 
-                                    {/* 2. Vignette Layer */}
-                                    <div style={{
-                                        position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none',
-                                        background: theme === 'dark'
-                                            ? 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%, rgba(0, 0, 0, 0.4) 100%)'
-                                            : 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%)'
-                                    }} />
+
 
                                     {/* 3. Graph Paper Grid */}
                                     <div style={{
@@ -750,8 +889,8 @@ export default function ProjectList({ theme }) {
                                     position: 'absolute',
                                     top: '2rem',
                                     right: '2rem',
-                                    background: theme === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.8)',
-                                    border: `1px solid ${theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
+                                    background: (theme === 'dark' || project.id === 0) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.8)',
+                                    border: `1px solid ${(theme === 'dark' || project.id === 0) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
                                     borderRadius: '50%',
                                     width: '44px',
                                     height: '44px',
@@ -772,8 +911,8 @@ export default function ProjectList({ theme }) {
                                 }}
                                 onMouseLeave={(e) => {
                                     e.currentTarget.style.transform = 'rotate(0deg)';
-                                    e.currentTarget.style.backgroundColor = theme === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.8)';
-                                    e.currentTarget.style.borderColor = theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                                    e.currentTarget.style.backgroundColor = (theme === 'dark' || project.id === 0) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.8)';
+                                    e.currentTarget.style.borderColor = (theme === 'dark' || project.id === 0) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
                                     e.currentTarget.style.color = 'var(--text-dim)';
                                 }}
                             >
@@ -808,6 +947,13 @@ export default function ProjectList({ theme }) {
                                     const Stamp = project.stamp;
                                     const isComponent = typeof Stamp !== 'string';
 
+                                    // Handle Adaptive Logo for Null Hypothesis (ID 3)
+                                    let stampSrc = Stamp;
+                                    if (project.id === 3) {
+                                        // User Request: Dark Logo in Light Mode, Light Logo in Dark Mode
+                                        stampSrc = theme === 'dark' ? '/assets/null-logo.webp' : '/assets/null-logo-dark.webp';
+                                    }
+
                                     return (
                                         <div style={{
                                             marginBottom: '2rem',
@@ -826,7 +972,7 @@ export default function ProjectList({ theme }) {
                                                 />
                                             ) : (
                                                 <img
-                                                    src={Stamp}
+                                                    src={stampSrc}
                                                     alt={`${project.title} logo`}
                                                     loading="lazy"
                                                     width="160"
@@ -845,7 +991,7 @@ export default function ProjectList({ theme }) {
 
                                 <h1 style={{
                                     fontSize: isMobile ? '2rem' : '3rem', // Smaller title on mobile
-                                    color: project.color,
+                                    color: project.id === 9 ? '#ffed02' : (project.id === 3 && theme !== 'dark' ? '#000000' : project.color),
                                     marginBottom: '0.5rem',
                                     lineHeight: 1,
                                     fontWeight: 800,
@@ -868,15 +1014,14 @@ export default function ProjectList({ theme }) {
                                                 e.currentTarget.style.setProperty('text-decoration', 'underline', 'important');
 
                                                 // Use adaptive color for Polymath (Gold in Dark Mode), otherwise Project Color
-                                                const hoverColor = project.id === 7 ? 'var(--text-main)' : project.color;
-
-                                                e.currentTarget.style.setProperty('text-decoration-color', hoverColor, 'important');
-                                                e.currentTarget.style.setProperty('color', hoverColor, 'important');
+                                                // FLICKBALL FIX: Keep it Yellow on hover
+                                                e.currentTarget.style.setProperty('text-decoration-color', 'important');
+                                                e.currentTarget.style.setProperty('color', 'important');
                                                 e.currentTarget.style.setProperty('text-shadow', 'none', 'important'); // KILL THE BLUE SHADOW
                                             }}
                                             onMouseLeave={(e) => {
                                                 e.currentTarget.style.textDecoration = 'none';
-                                                e.currentTarget.style.color = project.id === 7 ? 'var(--text-main)' : project.color;
+                                                e.currentTarget.style.color = 'important';
                                                 e.currentTarget.style.textShadow = 'none';
                                             }}
                                         >
@@ -899,7 +1044,7 @@ export default function ProjectList({ theme }) {
                                 </h1>
                                 <span style={{
                                     fontSize: '1rem',
-                                    color: 'var(--text-dim)',
+                                    color: project.id === 9 ? 'white' : 'var(--text-dim)',
                                     display: 'block',
                                     marginBottom: '2rem',
                                     textTransform: 'uppercase',
@@ -914,7 +1059,7 @@ export default function ProjectList({ theme }) {
                                     lineHeight: '1.6',
                                     maxWidth: '90%',
                                     marginBottom: '2rem',
-                                    color: 'var(--text-main)',
+                                    color: (project.id === 9 || project.id === 0) ? 'white' : 'var(--text-main)',
                                     transition: 'color 0.3s ease' // Smooth transition
                                 }}>
                                     {project.description}
@@ -922,7 +1067,7 @@ export default function ProjectList({ theme }) {
 
                                 {/* TECH STACK ICONS */}
                                 <div style={{ marginBottom: '2rem' }}>
-                                    <h4 style={{ color: 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '0.75rem', textTransform: 'uppercase', transition: 'color 0.3s ease' }}>Technologies Used</h4>
+                                    <h4 style={{ color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '0.75rem', textTransform: 'uppercase', transition: 'color 0.3s ease' }}>Technologies Used</h4>
                                     <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
                                         {project.techStack && project.techStack.map(tech => {
                                             const techName = typeof tech === 'string' ? tech : tech.name;
@@ -938,19 +1083,15 @@ export default function ProjectList({ theme }) {
                                                         style={{
                                                             cursor: 'help',
                                                             transition: 'all 0.3s ease',
-                                                            color: 'var(--text-dim)', // Monochrome default
+                                                            color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
                                                             display: 'flex',
                                                             alignItems: 'center'
                                                         }}
                                                         onMouseEnter={(e) => {
                                                             e.currentTarget.style.transform = 'scale(1.1)';
-                                                            e.currentTarget.style.color = `#${iconData.hex}`;
-                                                            e.currentTarget.style.filter = 'drop-shadow(0 0 5px rgba(0,0,0,0.5))';
                                                         }}
                                                         onMouseLeave={(e) => {
                                                             e.currentTarget.style.transform = 'scale(1)';
-                                                            e.currentTarget.style.color = 'var(--text-dim)';
-                                                            e.currentTarget.style.filter = 'none';
                                                         }}
                                                     >
                                                         <svg
@@ -976,17 +1117,15 @@ export default function ProjectList({ theme }) {
                                                     style={{
                                                         cursor: 'help',
                                                         transition: 'all 0.3s ease',
-                                                        color: 'var(--text-dim)', // Monochrome default
+                                                        color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
                                                         display: 'flex',
                                                         alignItems: 'center'
                                                     }}
                                                     onMouseEnter={(e) => {
                                                         e.currentTarget.style.transform = 'scale(1.1)';
-                                                        e.currentTarget.style.color = 'var(--text-main)'; // Highlight white
                                                     }}
                                                     onMouseLeave={(e) => {
                                                         e.currentTarget.style.transform = 'scale(1)';
-                                                        e.currentTarget.style.color = 'var(--text-dim)';
                                                     }}
                                                 >
                                                     <Icon size={24} strokeWidth={1.5} />
@@ -1148,18 +1287,32 @@ export default function ProjectList({ theme }) {
                                                 if (isObject) {
                                                     imgPath = item.src;
                                                 } else {
-                                                    const hasExtension = item.endsWith('.png') || item.endsWith('.jpg');
-                                                    imgPath = hasExtension ? item : `${item}-${theme === 'dark' ? 'dark' : 'light'}.png`;
+                                                    const hasExtension = item.endsWith('.png') || item.endsWith('.jpg') || item.endsWith('.webp');
+                                                    imgPath = hasExtension ? item : `${item}-${theme === 'dark' ? 'dark' : 'light'}.webp`;
                                                 }
 
                                                 return (
                                                     <div key={i} style={{
-                                                        display: isObject ? 'grid' : 'flex',
-                                                        gridTemplateColumns: isObject ? '1fr 1fr' : undefined,
+                                                        display: isObject && !isMobile ? 'grid' : 'flex',
+                                                        gridTemplateColumns: isObject && !isMobile ? '1fr 1fr' : undefined,
                                                         flexDirection: 'column',
-                                                        gap: isObject ? '1.5rem' : '1rem',
-                                                        marginBottom: '1rem'
+                                                        gap: '1.5rem',
+                                                        marginBottom: isObject ? '3rem' : '1rem'
                                                     }}>
+                                                        {/* Title above image for mobile design objects */}
+                                                        {isObject && isMobile && (
+                                                            <h3 style={{
+                                                                fontSize: '1.8rem',
+                                                                margin: 0,
+                                                                color: project.color,
+                                                                fontFamily: 'Syne, sans-serif',
+                                                                fontWeight: 800
+                                                            }}>
+                                                                {item.title}
+                                                            </h3>
+                                                        )}
+
+                                                        {/* Image */}
                                                         <div
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
@@ -1169,53 +1322,58 @@ export default function ProjectList({ theme }) {
                                                                 width: '100%',
                                                                 borderRadius: '12px',
                                                                 overflow: 'hidden',
-                                                                boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                                                                border: '1px solid var(--grid-line)',
+                                                                boxShadow: `0 10px 30px ${project.color}22`,
+                                                                border: `2px solid ${project.color}44`,
                                                                 cursor: 'zoom-in',
-                                                                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                                                                transition: 'all 0.3s ease'
                                                             }}
                                                             onMouseEnter={(e) => {
-                                                                e.currentTarget.style.transform = 'scale(1.02)';
-                                                                e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,255,159,0.1)';
+                                                                e.currentTarget.style.transform = 'translateY(-4px)';
+                                                                e.currentTarget.style.boxShadow = `0 20px 40px ${project.color}33`;
                                                             }}
                                                             onMouseLeave={(e) => {
-                                                                e.currentTarget.style.transform = 'scale(1)';
-                                                                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                                                                e.currentTarget.style.transform = 'translateY(0)';
+                                                                e.currentTarget.style.boxShadow = `0 10px 30px ${project.color}22`;
                                                             }}
                                                         >
                                                             <img
                                                                 src={imgPath}
                                                                 alt={isObject ? item.title : "Project screenshot"}
                                                                 style={{
-                                                                    width: isObject ? 'auto' : '100%',
-                                                                    maxWidth: '100%',
+                                                                    width: '100%',
                                                                     height: 'auto',
-                                                                    display: 'block',
-                                                                    margin: '0 auto'
+                                                                    display: 'block'
                                                                 }}
                                                                 loading="lazy"
                                                             />
                                                         </div>
+
+                                                        {/* Description - layout varies by device */}
                                                         {isObject && (
                                                             <div style={{
-                                                                padding: '2rem',
-                                                                background: 'rgba(0,0,0,0.2)',
-                                                                border: `1px solid ${project.color}33`,
-                                                                borderRadius: '4px',
+                                                                padding: isMobile ? 0 : '2rem',
+                                                                background: isMobile ? 'transparent' : 'rgba(0,0,0,0.2)',
+                                                                border: isMobile ? 'none' : `1px solid ${project.color}33`,
+                                                                borderRadius: isMobile ? 0 : '4px',
                                                                 height: 'fit-content'
                                                             }}>
-                                                                <h3 style={{
-                                                                    fontSize: '1.8rem', // Increased size
-                                                                    marginBottom: '1rem',
-                                                                    color: project.color,
-                                                                    fontFamily: 'Syne, sans-serif'
-                                                                }}>
-                                                                    {item.title}
-                                                                </h3>
+                                                                {/* Desktop: Title in description box */}
+                                                                {!isMobile && (
+                                                                    <h3 style={{
+                                                                        fontSize: '1.8rem',
+                                                                        marginBottom: '1rem',
+                                                                        color: project.color,
+                                                                        fontFamily: 'Syne, sans-serif'
+                                                                    }}>
+                                                                        {item.title}
+                                                                    </h3>
+                                                                )}
                                                                 <p style={{
-                                                                    fontSize: '1.1rem', // Increased size
-                                                                    lineHeight: '1.6',
-                                                                    color: 'var(--text-main)' // Strict black/white
+                                                                    fontSize: isMobile ? '1rem' : '1.1rem',
+                                                                    lineHeight: '1.7',
+                                                                    color: 'var(--text-main)',
+                                                                    margin: 0,
+                                                                    fontFamily: 'Space Grotesk, sans-serif'
                                                                 }}>
                                                                     {item.description}
                                                                 </p>
@@ -1251,14 +1409,6 @@ export default function ProjectList({ theme }) {
                                 </div>
 
                             </div>
-                            {/* OLD ROMAN HAND (Maybe remove or minimize?) */}
-
-                            {
-                                project.id === 1 && (
-                                    /* Removed hand for now as it conflicts with the gallery layout */
-                                    null
-                                )
-                            }
 
                         </div>
                     </animated.div>

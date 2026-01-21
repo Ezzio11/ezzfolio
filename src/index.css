@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Limelight&family=Lemonada:wght@700&display=swap');
+
 :root {
     --bg-color: #050510;
     --terminal-bg: #0a0a12;
@@ -42,7 +44,7 @@ body {
 }
 
 /* Light Mode Overrides for Project Overlay */
-body.light-mode .project-overlay h1 {
+body.light-mode .project-overlay:not([data-id="9"]):not([data-id="0"]) h1 {
     color: #1a1a1a !important;
     /* Force dark text */
 }
@@ -56,48 +58,9 @@ body.light-mode .project-overlay .bg-pattern {
     /* Keep it grey/white, don't invert to black */
 }
 
-/* Light Mode - Project Cards High Contrast */
-body.light-mode .project-card h3 {
-    color: #000 !important;
-    text-shadow: none !important;
-}
 
-body.light-mode .project-card .card-category {
-    color: #000 !important;
-    background: transparent !important;
-    padding: 0;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    /* Thick white halo to lift text off pattern without a box */
-    /* Optimized Performance Halo */
-    -webkit-text-stroke: 4px #fff;
-    paint-order: stroke fill;
-    text-shadow: 2px 2px 0 #fff;
-    /* Single shadow backup */
-}
 
-/* Icon handled by React now */
-body.light-mode .project-card .card-category::before {
-    content: none !important;
-}
 
-/* White Pattern */
-body.light-mode .project-card .bg-pattern {
-    opacity: 0.15 !important;
-    filter: invert(1) brightness(1.5) !important;
-    mix-blend-mode: normal !important;
-}
-
-/* Restore Ulafala */
-body.light-mode .project-card .card-overlay {
-    opacity: 1 !important;
-    filter: none !important;
-}
-
-/* Faint bloody gradient */
-body.light-mode .project-card .bloody-gradient {
-    opacity: 0.05 !important;
-}
 
 /* Editorial Mask override for Light Mode */
 body.light-mode .editorial-mask {
@@ -217,6 +180,26 @@ button {
     border-color: var(--neon-blue) !important;
 }
 
+/* Logo Hover Effect */
+.project-card:hover .project-card-logo,
+.project-card.is-mobile-active .project-card-logo {
+    transform: scale(1.1) translateY(-5px);
+    /* Slightly less aggressive scale for elegance */
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+    /* Restore full color/visibility */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Performance optimizations for animations */
+.project-card,
+.project-overlay {
+    /* Force GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
 /* --- REFACTORED UTILITIES --- */
 
 .theme-toggle {
@@ -272,7 +255,7 @@ button {
     margin: 0 auto;
     padding: 4rem 2rem;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .project-grid {
@@ -338,10 +321,6 @@ button {
             transparent 10%,
             transparent 12%,
             #000 16%);
-    /* BASE LAYER */
-    /* EXACT SOURCE COLORS (Reverted Tuning) */
-    /* BASE LAYER */
-    /* Dark Mode (Default) Rainbow */
     --rainbow: repeating-linear-gradient(100deg,
             #60a5fa 10%,
             #e879f9 15%,
@@ -349,11 +328,7 @@ button {
             #5eead4 25%,
             #60a5fa 30%);
 
-    /* Light Mode Rainbow (Pre-inverted to save GPU)
-       Original: 60a5fa -> 9f5a05
-       Original: e879f9 -> 178606
-       Original: 5eead4 -> a1152b
-    */
+    /* Light Mode Rainbow (Pre-inverted to save GPU) */
     --rainbowLight: repeating-linear-gradient(100deg,
             #9f5a05 10%,
             #178606 15%,
@@ -361,12 +336,13 @@ button {
             #a1152b 25%,
             #9f5a05 30%);
 
-    background-image: var(--stripes), var(--rainbow);
+    /* Enforce Light Mode Style Globally */
+    background-image: var(--stripes), var(--rainbowLight);
     background-size: 300%, 200%;
     background-position: 50% 50%, 50% 50%;
 
-    filter: blur(10px) opacity(50%) saturate(200%);
-    mask-image: none;
+    filter: blur(10px) opacity(30%) saturate(200%);
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
 
     pointer-events: none;
     position: absolute;
@@ -376,38 +352,65 @@ button {
     animation: jumbo 60s linear infinite;
 }
 
-/* Light Mode Override */
-body.light-mode .jumbo {
-    background-image: var(--stripes), var(--rainbowLight);
-    filter: blur(10px) opacity(30%) saturate(200%);
-    /* Lighter opacity for light mode */
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-}
-
 .jumbo::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: var(--stripes), var(--rainbow);
+    /* Enforce Light Mode Style */
+    background-image: var(--stripes), var(--rainbowLight);
     background-size: 200%, 100%;
     animation: jumbo 60s linear infinite;
-    background-attachment: scroll;
+    background-attachment: fixed;
     mix-blend-mode: difference;
 }
 
-body.light-mode .jumbo::after {
-    background-image: var(--stripes), var(--rainbowLight);
+/* --- COMIC STYLE (FlickBall - Official) --- */
+:root {
+    /* ===== BLAUGRANA PALETTE ===== */
+    --color-barca-garnet: #a50044;
+    --color-barca-blue: #004d98;
+    --color-barca-gold: #edbb00;
+    --color-barca-yellow: #ffed02;
+    --color-barca-red-bright: #db0030;
+
+    /* ===== FONTS ===== */
+    --font-bangers: 'Bangers', cursive;
+    --font-limelight: 'Limelight', cursive;
+    --font-lemonada: 'Lemonada', cursive;
+    --font-comic: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
 }
 
-/* Dark Mode Adaptation - Keep Defaults */
-body:not(.light-mode) .jumbo {
-    background-image: var(--stripesDark), var(--rainbow);
+.font-bangers {
+    font-family: var(--font-bangers);
 }
 
-body:not(.light-mode) .jumbo::after {
-    background-image: var(--stripesDark), var(--rainbow);
+.font-header-alt {
+    font-family: var(--font-limelight);
 }
 
-body:not(.light-mode) .jumbo::after {
-    background-image: var(--stripesDark), var(--rainbow);
+/* Halftone Pattern (SVG Dots from Reference) */
+.comic-halftone {
+    background-color: transparent;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(0)" opacity="0.2" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+    /* CHANGED TO DARK BURGUNDY DOTS FOR BRAND MATCHING */
+    background-size: 20px 20px;
+}
+
+.comic-border {
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0px #000;
+}
+
+.comic-text-shadow {
+    text-shadow: 2px 2px 0 #000;
+}
+
+.comic-title-shadow {
+    text-shadow: 4px 4px 0 #000;
+}
+
+.text-stroke-comic {
+    -webkit-text-stroke: 3px black;
+    paint-order: stroke fill;
+    text-shadow: 4px 4px 0 #000;
 }

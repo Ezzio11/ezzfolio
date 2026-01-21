@@ -209,7 +209,7 @@ export default function Blog({ theme }) {
                 left: 0,
                 width: '100vw',
                 height: '100vh',
-                background: bgMain,
+                backgroundColor: bgMain,
                 border: 'none',
                 boxSizing: 'border-box',
                 zIndex: 99999,
@@ -345,7 +345,19 @@ export default function Blog({ theme }) {
                                     h1: ({ node, ...props }) => <h1 style={{ display: 'none' }} {...props} />, // Hide markdown h1 since we render title manually
                                     h2: ({ node, ...props }) => <h2 style={{ fontFamily: 'Syne', fontSize: '2.5rem', fontWeight: 700, marginTop: '4rem', marginBottom: '1.5rem', color: textMain, letterSpacing: '-0.5px' }} {...props} />,
                                     h3: ({ node, ...props }) => <h3 style={{ fontFamily: 'Syne', fontSize: '2rem', fontWeight: 700, marginTop: '3rem', marginBottom: '1rem', color: textMain }} {...props} />,
-                                    p: ({ node, ...props }) => <p style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.8', fontSize: '1.2rem', marginBottom: '2rem', color: textMain, maxWidth: '65ch', opacity: 0.9 }} {...props} />,
+                                    p: ({ node, children, ...props }) => {
+                                        // Check if children contains a figure element (our img wrapper)
+                                        // If so, return children directly to avoid <p><figure> nesting
+                                        const hasBlockElement = React.Children.toArray(children).some(
+                                            child => child?.type === 'figure' || child?.props?.node?.tagName === 'img'
+                                        );
+
+                                        if (hasBlockElement) {
+                                            return <>{children}</>;
+                                        }
+
+                                        return <p style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.8', fontSize: '1.2rem', marginBottom: '2rem', color: textMain, maxWidth: '65ch', opacity: 0.9 }} {...props}>{children}</p>;
+                                    },
                                     li: ({ node, ...props }) => <li style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.6', marginBottom: '0.5rem', color: textMain, fontSize: '1.1rem', opacity: 0.9 }} {...props} />,
                                     strong: ({ node, ...props }) => <strong style={{ color: textMain, fontWeight: 700 }} {...props} />,
                                     blockquote: ({ node, ...props }) => (

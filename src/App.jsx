@@ -9,6 +9,8 @@ import Clock from './components/Clock';
 import { Sun, Moon } from 'lucide-react';
 import SnowOverlay from './components/SnowOverlay';
 
+import { Analytics } from "@vercel/analytics/react"
+
 export default function App() {
     const [theme, setTheme] = useState('dark');
     const location = useLocation();
@@ -51,6 +53,7 @@ export default function App() {
                     <p>© 2026 Ezz Eldin Ahmed. All rights reserved.</p>
                 </footer>
             </div>
+            <Analytics />
         </div>
     );
 }
