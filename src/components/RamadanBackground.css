@@ -1,0 +1,313 @@
+/* Starry Night Background CSS */
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Tajawal:wght@300&display=swap');
+
+:root {
+    --moon-color: #ffffb0;
+    --star-color: #ffff99;
+    --tiny-star-color: white;
+    --background-color: black;
+    --stars-brightness: 0.8;
+}
+
+/* Background Container - Main Selector */
+.ramadan-background-container {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+
+    /* Base Color + Gradient */
+    background-color: #090a0f;
+    background-image:
+        /* VIGNETTE LAYER: Facdes pattern in center, darker at edges */
+        radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.2) 0%, rgba(9, 10, 15, 0.8) 100%),
+
+        /* THIN LINE PATTERN: Gold (8% Opacity - Increased) */
+        linear-gradient(30deg, transparent 49%, rgba(255, 215, 0, 0.08) 49.5%, rgba(255, 215, 0, 0.08) 50.5%, transparent 51%),
+        linear-gradient(150deg, transparent 49%, rgba(255, 215, 0, 0.08) 49.5%, rgba(255, 215, 0, 0.08) 50.5%, transparent 51%),
+
+        /* Secondary Cross Lines: White (5% Opacity - Increased) */
+        linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.05) 49.5%, rgba(255, 255, 255, 0.05) 50.5%, transparent 51%),
+
+        /* Base Radial Gradient */
+        radial-gradient(ellipse at bottom, #0e1319 0%, #090a0f 100%);
+
+    background-size:
+        100% 100%,
+        /* Vignette */
+        60px 104px,
+        /* Hexagonal-ish ratio from 30deg angles */
+        60px 104px,
+        60px 104px,
+        100% 100%;
+
+    background-position: center;
+}
+
+.page {
+    transform: scale(0.7);
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}
+
+#moon {
+    transition: 1s fade-in;
+    position: absolute;
+    margin: 0 auto;
+    top: 15vh !important;
+    right: 5vw;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 25px 10px 0px 0px var(--moon-color);
+    animation: fade-in 5s forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+    transform: rotate(-15deg);
+}
+
+#main-star {
+    transform: scale(0.2);
+    margin: 0 auto;
+    top: 20px;
+    right: 15%;
+    position: absolute;
+    animation-delay: 5s;
+    opacity: 0;
+}
+
+.constellation {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    left: auto;
+    width: 250px;
+    height: 250px;
+    transform: scale(0.6);
+    opacity: 0.6;
+}
+
+.constellations {
+    margin-left: 50px;
+    margin-top: -40px;
+}
+
+#angled {
+    margin-top: -300px;
+    transform: rotate(45deg);
+}
+
+.baby-star {
+    transform: scale(0.1);
+    margin: 0 auto;
+    top: 0px;
+    left: -120px;
+    position: relative;
+}
+
+.baby-star:nth-child(1) {
+    top: -35px;
+    left: 0px;
+}
+
+.baby-star:nth-child(2) {
+    top: -30px;
+    left: -120px;
+}
+
+.baby-star:nth-child(3) {
+    top: -150px;
+    left: 130px;
+}
+
+.baby-star:nth-child(4) {
+    top: -145px;
+    left: 0px;
+}
+
+.star-five {
+    margin: 50px 0;
+    position: relative;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid var(--star-color);
+    border-left: 100px solid transparent;
+    transform: rotate(35deg);
+}
+
+.star-five:before {
+    border-bottom: 80px solid var(--star-color);
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -45px;
+    left: -65px;
+    display: block;
+    content: "";
+    transform: rotate(-35deg);
+}
+
+.star-five:after {
+    position: absolute;
+    display: block;
+    top: 3px;
+    left: -105px;
+    width: 0px;
+    height: 0px;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid var(--star-color);
+    border-left: 100px solid transparent;
+    transform: rotate(-70deg);
+    content: "";
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    animation: rotating 20s linear infinite;
+}
+
+.rotating-slow {
+    animation: rotating 40s linear infinite;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 5s forwards;
+}
+
+#stars,
+#stars2,
+#stars3 {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+}
+
+#stars {
+    box-shadow: 1703px 1208px #fff, 381px 207px #fff, 1516px 1990px #fff, 1960px 982px #fff, 922px 1278px #fff, 689px 1766px #fff, 538px 554px #fff, 802px 1529px #fff, 871px 1805px #fff, 228px 1830px #fff, 353px 186px #fff, 1873px 1154px #fff, 494px 1244px #fff, 1415px 261px #fff, 1020px 1990px #fff, 1924px 1169px #fff;
+    animation: animStar 50s linear infinite;
+}
+
+#stars:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 1703px 1208px #fff, 381px 207px #fff, 1516px 1990px #fff, 1960px 982px #fff, 922px 1278px #fff, 689px 1766px #fff, 538px 554px #fff, 802px 1529px #fff, 871px 1805px #fff, 228px 1830px #fff, 353px 186px #fff, 1873px 1154px #fff, 494px 1244px #fff, 1415px 261px #fff, 1020px 1990px #fff, 1924px 1169px #fff;
+}
+
+#stars2 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 743px 879px #fff, 1145px 1260px #fff, 1412px 672px #fff, 507px 1211px #fff, 52px 89px #fff, 1045px 256px #fff, 1022px 859px #fff, 1520px 413px #fff, 1575px 604px #fff, 992px 877px #fff;
+    animation: animStar 100s linear infinite;
+}
+
+#stars2:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: 743px 879px #fff, 1145px 1260px #fff, 1412px 672px #fff, 507px 1211px #fff, 52px 89px #fff, 1045px 256px #fff, 1022px 859px #fff, 1520px 413px #fff, 1575px 604px #fff, 992px 877px #fff;
+}
+
+#stars3 {
+    width: 3px;
+    height: 3px;
+    box-shadow: 1703px 1208px #fff, 381px 207px #fff, 1516px 1990px #fff, 1960px 982px #fff, 922px 1278px #fff, 689px 1766px #fff, 538px 554px #fff, 802px 1529px #fff;
+    animation: animStar 150s linear infinite;
+}
+
+#stars3:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: 1703px 1208px #fff, 381px 207px #fff, 1516px 1990px #fff, 1960px 982px #fff, 922px 1278px #fff, 689px 1766px #fff, 538px 554px #fff, 802px 1529px #fff;
+}
+
+@keyframes animStar {
+    from {
+        transform: translateY(0px);
+    }
+
+    to {
+        transform: translateY(-2000px);
+    }
+}
+
+/* --- LIGHT MODE OVERRIDES --- */
+/* Hide Night Elements in Light Mode */
+body.light-mode #stars,
+body.light-mode #stars:after,
+body.light-mode #stars2,
+body.light-mode #stars2:after,
+body.light-mode #stars3,
+body.light-mode #stars3:after,
+body.light-mode #moon,
+body.light-mode .page {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    visibility: hidden;
+    transition-delay: 0s, 0.8s;
+}
+
+/* Scoped Background for Light Mode Ramadan */
+body.light-mode .ramadan-background-container {
+    background-color: #FFFBF0;
+    transition: background-color 0.8s ease;
+
+    background-image:
+        /* VIGNETTE MASK: Fades pattern in center (white/transparent) to edges */
+        radial-gradient(circle at 50% 50%, rgba(255, 251, 240, 0.95) 20%, rgba(255, 251, 240, 0.6) 80%, rgba(255, 251, 240, 0) 100%),
+
+        /* THIN LINE PATTERN: Dark Gold (12% Opacity - Increased) */
+        linear-gradient(30deg, transparent 49%, rgba(184, 134, 11, 0.12) 49.5%, rgba(184, 134, 11, 0.12) 50.5%, transparent 51%),
+        linear-gradient(150deg, transparent 49%, rgba(184, 134, 11, 0.12) 49.5%, rgba(184, 134, 11, 0.12) 50.5%, transparent 51%),
+
+        /* Secondary Cross Lines: Brown (8% Opacity - Increased) */
+        linear-gradient(90deg, transparent 49%, rgba(62, 39, 35, 0.08) 49.5%, rgba(62, 39, 35, 0.08) 50.5%, transparent 51%);
+
+    /* Smaller scale for finer texture */
+    background-size:
+        100% 100%,
+        /* Vignette */
+        60px 104px,
+        60px 104px,
+        60px 104px;
+
+    background-position: center;
+}

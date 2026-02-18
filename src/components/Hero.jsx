@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import RamadanCountdown from './RamadanCountdown';
 
-export default function Hero() {
+export default function Hero({ currentTheme }) {
     const [activeSocial, setActiveSocial] = useState(null);
     const [text, setText] = useState('');
     const fullText = "Ezz Eldin Ahmed";
@@ -54,7 +55,7 @@ export default function Hero() {
                     </p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
                     {socialItems.map((social, index) => (
                         <a
                             key={social.id}
@@ -77,6 +78,9 @@ export default function Hero() {
                             </svg>
                         </a>
                     ))}
+
+                    {/* Ramadan Widget (Inline) */}
+                    {currentTheme === 'ramadan' && <RamadanCountdown />}
                 </div>
             </div>
         </div>

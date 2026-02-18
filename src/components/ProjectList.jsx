@@ -3,6 +3,7 @@ import { ExternalLink, X, Globe, Languages } from 'lucide-react';
 import { projects, techIcons, getCategoryIcon } from '../data/projects';
 const Lightbox = React.lazy(() => import('./Lightbox')); // Lazy load modal
 const CodeViewer = React.lazy(() => import('./CodeViewer')); // Lazy load syntax highlighter
+const OverseerStarfield = React.lazy(() => import('./OverseerStarfield')); // Lazy load starfield
 
 import { useSpring, useTransition, animated, config } from '@react-spring/web';
 
@@ -405,6 +406,21 @@ export default function ProjectList({ theme }) {
                                     }} />
                                 )}
 
+                                {/* THE OVERSEER (ID 10) - Starfield in Card */}
+                                {project.id === 10 && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        zIndex: 0,
+                                        background: '#0a0a0a', // Dark base
+                                        pointerEvents: 'none'
+                                    }}>
+                                        <React.Suspense fallback={null}>
+                                            <OverseerStarfield />
+                                        </React.Suspense>
+                                    </div>
+                                )}
+
 
                                 {/* UPDATED Logo Stamp (Bottom Right, -45 deg) */}
                                 {project.stamp && (
@@ -566,6 +582,8 @@ export default function ProjectList({ theme }) {
                     // STRICT MONOCHROME: No overrides
                 } else if (item === 9) { // FlickBall
                     overlayBg = '#DB0030'; // Website Brand Red
+                } else if (item === 10) { // The Overseer
+                    overlayBg = '#000000'; // Deep Black for Starfield
                 } else {
                     overlayBg = 'var(--terminal-bg)';
                 }
@@ -663,6 +681,13 @@ export default function ProjectList({ theme }) {
                                     zIndex: -1,
                                     opacity: 0.5 // Slightly increased from 0.3 as per user request
                                 }} />
+                            )}
+
+                            {/* The Overseer (ID 10) - Starfield */}
+                            {project.id === 10 && (
+                                <React.Suspense fallback={null}>
+                                    <OverseerStarfield />
+                                </React.Suspense>
                             )}
 
                             {/* Logo stamps removed from here - now in left column above title */}

@@ -1,0 +1,309 @@
+/* ComplexLantern.css */
+@import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+.complex-lantern-container {
+    position: absolute;
+    /* or fixed if we want it to stay on screen */
+    z-index: 55;
+    /* Above background, below some overlays potentially */
+    /* Floor Standing Position */
+    top: auto;
+    bottom: -50px;
+    /* Sits slightly off bottom for depth */
+    left: 2vw;
+    /* Left side */
+    right: auto;
+    width: 250px;
+    /* Slightly larger */
+    height: 600px;
+    pointer-events: none;
+    transform: scale(1.1);
+    /* Make it feel closer */
+}
+
+/* ... existing text styles ... */
+
+.lantern {
+    position: absolute;
+    width: 200px;
+    top: 0;
+    left: 0;
+    transform-origin: bottom center;
+    /* Pivot from bottom if needed, but animation removed */
+    /* animation: lantern-sway 3s ease-in-out infinite alternate; REMOVED SWAY */
+}
+
+/* REMOVED KEYFRAMES for lantern-sway */
+
+.lantern .wire {
+    display: none;
+    /* Hide hanging wire */
+}
+
+.lantern .ring {
+    /* Modify ring to look like a handle or hide it. Let's hide it for a cleaner floor look or keep as handle */
+    display: none;
+}
+
+.lantern .top-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 280px;
+    /* $wireHeight + 40px */
+    left: 40px;
+    border-bottom: 60px solid #AE8738;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+}
+
+.lantern .top-triangle:after {
+    position: absolute;
+    top: 38px;
+    left: -70px;
+    content: '';
+    width: 140px;
+    height: 90px;
+    background: linear-gradient(to bottom, #AE8738, #A76F00);
+    border-radius: 50% 50% 30% 30%;
+}
+
+.lantern .front-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 280px;
+    /* $wireHeight + 40px */
+    left: 70px;
+    border-bottom: 54px solid #B1A999;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+}
+
+.lantern .front-triangle:after {
+    position: absolute;
+    top: 38px;
+    left: -40px;
+    content: '';
+    width: 80px;
+    height: 90px;
+    background: linear-gradient(to bottom, #B1A999, #AE8738);
+    border-radius: 50% 50% 30% 30%;
+}
+
+.lantern .ball {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: 273px;
+    /* $wireHeight + 33px */
+    left: 94px;
+    background: radial-gradient(circle at top left, #B1A999, #6D4900);
+    z-index: 2;
+}
+
+.lantern .rect-1 {
+    position: absolute;
+    width: 140px;
+    height: 12px;
+    top: 396px;
+    /* $wireHeight + 156px */
+    left: 30px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 35%, #6D4900 35%, #AE8738 40%, #AE8738 50%, #B1A999 60%, #AE8738 65%, #6D4900 65%, #AE8738 100%);
+}
+
+.lantern .rect-2 {
+    position: absolute;
+    width: 120px;
+    height: 4px;
+    top: 408px;
+    /* $wireHeight + 168px */
+    left: 40px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 50%, #6D4900 100%);
+}
+
+.lantern .rect-3 {
+    position: absolute;
+    width: 160px;
+    height: 12px;
+    top: 412px;
+    /* $wireHeight + 172px */
+    left: 20px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 20%, #6D4900 20%, #AE8738 30%, #AE8738 50%, #B1A999 70%, #AE8738 80%, #6D4900 80%, #AE8738 100%);
+}
+
+.lantern .window {
+    position: absolute;
+    width: 90px;
+    height: 120px;
+    top: 424px;
+    /* $wireHeight + 184px */
+    left: 55px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.lantern .window .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4%;
+    height: inherit;
+    background: linear-gradient(to top, #6D4900, #AE8738);
+}
+
+.lantern .window .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4%;
+    height: inherit;
+    background: linear-gradient(to top, #A76F00, #AE8738);
+}
+
+.lantern .window .circle-1 {
+    position: absolute;
+    width: 40%;
+    height: 36%;
+    top: -9%;
+    left: -11%;
+    border-radius: 50%;
+    background: #AE8738;
+}
+
+.lantern .window .circle-2 {
+    position: absolute;
+    width: 40%;
+    height: 36%;
+    top: -9%;
+    right: -11%;
+    border-radius: 50%;
+    background: linear-gradient(to left, #A76F00, #AE8738);
+}
+
+.lantern .window .circle-3 {
+    position: absolute;
+    width: 32%;
+    height: 26%;
+    top: -13%;
+    left: 17%;
+    border-radius: 50%;
+    background: #AE8738;
+}
+
+.lantern .window .circle-4 {
+    position: absolute;
+    width: 32%;
+    height: 26%;
+    top: -13%;
+    right: 17%;
+    border-radius: 50%;
+    background: #AE8738;
+}
+
+.lantern .window.window-right {
+    width: 25px;
+    left: 145px;
+}
+
+.lantern .window.window-left {
+    width: 25px;
+    left: 30px;
+}
+
+.lantern .candle {
+    position: absolute;
+    top: 510px;
+    /* $wireHeight + 270px */
+    left: 80px;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(to right, #AE8738, #B1A999);
+}
+
+.lantern .candle .candle-top {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 40px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(#A76F00, #B1A999 50%);
+}
+
+.lantern .candle .candle-thread {
+    position: absolute;
+    top: -16px;
+    left: 19px;
+    width: 2px;
+    height: 16px;
+    background: #000;
+}
+
+.lantern .candle .candle-flame {
+    position: absolute;
+    top: -21px;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(to top, #6D4900, #B1A999 70%);
+    box-shadow: 0 -10px 30px 5px #fff, 0 0 50px 5px #fff, 0 0 50px #fff;
+    animation: flame-flicker 0.1s infinite alternate;
+}
+
+@keyframes flame-flicker {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.lantern .candle .candle-flame:after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -12px;
+    border-bottom: 15px solid #B1A999;
+    border-right: 4px solid transparent;
+    border-left: 5px solid transparent;
+    transform: skew(5deg);
+}
+
+.lantern .rect-4 {
+    position: absolute;
+    width: 150px;
+    height: 12px;
+    top: 544px;
+    /* $wireHeight + 304px */
+    left: 25px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 20%, #6D4900 20%, #B1A999 80%, #6D4900 80%, #AE8738 100%);
+}
+
+.lantern .rect-5 {
+    position: absolute;
+    width: 120px;
+    height: 4px;
+    top: 556px;
+    /* $wireHeight + 316px */
+    left: 40px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 50%, #6D4900 100%);
+}
+
+.lantern .rect-6 {
+    position: absolute;
+    width: 140px;
+    height: 12px;
+    top: 560px;
+    /* $wireHeight + 320px */
+    left: 30px;
+    background: linear-gradient(to right, #6D4900 0%, #A76F00 20%, #6D4900 20%, #AE8738 30%, #AE8738 50%, #B1A999 70%, #AE8738 80%, #6D4900 80%, #AE8738 100%);
+}

@@ -9,6 +9,7 @@ import {
     siPython, siVuedotjs, siSass, siLatex,
     siPandas, siScikitlearn, siPlotly, siHtml5, siJavascript, siTypescript, siGoogle
 } from 'simple-icons';
+import OverseerIcon from '../components/icons/OverseerIcon';
 
 export const projects = [
     {
@@ -51,13 +52,29 @@ export const projects = [
         ]
     },
     {
+        id: 10,
+        title: 'The Overseer',
+        category: 'System Intelligence',
+        color: '#6366f1', // Indigo-500 (Intelligence/System feel)
+        lightColor: '#4338ca', // Indigo-700
+        description: "Inspired by the supercomputer from F9 (2021) and the Batcomputer, The Overseer is a comprehensive global monitoring system designed to visualize complex data streams in real-time. Features a 3D interactive globe for geospatial data, live news and metrics tracking.",
+        link: 'https://overseer.ezzio.me',
+        techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Zustand', 'React Globe GL', 'Puppeteer'],
+        stamp: OverseerIcon, // Custom Animated SVG Icon
+        gallery: [
+            '/assets/overseer/overseer-1.webp',
+            '/assets/overseer/overseer-2.webp',
+            '/assets/overseer/overseer-3.webp'
+        ]
+    },
+    {
         id: 3,
         title: 'The Null Hypothesis',
         category: 'Learning Platform',
         color: '#D4A373', // Sepia/Bronze (Dark Academia)
         lightColor: '#78350f', // Amber-900 (Rich Leather/Coffee)
         description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
-        link: 'https://h0.ezzio.me',
+        link: 'https://nullhypothesis.dev',
         techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
         stamp: '/assets/null/logo.webp', // Custom Logo Image
         gallery: [

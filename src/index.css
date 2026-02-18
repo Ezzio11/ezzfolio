@@ -1,4 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Limelight&family=Lemonada:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Limelight&family=Lemonada:wght@700&family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap');
+
+/* ... (existing root variables) ... */
+
+/* ... (Bottom of file) ... */
+
+/* RAMADAN THEME OVERRIDES */
+.ramadan-theme {
+    --ramadan-gold: #FFD700;
+    /* ... existing vars ... */
+}
+
+/* Specific Hero Title Styling */
+.ramadan-theme .hero-title {
+    font-family: 'Amiri', serif !important;
+    /* Calligraphic Islamic Font */
+    color: var(--ramadan-gold);
+    font-weight: 700;
+    font-size: 5rem;
+    /* Larger for calligraphy */
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    /* Golden Glow */
+    letter-spacing: 0px;
+    /* Connect letters slightly more */
+}
+
+.ramadan-theme .hero-title::before,
+.ramadan-theme .hero-title::after {
+    content: " ◈ ";
+    /* Decorative Geometric Star */
+    font-size: 2rem;
+    vertical-align: middle;
+    opacity: 0.8;
+    color: var(--ramadan-gold);
+}
+
+.ramadan-theme h1,
+.ramadan-theme h2,
+.ramadan-theme h3,
+.ramadan-theme h4 {
+    font-family: 'Amiri', serif !important;
+    /* Apply Amiri to all headers */
+}
+
+/* ... existing styles ... */
 
 :root {
     --bg-color: #050510;
@@ -412,4 +456,95 @@ button {
     -webkit-text-stroke: 3px black;
     paint-order: stroke fill;
     text-shadow: 4px 4px 0 #000;
+}
+
+/* ========================================= */
+/* RAMADAN THEME OVERRIDES (APPENDED)        */
+/* ========================================= */
+/* ========================================= */
+/* RAMADAN THEME OVERRIDES (APPENDED)        */
+/* ========================================= */
+.ramadan-theme {
+    --ramadan-gold: #FFD700;
+    --ramadan-gold-dim: rgba(255, 215, 0, 0.6);
+    --grid-line: rgba(174, 135, 56, 0.15);
+    /* Gold Grid */
+    --neon-blue: #ffd700;
+    /* Tint accents gold */
+    --text-selection: #FFD700;
+}
+
+/* Specific Hero Title Styling */
+.ramadan-theme .hero-title {
+    font-family: 'Amiri', serif !important;
+    /* Calligraphic Islamic Font */
+    color: var(--ramadan-gold) !important;
+    font-weight: 700;
+    font-size: 5rem;
+    /* Larger for calligraphy */
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    /* Golden Glow */
+    letter-spacing: 0px;
+    /* Connect letters slightly more */
+    margin-bottom: 0.5rem;
+}
+
+/* Decorative stars around the name */
+.ramadan-theme .hero-title::before {
+    content: "◈ ";
+    font-size: 2.5rem;
+    vertical-align: middle;
+    opacity: 0.8;
+    color: var(--ramadan-gold);
+    margin-right: 1rem;
+}
+
+.ramadan-theme .hero-title::after {
+    content: " ◈";
+    font-size: 2.5rem;
+    vertical-align: middle;
+    opacity: 0.8;
+    color: var(--ramadan-gold);
+    margin-left: 1rem;
+}
+
+.ramadan-theme h1,
+.ramadan-theme h2,
+.ramadan-theme h3,
+.ramadan-theme h4 {
+    font-family: 'Amiri', serif !important;
+    letter-spacing: normal;
+}
+
+.ramadan-theme body {
+    font-family: 'Amiri', 'Space Grotesk', Arial, sans-serif !important;
+    font-size: 1.1rem;
+    /* Amiri needs to be slightly larger to be readable */
+}
+
+.ramadan-theme ::selection {
+    background: var(--ramadan-gold);
+    color: black;
+}
+
+.ramadan-theme ::-webkit-scrollbar-thumb {
+    background: var(--ramadan-gold);
+}
+
+/* LIGHT MODE overloads for Ramadan */
+/* LIGHT MODE overloads for Ramadan */
+body.light-mode .ramadan-theme {
+    --text-main: #3E2723;
+    --text-dim: #5D4037;
+    --ramadan-gold: #B8860B;
+    --grid-line: rgba(184, 134, 11, 0.2);
+    --neon-blue: #B8860B;
+}
+
+body.light-mode .ramadan-theme .hero-title,
+body.light-mode .ramadan-theme .hero-title::before,
+body.light-mode .ramadan-theme .hero-title::after {
+    color: #3E2723 !important;
+    /* Deep Coffee for max contrast */
+    text-shadow: none;
 }
