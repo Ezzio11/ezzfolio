@@ -20,6 +20,17 @@
     pointer-events: none;
     transform: scale(1.1);
     /* Make it feel closer */
+    transform-origin: bottom left;
+}
+
+@media (max-width: 768px) {
+    .complex-lantern-container {
+        transform: scale(0.6);
+        /* Significantly smaller on mobile */
+        left: -20px;
+        /* Pull it closer to edge so it doesn't block text */
+        bottom: -30px;
+    }
 }
 
 /* ... existing text styles ... */
