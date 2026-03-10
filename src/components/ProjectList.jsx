@@ -1141,7 +1141,7 @@ export default function ProjectList({ theme }) {
                                     lineHeight: '1.6',
                                     maxWidth: '90%',
                                     marginBottom: '2rem',
-                                    color: (project.id === 9 || project.id === 0) ? 'white' : 'var(--text-main)',
+                                    color: (project.id === 9 || project.id === 0 || project.id === 10) ? 'white' : 'var(--text-main)',
                                     transition: 'color 0.3s ease' // Smooth transition
                                 }}>
                                     {project.description}
@@ -1149,7 +1149,7 @@ export default function ProjectList({ theme }) {
 
                                 {/* TECH STACK ICONS */}
                                 <div style={{ marginBottom: '2rem' }}>
-                                    <h4 style={{ color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '0.75rem', textTransform: 'uppercase', transition: 'color 0.3s ease' }}>Technologies Used</h4>
+                                    <h4 style={{ color: (project.id === 9 || project.id === 0 || project.id === 10) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', fontSize: '0.8rem', marginBottom: '0.75rem', textTransform: 'uppercase', transition: 'color 0.3s ease' }}>Technologies Used</h4>
                                     <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
                                         {project.techStack && project.techStack.map(tech => {
                                             const techName = typeof tech === 'string' ? tech : tech.name;
@@ -1165,7 +1165,7 @@ export default function ProjectList({ theme }) {
                                                         style={{
                                                             cursor: 'help',
                                                             transition: 'all 0.3s ease',
-                                                            color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
+                                                            color: (project.id === 9 || project.id === 0 || project.id === 10) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
                                                             display: 'flex',
                                                             alignItems: 'center'
                                                         }}
@@ -1199,7 +1199,7 @@ export default function ProjectList({ theme }) {
                                                     style={{
                                                         cursor: 'help',
                                                         transition: 'all 0.3s ease',
-                                                        color: (project.id === 9 || project.id === 0) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
+                                                        color: (project.id === 9 || project.id === 0 || project.id === 10) ? 'rgba(255,255,255,0.8)' : 'var(--text-dim)', // Monochrome default
                                                         display: 'flex',
                                                         alignItems: 'center'
                                                     }}

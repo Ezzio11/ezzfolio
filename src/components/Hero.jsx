@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RamadanCountdown from './RamadanCountdown';
+import ExchangeRate from './ExchangeRate';
 
 export default function Hero({ currentTheme }) {
     const [activeSocial, setActiveSocial] = useState(null);
@@ -81,6 +82,9 @@ export default function Hero({ currentTheme }) {
 
                     {/* Ramadan Widget (Inline) */}
                     {currentTheme === 'ramadan' && <RamadanCountdown />}
+
+                    {/* Exchange Rate Widget */}
+                    <ExchangeRate />
                 </div>
             </div>
         </div>

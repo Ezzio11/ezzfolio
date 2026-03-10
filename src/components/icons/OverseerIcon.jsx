@@ -31,38 +31,32 @@ export default function OverseerIcon({ size = 80, strokeWidth = 1.5, ...props })
             <style dangerouslySetInnerHTML={{
                 __html: `
                     @keyframes overseer-spin {
-                        from { transform: translateX(0%); }
-                        to { transform: translateX(-43.75%); }
+                        from { transform: translateX(0); }
+                        to { transform: translateX(-50%); }
                     }
                 `}} />
 
             <div style={{
                 display: 'flex',
                 height: '100%',
-                width: 'auto', // Let width be determined by children
+                width: 'auto',
                 animation: 'overseer-spin 4s linear infinite',
                 willChange: 'transform'
             }}>
-                {/* 
-                    We render the SVG with a fixed aspect ratio relative to height.
-                    Height = 100% of container (size).
-                    Width = 4.32 * height.
-                */}
                 <svg
-                    viewBox="0 0 432 100"
+                    viewBox="0 0 200 100"
                     fill="currentColor"
                     preserveAspectRatio="xMinYMid meet"
                     style={{
                         height: '100%',
                         width: 'auto',
                         minHeight: '100%',
-                        // Force aspect ratio via aspect-ratio prop if possible, but automatic width behavior of SVG should handle it if height is fixed.
-                        aspectRatio: '432/100',
+                        aspectRatio: '200/100',
                         display: 'block'
                     }}
                 >
                     <g transform="translate(0, 0)"><path d={WORLD_PATH} /></g>
-                    <g transform="translate(189, 0)"><path d={WORLD_PATH} /></g>
+                    <g transform="translate(200, 0)"><path d={WORLD_PATH} /></g>
                 </svg>
             </div>
 
