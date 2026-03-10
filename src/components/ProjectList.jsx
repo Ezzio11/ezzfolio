@@ -384,14 +384,38 @@ export default function ProjectList({ theme }) {
                                     </>
                                 )}
 
-                                {/* MSTAG (ID 5) Visuals - Default Lush Gradient */}
+                                {/* MZ (ID 5) Visuals */}
                                 {project.id === 5 && (
-                                    <div className="jumbo" style={{
-                                        position: 'absolute',
-                                        inset: 0,
-                                        zIndex: 0,
-                                        opacity: 0.9
-                                    }} />
+                                    <>
+                                        <div style={{
+                                            position: 'absolute',
+                                            left: '15%', top: 0, bottom: 0, width: '1px',
+                                            background: project.color, opacity: 0.2, zIndex: 0
+                                        }} />
+                                        <div style={{
+                                            position: 'absolute',
+                                            left: '85%', top: 0, bottom: 0, width: '1px',
+                                            background: project.color, opacity: 0.2, zIndex: 0
+                                        }} />
+                                        <div style={{
+                                            position: 'absolute',
+                                            left: 0, right: 0, top: '20%', height: '1px',
+                                            background: project.color, opacity: 0.15, zIndex: 0
+                                        }} />
+                                        <div className="mz-animated-bg" style={{
+                                            position: 'absolute', inset: 0, zIndex: 0,
+                                            opacity: 0.08,
+                                            backgroundImage: `repeating-linear-gradient(45deg, ${project.color} 0, ${project.color} 1px, transparent 1px, transparent 28px)`,
+                                            backgroundSize: '40px 40px',
+                                            animation: 'mz-slide 3s linear infinite'
+                                        }} />
+                                        <style>{`
+                                            @keyframes mz-slide {
+                                                from { background-position: 0 0; }
+                                                to { background-position: 40px 40px; }
+                                            }
+                                        `}</style>
+                                    </>
                                 )}
 
                                 {/* Polymath (ID 7) - Parchment (Light) / Deep Brown (Dark) Background */}
@@ -582,6 +606,9 @@ export default function ProjectList({ theme }) {
                     // STRICT MONOCHROME: No overrides
                 } else if (item === 9) { // FlickBall
                     overlayBg = '#DB0030'; // Website Brand Red
+                } else if (item === 5) { // MZ
+                    const isDark = theme === 'dark';
+                    overlayBg = isDark ? '#060d02' : '#ffffff'; // MZ Studio Theme
                 } else if (item === 10) { // The Overseer
                     overlayBg = '#000000'; // Deep Black for Starfield
                 } else {
@@ -673,14 +700,44 @@ export default function ProjectList({ theme }) {
                                 }} />
                             )}
 
-                            {/* MSTAG (ID 5) - Full Screen Aurora */}
+                            {/* MZ (ID 5) - Full Screen Visuals */}
                             {project.id === 5 && (
-                                <div className="jumbo" style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    zIndex: -1,
-                                    opacity: 0.5 // Slightly increased from 0.3 as per user request
-                                }} />
+                                <>
+                                    <div style={{
+                                        position: 'absolute',
+                                        left: '15%', top: 0, bottom: 0, width: '1px',
+                                        background: project.color,
+                                        opacity: theme === 'dark' ? 0.1 : 0.2, // Slightly more visible in light
+                                        zIndex: -1
+                                    }} />
+                                    <div style={{
+                                        position: 'absolute',
+                                        left: '85%', top: 0, bottom: 0, width: '1px',
+                                        background: project.color,
+                                        opacity: theme === 'dark' ? 0.1 : 0.2,
+                                        zIndex: -1
+                                    }} />
+                                    <div style={{
+                                        position: 'absolute',
+                                        left: 0, right: 0, top: '20%', height: '1px',
+                                        background: project.color,
+                                        opacity: theme === 'dark' ? 0.1 : 0.15,
+                                        zIndex: -1
+                                    }} />
+                                    <div className="mz-animated-bg-expanded" style={{
+                                        position: 'absolute', inset: 0, zIndex: -1,
+                                        opacity: theme === 'dark' ? 0.1 : 0.05, // Subtle in light
+                                        backgroundImage: `repeating-linear-gradient(45deg, ${project.color} 0, ${project.color} 1px, transparent 1px, transparent 32px)`,
+                                        backgroundSize: '45.25px 45.25px',
+                                        animation: 'mz-slide-expanded 4s linear infinite'
+                                    }} />
+                                    <style>{`
+                                        @keyframes mz-slide-expanded {
+                                            from { background-position: 0 0; }
+                                            to { background-position: 45.25px 45.25px; }
+                                        }
+                                    `}</style>
+                                </>
                             )}
 
                             {/* The Overseer (ID 10) - Starfield */}

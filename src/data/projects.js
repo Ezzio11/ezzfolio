@@ -34,6 +34,38 @@ export const projects = [
         ]
     },
     {
+        id: 5,
+        title: 'MZ',
+        category: 'Tech Startup Platform',
+        color: '#92b600', // Brand Green
+        lightColor: '#7b9900', // MZ Hover Green
+        description: "The official home of our digital studio. MZ specializes in precision-built digital products—the sites people share, the tools teams rely on, and the platforms that grow careers. A high-performance platform reflecting our commitment to technical excellence and premium aesthetics.",
+        link: 'https://mz.ezzio.me',
+        techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Framer Motion'],
+        stamp: '/assets/mz/logo.webp',
+        gallery: [
+            '/assets/mz/hero', // Adapts: mz-hero-dark.png / light.png
+            '/assets/mz/cases',     // Adapts: mz-cases-dark.png / light.png
+            '/assets/mz/speciality'  // Adapts: mz-speciality-dark.png / light.png
+        ]
+    },
+    {
+        id: 3,
+        title: 'The Null Hypothesis',
+        category: 'Learning Platform',
+        color: '#D4A373', // Sepia/Bronze (Dark Academia)
+        lightColor: '#78350f', // Amber-900 (Rich Leather/Coffee)
+        description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and highly rigourous courses.",
+        link: 'https://nullhypothesis.dev',
+        techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
+        stamp: '/assets/null/logo.webp', // Custom Logo Image
+        gallery: [
+            '/assets/null/hero',        // Adaptive (hero-dark/light)
+            '/assets/null/atlas',        // Adaptive (atlas-dark/light)
+            '/assets/null/case'        // Adaptive (case-dark/light)
+        ]
+    },
+    {
         id: 9,
         title: 'FlickBall',
         category: 'Sports Analytics',
@@ -65,59 +97,6 @@ export const projects = [
             '/assets/overseer/overseer-1.webp',
             '/assets/overseer/overseer-2.webp',
             '/assets/overseer/overseer-3.webp'
-        ]
-    },
-    {
-        id: 3,
-        title: 'The Null Hypothesis',
-        category: 'Learning Platform',
-        color: '#D4A373', // Sepia/Bronze (Dark Academia)
-        lightColor: '#78350f', // Amber-900 (Rich Leather/Coffee)
-        description: "A (very) highly interactive, dark academia styled statistical learning platform. Featuring intuitive simulations, Python coding, AI-powered explanations, and the best ISLP course in the world.",
-        link: 'https://nullhypothesis.dev',
-        techStack: ['Next.js 16', 'Tailwind v4', 'Huggingface', 'Tiptap'],
-        stamp: '/assets/null/logo.webp', // Custom Logo Image
-        gallery: [
-            '/assets/null/hero',        // Adaptive (hero-dark/light)
-            '/assets/null/lab',        // Adaptive (lab-dark/light)
-            '/assets/null/folio'        // Adaptive (folio-dark/light)
-        ]
-    },
-    {
-        id: 1,
-        title: '1316: The Reign',
-        category: 'Scrollytelling',
-        color: '#D00000', // Bloody Red
-        lightColor: '#991b1b', // Red-800
-        description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
-        link: 'https://1316.ezzio.me',
-        bgImage: '/assets/roman/samoan-pattern.webp',
-        overlayImage: '/assets/roman/ulafala.webp',
-        darkPattern: true, // New flag for styling
-        techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
-        stamp: '/assets/roman/hand.webp', // Restored Stamp
-        gallery: [
-            '/assets/roman/gallery-1.webp',
-            '/assets/roman/gallery-2.webp',
-            '/assets/roman/gallery-3.webp',
-            '/assets/roman/gallery-4.webp',
-            '/assets/roman/gallery-5.webp'
-        ]
-    },
-    {
-        id: 5,
-        title: 'MSTAG',
-        category: 'Startup Platform',
-        color: '#7a3ceb', // Brand Blue
-        lightColor: '#1e40af', // Blue-800
-        description: "Our startup platform! I tried going for something very tech-y, very premium looking, that'd reflect our systems quality. Thank you random, kind stranger on CodePen (dyaezEN) for the amazing aurora background!",
-        link: 'https://ms-tag.netlify.app',
-        techStack: ['Next.js 16', 'React 19', 'Tailwind v4', 'Framer Motion'],
-        stamp: '/assets/mstag/logo.webp',
-        gallery: [
-            '/assets/mstag/dashboard', // Adapts: mstag-dashboard-dark.png / light.png
-            '/assets/mstag/cases',     // Adapts: mstag-cases-dark.png / light.png
-            '/assets/mstag/fullcycle'  // Adapts: mstag-fullcycle-dark.png / light.png
         ]
     },
     {
@@ -393,6 +372,27 @@ lightgbm                     LightGBM                   Fast training, low memor
 catboost                     CatBoost Handles categorical features, reduced overfitting           Datasets with many categorical features  Medium to large                      Medium`,
                 count: 9
             }
+        ]
+    },
+    {
+        id: 1,
+        title: '1316: The Reign',
+        category: 'Scrollytelling',
+        color: '#D00000', // Bloody Red
+        lightColor: '#991b1b', // Red-800
+        description: "A scrollytelling of the historical 1316 days reign of THE UNDISPUTED WWE UNIVERSAL CHAMPION. THE ULTIMATE NEEDLE MOVER. THE TRIBAL CHIEF. THE HEAD OF THE TABLE. THE GREATEST TO EVER DO IT. THE GOAT OF ALL GOATS. ROMAN. REIGNS",
+        link: 'https://1316.ezzio.me',
+        bgImage: '/assets/roman/samoan-pattern.webp',
+        overlayImage: '/assets/roman/ulafala.webp',
+        darkPattern: true, // New flag for styling
+        techStack: ['Next.js', 'Framer Motion', 'Tailwind', 'Photopea'],
+        stamp: '/assets/roman/hand.webp', // Restored Stamp
+        gallery: [
+            '/assets/roman/gallery-1.webp',
+            '/assets/roman/gallery-2.webp',
+            '/assets/roman/gallery-3.webp',
+            '/assets/roman/gallery-4.webp',
+            '/assets/roman/gallery-5.webp'
         ]
     },
     {
