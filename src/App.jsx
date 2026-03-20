@@ -5,20 +5,21 @@ import Hero from './components/Hero';
 const ProjectList = React.lazy(() => import('./components/ProjectList'));
 const Blog = React.lazy(() => import('./components/Blog'));
 import Background from './components/Background';
-import RamadanBackground from './components/RamadanBackground';
+const RamadanBackground = React.lazy(() => import('./components/RamadanBackground'));
 import Clock from './components/Clock';
 import { Sun, Moon, Snowflake, Star, Zap } from 'lucide-react';
-import RamadanOverlay from './components/RamadanOverlay';
-import ComplexLantern from './components/ComplexLantern';
-import RamadanDecorations from './components/RamadanDecorations';
+const RamadanOverlay = React.lazy(() => import('./components/RamadanOverlay'));
+const ComplexLantern = React.lazy(() => import('./components/ComplexLantern'));
+const RamadanDecorations = React.lazy(() => import('./components/RamadanDecorations'));
 import SnowOverlay from './components/SnowOverlay';
-import RamadanCountdown from './components/RamadanCountdown';
+const RamadanCountdown = React.lazy(() => import('./components/RamadanCountdown'));
+
 
 import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
     const [theme, setTheme] = useState('dark');
-    const [currentTheme, setCurrentTheme] = useState('ramadan'); // 'ramadan' | 'winter' | 'normal'
+    const [currentTheme, setCurrentTheme] = useState('normal'); // 'ramadan' | 'winter' | 'normal'
     const location = useLocation();
 
     const toggleTheme = () => {
@@ -66,13 +67,14 @@ export default function App() {
 
             {/* Render Background based on Theme */}
             {currentTheme === 'ramadan' ? (
-                <>
+                <Suspense fallback={null}>
                     <RamadanBackground />
                     <RamadanOverlay />
                     <ComplexLantern />
                     <RamadanDecorations />
-                </>
+                </Suspense>
             ) : (
+
                 <>
                     {/* Normal & Winter share the default grid background */}
                     <Background />

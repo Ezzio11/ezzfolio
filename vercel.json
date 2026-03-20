@@ -1,18 +1,9 @@
 {
-    "rewrites": [
-        {
-            "source": "/",
-            "has": [
-                {
-                    "type": "query",
-                    "key": "post"
-                }
-            ],
-            "destination": "/api/seo"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+
+  ]
 }

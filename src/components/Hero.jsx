@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import RamadanCountdown from './RamadanCountdown';
 import ExchangeRate from './ExchangeRate';
+import GoldPrice from './GoldPrice';
+import FootballMatch from './FootballMatch';
+import FreeLoot from './FreeLoot';
 
 export default function Hero({ currentTheme }) {
     const [activeSocial, setActiveSocial] = useState(null);
@@ -64,8 +67,10 @@ export default function Hero({ currentTheme }) {
                             target={social.id === 'em' ? undefined : "_blank"}
                             rel={social.id === 'em' ? undefined : "noopener noreferrer"}
                             className={`social-link ${activeSocial === social.id ? 'is-active' : ''} animate-pop-in`}
-                            aria-label={social.label}
+                            aria-label={`Open ${social.label}`}
+                            title={social.label}
                             style={{ animationDelay: `${1 + (index * 0.1)}s` }}
+
                             onClick={(e) => {
                                 if (activeSocial !== social.id) {
                                     e.preventDefault();
@@ -85,6 +90,12 @@ export default function Hero({ currentTheme }) {
 
                     {/* Exchange Rate Widget */}
                     <ExchangeRate />
+
+                    {/* New Economic & Game Widgets */}
+                    <GoldPrice />
+                    <FootballMatch />
+                    <FreeLoot />
+
                 </div>
             </div>
         </div>

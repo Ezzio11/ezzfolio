@@ -1,3 +1,5 @@
 User-agent: *
+Disallow: /api-football/
+Disallow: /api-gamerpower/
 Allow: /
 Sitemap: https://ezzio.me/sitemap.xml

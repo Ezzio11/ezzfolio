@@ -8,16 +8,17 @@ export default function ExchangeRate() {
     useEffect(() => {
         const fetchRate = async () => {
             try {
-                const response = await fetch('https://open.er-api.com/v6/latest/USD');
+                const response = await fetch('/api/gold');
                 const data = await response.json();
-                if (data.result === 'success') {
-                    setRate(data.rates.EGP);
+                if (data.rate) {
+                    setRate(data.rate);
                 }
                 setLoading(false);
             } catch (error) {
                 console.error("Failed to fetch exchange rate:", error);
                 setLoading(false);
             }
+
         };
 
         fetchRate();

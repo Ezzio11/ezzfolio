@@ -8,7 +8,12 @@ export default defineConfig({
   server: {
     allowedHosts: [
       "restorable-nonconcentrically-katalina.ngrok-free.dev"
-    ]
+    ],
+    proxy: {
+      // Serverless functions are handled by Vercel in production
+      // and by 'vercel dev' during local development.
+    }
+
   },
   // ------------------------
   build: {
