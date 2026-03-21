@@ -2,12 +2,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 
-const Lightbox = ({ src, onClose }) => {
+const Lightbox = ({ src, title, description, onClose }) => {
     const [scale, setScale] = useState(1);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const imgRef = useRef(null);
+
+    // Metadata Overlay Visibility (Hide when zoomed in significantly)
+    const showMetadata = scale < 1.5;
 
     // Prevent default browser zoom actions
     useEffect(() => {
@@ -72,6 +75,32 @@ const Lightbox = ({ src, onClose }) => {
                 cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-out'
             }}
         >
+            {/* Metadata Text (Top Left) */}
+            {title && (
+                <div style={{
+                    position: 'absolute', top: '2rem', left: '2rem',
+                    maxWidth: '400px', zIndex: 10002,
+                    opacity: showMetadata ? 1 : 0,
+                    transform: showMetadata ? 'translateY(0)' : 'translateY(-20px)',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none'
+                }}>
+                    <h2 style={{
+                        color: 'white', fontSize: '1.5rem', margin: '0 0 0.5rem 0',
+                        fontFamily: 'Syne, sans-serif', fontWeight: 800,
+                        textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                    }}>{title}</h2>
+                    {description && (
+                        <p style={{
+                            color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', margin: 0,
+                            lineHeight: 1.5, fontFamily: 'Space Grotesk, sans-serif',
+                            background: 'rgba(0,0,0,0.3)', padding: '0.75rem',
+                            borderRadius: '8px', backdropFilter: 'blur(5px)'
+                        }}>{description}</p>
+                    )}
+                </div>
+            )}
+
             <div
                 style={{
                     transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
@@ -88,7 +117,7 @@ const Lightbox = ({ src, onClose }) => {
                 <img
                     ref={imgRef}
                     src={src}
-                    alt="Lightbox"
+                    alt={title || "Lightbox"}
                     draggable={false}
                     style={{
                         maxWidth: '90vw', maxHeight: '90vh',
@@ -112,6 +141,7 @@ const Lightbox = ({ src, onClose }) => {
                 <div style={{ color: 'white', fontFamily: 'monospace', alignSelf: 'center' }} aria-live="polite">{Math.round(scale * 100)}%</div>
                 <button onClick={zoomIn} className="icon-btn" disabled={scale >= 4} aria-label="Zoom In"><ZoomIn size={20} color="white" /></button>
                 <button onClick={reset} className="icon-btn" style={{ marginLeft: '10px', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '1rem' }} aria-label="Reset Zoom"><RotateCcw size={20} color="white" /></button>
+                <button onClick={reset} className="icon-btn" style={{ display: 'none' }}></button> {/* Ghost button for spacing check if needed */}
                 <button onClick={onClose} className="icon-btn" style={{ marginLeft: '10px', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '1rem' }} aria-label="Close Lightbox"><X size={20} color="#ff4444" /></button>
             </div>
 

@@ -84,6 +84,109 @@ export const projects = [
         ]
     },
     {
+        id: 6,
+        title: 'Graphic Designs',
+        category: 'Art',
+        color: '#FF0055', // Neon Pink/Red
+        lightColor: '#be123c', // Rose-700
+        description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
+        link: null,
+        techStack: ['Photopea', 'Figma'],
+        stamp: PenTool,
+        gallery: [
+            // Row 1: High-Impact Openers
+            {
+                type: 'design',
+                src: '/assets/designs/RomanReigns.webp',
+                title: 'OTC',
+                description: "The superhero landing pose-right before a Superman punch-from our tribal chief makes him look like an otherworldy figure. Combined with the Samoan tattoo, the ominous lightning bolt, and the dark background, it's a great acknowledgment for the OTC."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/LAKnight.webp',
+                title: 'YEAH!',
+                description: "A high-energy tribute poster for the megastar LA Knight. Let me talk to ya!"
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/DX.webp',
+                title: 'Are You Ready?',
+                description: "My favorite WWE faction ever. I wanted to capture the rebellious energy of the Shawn Michaels and Triple H through a static poster. The neon-green glowing sticks is pretty much their most iconic piece, which made for a fantastic point of focus."
+            },
+            // Row 2: Deep Arts & Personal
+            {
+                type: 'design',
+                src: '/assets/designs/Poetry.webp',
+                title: 'Poetry',
+                description: "My friend, Abdulrahman Mostafa, is a poet. He wrote something that resonated with me deeply, so I tried capturing how I felt with the 'Surrealist' style in typography and the emerald green color scheme."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/Fin.webp',
+                title: 'Fin.',
+                description: "A surreal, double-exposure composition I made for myself marking the end of my chapter taking the EMAM Research Center leap."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/BDay.webp',
+                title: '21',
+                description: "A playful scrapbook-style collage poster designed for my 21st birthday, looking back at the years that built me."
+            },
+            // Row 3: Event & Celebration
+            {
+                type: 'design',
+                src: '/assets/designs/Eid.webp',
+                title: 'Eid Celebration',
+                description: "A festive design celebrating the spirit and joy of Eid."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/SonicCU.webp',
+                title: 'Sonic & Co. Visit Cairo University',
+                description: "I'm a huge Sonic T. Hedgehog fan, and a student at Cairo University. I also love autumn. And it all clicked so naturally when I wanted a challenging project---changing the university atmosphere from summer to autumn."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/Wargames.webp',
+                title: 'WarGames 2025: Civil War',
+                description: "A 10-piece expansive character poster set I developed mimicking electoral campaign cards for the monumental 2025 Bloodline WarGames event."
+            },
+            // Row 4: Bold, Graphic, & Epic
+            {
+                type: 'design',
+                src: '/assets/designs/WeTheOnes.webp',
+                title: 'We The Ones',
+                description: "I wanted to design a motivating poster with the 'pointing up' gesture from the WWE faction, the Bloodline. Inspired by the brilliant propaganda posters from Bioshock. Ended up with a Red Dead Redemption-styled poster. Couldn't have turned out better."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/PIPEBOMB.webp',
+                title: 'Pipebomb',
+                description: "A tribute to CM Punk's iconic Pipebomb promo, capturing the gritty reality of that revolutionary moment."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/Wrestlemania.webp',
+                title: 'The Grandest Stage',
+                description: "Capturing the epic scale and magnitude of Wrestlemania in a single frame."
+            },
+            // Row 5: The Duality Sequence
+            {
+                type: 'design',
+                src: '/assets/designs/1316 - Light.webp',
+                title: '1316: The Light Era',
+                description: "A light-themed variant complementing the Roman Reigns scrollytelling project."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/1316 - Dark.webp',
+                title: '1316: The Dark Era',
+                description: "A dark-themed poster inspired by Roman Reigns' historical title reign."
+            }
+        ]
+    },
+    /*
+    {
         id: 10,
         title: 'The Overseer',
         category: 'System Intelligence',
@@ -99,6 +202,7 @@ export const projects = [
             '/assets/overseer/overseer-3.webp'
         ]
     },
+    */
     {
         id: 8,
         title: 'SharkPy',
@@ -436,49 +540,6 @@ catboost                     CatBoost Handles categorical features, reduced over
             '/assets/polymath/treemap.webp'
         ]
     },
-    {
-        id: 6,
-        title: 'Graphic Designs',
-        category: 'Art',
-        color: '#FF0055', // Neon Pink/Red
-        lightColor: '#be123c', // Rose-700
-        description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
-        link: null,
-        techStack: ['Photopea', 'Figma'],
-        stamp: PenTool,
-        gallery: [
-            {
-                type: 'design',
-                src: '/assets/designs/RomanReigns.webp',
-                title: 'OTC',
-                description: "The superhero landing pose-right before a Superman punch-from our tribal chief makes him look like an otherworldy figure. Combined with the Samoan tattoo, the ominous lightning bolt, and the dark background, it's a great acknowledgment for the OTC."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/DX.webp',
-                title: 'Are You Ready?',
-                description: "My favorite WWE faction ever. I wanted to capture the rebellious energy of the Shawn Michaels and Triple H through a static poster. The neon-green glowing sticks is pretty much their most iconic piece, which made for a fantastic point of focus."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/WeTheOnes.webp',
-                title: 'We The Ones',
-                description: "I wanted to design a motivating poster with the 'pointing up' gesture from the WWE faction, the Bloodline. Inspired by the brilliant propaganda posters from Bioshock. Ended up with a Red Dead Redemption-styled poster. Couldn't have turned out better."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/SonicCU.webp',
-                title: 'Sonic & Co. Visit Cairo University',
-                description: "I'm a huge Sonic T. Hedgehog fan, and a student at Cairo University. I also love autumn. And it all clicked so naturally when I wanted a challenging project---changing the university atmosphere from summer to autumn."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/Poetry.webp',
-                title: 'Poetry',
-                description: "My friend, Abdulrahman Mostafa, is a poet. He wrote something that resonated with me deeply, so I tried capturing how I felt with the 'Surrealist' style in typography and the emerald green color scheme."
-            }
-        ]
-    }
 ];
 
 export const techIcons = {

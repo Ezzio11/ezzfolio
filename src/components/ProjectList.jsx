@@ -12,7 +12,7 @@ export default function ProjectList({ theme }) {
 
     const [selectedId, setSelectedId] = useState(null);
     const [originRect, setOriginRect] = useState(null);
-    const [expandedImg, setExpandedImg] = useState(null);
+    const [expandedItem, setExpandedItem] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false); // For mobile optimization
 
     const overlayRef = useRef(null);
@@ -131,8 +131,8 @@ export default function ProjectList({ theme }) {
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
-                if (expandedImg) {
-                    setExpandedImg(null);
+                if (expandedItem) {
+                    setExpandedItem(null);
                     return;
                 }
                 if (selectedId !== null) {
@@ -143,7 +143,7 @@ export default function ProjectList({ theme }) {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [selectedId, expandedImg]);
+    }, [selectedId, expandedItem]);
 
 
 
@@ -1362,7 +1362,13 @@ export default function ProjectList({ theme }) {
                                             })}
                                         </div>
                                     ) : project.gallery && project.gallery.length > 0 ? (
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '0 2rem 2rem 0' }}>
+                                        <div style={{
+                                            display: project.id === 6 ? 'grid' : 'flex',
+                                            gridTemplateColumns: project.id === 6 ? (isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)') : undefined,
+                                            flexDirection: 'column',
+                                            gap: project.id === 6 ? '1.5rem' : '2rem',
+                                            padding: project.id === 6 ? '0 1rem 2rem 0' : '0 2rem 2rem 0'
+                                        }}>
                                             {project.gallery.map((item, i) => {
                                                 const isObject = typeof item === 'object';
                                                 let imgPath;
@@ -1373,6 +1379,74 @@ export default function ProjectList({ theme }) {
                                                     imgPath = hasExtension ? item : `${item}-${theme === 'dark' ? 'dark' : 'light'}.webp`;
                                                 }
 
+                                                // Special Case: Graphic Design Grid (ID 6)
+                                                if (project.id === 6 && isObject) {
+                                                    return (
+                                                        <div
+                                                            key={i}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setExpandedItem(item);
+                                                            }}
+                                                            style={{
+                                                                width: '100%',
+                                                                aspectRatio: '1', // Square thumbnails
+                                                                borderRadius: '8px',
+                                                                overflow: 'hidden',
+                                                                boxShadow: `0 4px 15px ${project.color}11`,
+                                                                border: `1px solid ${project.color}33`,
+                                                                cursor: 'zoom-in',
+                                                                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease',
+                                                                position: 'relative',
+                                                                background: '#0a0a0a',
+                                                                willChange: 'transform',
+                                                                transform: 'translateZ(0)' // Hardware Acceleration for lag
+                                                            }}
+                                                            onMouseEnter={(e) => {
+                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1.05)';
+                                                                e.currentTarget.style.borderColor = project.color;
+                                                                e.currentTarget.style.zIndex = '10';
+                                                                e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '1';
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1)';
+                                                                e.currentTarget.style.borderColor = `${project.color}33`;
+                                                                e.currentTarget.style.zIndex = '1';
+                                                                e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '0';
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={imgPath.replace('.webp', '_thumb.webp')}
+                                                                alt={item.title}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    height: '100%',
+                                                                    objectFit: 'cover',
+                                                                    display: 'block'
+                                                                }}
+                                                                loading="lazy"
+                                                            />
+                                                            <div
+                                                                className="design-thumb-overlay"
+                                                                style={{
+                                                                    position: 'absolute', inset: 0,
+                                                                    background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                                                                    display: 'flex', alignItems: 'flex-end',
+                                                                    padding: '0.75rem',
+                                                                    opacity: 0,
+                                                                    transition: 'opacity 0.2s ease',
+                                                                    pointerEvents: 'none'
+                                                                }}
+                                                            >
+                                                                <span style={{
+                                                                    color: 'white', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Syne, sans-serif'
+                                                                }}>{item.title}</span>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+
+                                                // Default Row Layout for other projects
                                                 return (
                                                     <div key={i} style={{
                                                         display: isObject && !isMobile ? 'grid' : 'flex',
@@ -1381,7 +1455,7 @@ export default function ProjectList({ theme }) {
                                                         gap: '1.5rem',
                                                         marginBottom: isObject ? '3rem' : '1rem'
                                                     }}>
-                                                        {/* Title above image for mobile design objects */}
+                                                        {/* Title above image for mobile design objects (if not grid) */}
                                                         {isObject && isMobile && (
                                                             <h3 style={{
                                                                 fontSize: '1.8rem',
@@ -1398,7 +1472,7 @@ export default function ProjectList({ theme }) {
                                                         <div
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
-                                                                setExpandedImg(imgPath);
+                                                                setExpandedItem(isObject ? item : { src: imgPath });
                                                             }}
                                                             style={{
                                                                 width: '100%',
@@ -1479,11 +1553,13 @@ export default function ProjectList({ theme }) {
                                     )}
 
                                     {/* --- LIGHTBOX MODAL --- */}
-                                    {expandedImg && (
+                                    {expandedItem && (
                                         <React.Suspense fallback={null}>
                                             <Lightbox
-                                                src={expandedImg}
-                                                onClose={() => setExpandedImg(null)}
+                                                src={expandedItem.src || expandedItem}
+                                                title={expandedItem.title}
+                                                description={expandedItem.description}
+                                                onClose={() => setExpandedItem(null)}
                                             />
                                         </React.Suspense>
                                     )}
@@ -1500,11 +1576,13 @@ export default function ProjectList({ theme }) {
 
             {/* --- LIGHTBOX MODAL --- */}
             {
-                expandedImg && (
+                expandedItem && (
                     <React.Suspense fallback={null}>
                         <Lightbox
-                            src={expandedImg}
-                            onClose={() => setExpandedImg(null)}
+                            src={expandedItem.src || expandedItem}
+                            title={expandedItem.title}
+                            description={expandedItem.description}
+                            onClose={() => setExpandedItem(null)}
                         />
                     </React.Suspense>
                 )
