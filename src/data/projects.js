@@ -170,7 +170,45 @@ export const projects = [
                 title: 'The Grandest Stage',
                 description: "Capturing the epic scale and magnitude of Wrestlemania in a single frame."
             },
-            // Row 5: The Duality Sequence
+            // Row 5: The Undisputed Promos
+            {
+                type: 'design',
+                src: '/assets/designs/STREAK.webp',
+                title: '21-1',
+                description: "A chilling typographic tribute to the greatest streak in sports entertainment history, and the shocking moment it was conquered."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/STREAK - Alt.webp',
+                title: 'The Streak',
+                description: "An alternate, grittier variant honoring the legacy of The Undertaker at the grandest stage of them all."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/ENDOFANERA.webp',
+                title: 'End of an Era',
+                description: "Capturing the emotional weight of the iconic Hell in a Cell clash between titans, marking truly the end of an era."
+            },
+            // Row 6: Modern Icons
+            {
+                type: 'design',
+                src: '/assets/designs/IQUIT.webp',
+                title: 'I Quit',
+                description: "A brutal, uncompromising design showcasing the finality and absolute destruction of an 'I Quit' match."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/STORY.webp',
+                title: 'Finish The Story',
+                description: "A triumphant, motivational piece dedicated to the long, grueling cinematic journey of finishing the story."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/SHIELD.webp',
+                title: 'Hounds of Justice',
+                description: "SIERRA, HOTEL, INDIA, ECHO, LIMA, DELTA. A tactical, high-contrast homage to the most dominant faction of the modern era."
+            },
+            // Row 7: The Duality Sequence
             {
                 type: 'design',
                 src: '/assets/designs/1316 - Light.webp',
