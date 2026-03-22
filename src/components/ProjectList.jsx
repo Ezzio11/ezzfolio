@@ -1363,14 +1363,84 @@ export default function ProjectList({ theme }) {
                                         </div>
                                     ) : project.gallery && project.gallery.length > 0 ? (
                                         <div style={{
-                                            display: project.id === 6 ? 'block' : 'flex',
-                                            columnCount: project.id === 6 ? (isMobile ? 2 : 3) : undefined,
-                                            columnGap: project.id === 6 ? '1.5rem' : undefined,
-                                            flexDirection: project.id === 6 ? undefined : 'column',
-                                            gap: project.id === 6 ? undefined : '2rem',
-                                            padding: project.id === 6 ? '0 1.5rem 2rem 0' : '0 2rem 2rem 0'
+                                            display: project.id === 6 ? 'flex' : 'flex',
+                                            flexDirection: project.id === 6 ? 'row' : 'column',
+                                            gap: project.id === 6 ? '1.5rem' : '2rem',
+                                            padding: project.id === 6 ? '0 1.5rem 2rem 0' : '0 2rem 2rem 0',
+                                            alignItems: 'flex-start'
                                         }}>
-                                            {project.gallery.map((item, i) => {
+                                            {project.id === 6 ? (() => {
+                                                const numCols = isMobile ? 2 : 3;
+                                                const columns = Array.from({ length: numCols }, () => []);
+                                                project.gallery.forEach((item, index) => {
+                                                    columns[index % numCols].push(item);
+                                                });
+
+                                                return columns.map((colItems, colIdx) => (
+                                                    <div key={colIdx} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                                        {colItems.map((item, i) => {
+                                                            const imgPath = typeof item === 'object' ? item.src : item;
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        setExpandedItem(item);
+                                                                    }}
+                                                                    style={{
+                                                                        width: '100%',
+                                                                        borderRadius: '8px',
+                                                                        overflow: 'hidden',
+                                                                        boxShadow: `0 4px 15px ${project.color}11`,
+                                                                        border: `1px solid ${project.color}33`,
+                                                                        cursor: 'zoom-in',
+                                                                        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease',
+                                                                        position: 'relative',
+                                                                        background: '#0a0a0a',
+                                                                        willChange: 'transform',
+                                                                        transform: 'translateZ(0)'
+                                                                    }}
+                                                                    onMouseEnter={(e) => {
+                                                                        e.currentTarget.style.transform = 'translateZ(0) scale(1.02)';
+                                                                        e.currentTarget.style.borderColor = project.color;
+                                                                        e.currentTarget.style.zIndex = '10';
+                                                                        e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '1';
+                                                                    }}
+                                                                    onMouseLeave={(e) => {
+                                                                        e.currentTarget.style.transform = 'translateZ(0) scale(1)';
+                                                                        e.currentTarget.style.borderColor = `${project.color}33`;
+                                                                        e.currentTarget.style.zIndex = '1';
+                                                                        e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '0';
+                                                                    }}
+                                                                >
+                                                                    <img
+                                                                        src={imgPath.replace('.webp', '_thumb.webp')}
+                                                                        alt={item.title}
+                                                                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                                                                        loading="lazy"
+                                                                    />
+                                                                    <div
+                                                                        className="design-thumb-overlay"
+                                                                        style={{
+                                                                            position: 'absolute', inset: 0,
+                                                                            background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                                                                            display: 'flex', alignItems: 'flex-end',
+                                                                            padding: '0.75rem',
+                                                                            opacity: 0,
+                                                                            transition: 'opacity 0.2s ease',
+                                                                            pointerEvents: 'none'
+                                                                        }}
+                                                                    >
+                                                                        <span style={{
+                                                                            color: 'white', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Syne, sans-serif'
+                                                                        }}>{item.title}</span>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                ));
+                                            })() : project.gallery.map((item, i) => {
                                                 const isObject = typeof item === 'object';
                                                 let imgPath;
                                                 if (isObject) {
@@ -1378,73 +1448,6 @@ export default function ProjectList({ theme }) {
                                                 } else {
                                                     const hasExtension = item.endsWith('.png') || item.endsWith('.jpg') || item.endsWith('.webp');
                                                     imgPath = hasExtension ? item : `${item}-${theme === 'dark' ? 'dark' : 'light'}.webp`;
-                                                }
-
-                                                // Special Case: Graphic Design Grid (ID 6)
-                                                if (project.id === 6 && isObject) {
-                                                    return (
-                                                        <div
-                                                            key={i}
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                setExpandedItem(item);
-                                                            }}
-                                                            style={{
-                                                                width: '100%',
-                                                                marginBottom: '1.5rem',
-                                                                breakInside: 'avoid',
-                                                                borderRadius: '8px',
-                                                                overflow: 'hidden',
-                                                                boxShadow: `0 4px 15px ${project.color}11`,
-                                                                border: `1px solid ${project.color}33`,
-                                                                cursor: 'zoom-in',
-                                                                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease',
-                                                                position: 'relative',
-                                                                background: '#0a0a0a',
-                                                                willChange: 'transform',
-                                                                transform: 'translateZ(0)' // Hardware Acceleration for lag
-                                                            }}
-                                                            onMouseEnter={(e) => {
-                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1.02)';
-                                                                e.currentTarget.style.borderColor = project.color;
-                                                                e.currentTarget.style.zIndex = '10';
-                                                                e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '1';
-                                                            }}
-                                                            onMouseLeave={(e) => {
-                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1)';
-                                                                e.currentTarget.style.borderColor = `${project.color}33`;
-                                                                e.currentTarget.style.zIndex = '1';
-                                                                e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '0';
-                                                            }}
-                                                        >
-                                                            <img
-                                                                src={imgPath.replace('.webp', '_thumb.webp')}
-                                                                alt={item.title}
-                                                                style={{
-                                                                    width: '100%',
-                                                                    height: 'auto',
-                                                                    display: 'block'
-                                                                }}
-                                                                loading="lazy"
-                                                            />
-                                                            <div
-                                                                className="design-thumb-overlay"
-                                                                style={{
-                                                                    position: 'absolute', inset: 0,
-                                                                    background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
-                                                                    display: 'flex', alignItems: 'flex-end',
-                                                                    padding: '0.75rem',
-                                                                    opacity: 0,
-                                                                    transition: 'opacity 0.2s ease',
-                                                                    pointerEvents: 'none'
-                                                                }}
-                                                            >
-                                                                <span style={{
-                                                                    color: 'white', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Syne, sans-serif'
-                                                                }}>{item.title}</span>
-                                                            </div>
-                                                        </div>
-                                                    );
                                                 }
 
                                                 // Default Row Layout for other projects
