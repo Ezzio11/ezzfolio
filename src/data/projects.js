@@ -94,12 +94,62 @@ export const projects = [
         techStack: ['Photopea', 'Figma'],
         stamp: PenTool,
         gallery: [
-            // Row 1: High-Impact Openers
+            // Row 1 & 2: The "Undisputed" Promo Collection (Minimalist, high-impact branding)
+            {
+                type: 'design',
+                src: '/assets/designs/PIPEBOMB.webp',
+                title: 'THE PIPEBOMB',
+                description: "A tribute to CM Punk's iconic Pipebomb promo, capturing the gritty reality of that revolutionary moment."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/STORY.webp',
+                title: 'STORY, FINISHED.',
+                description: "\"Sorry it took me so long.\" A triumphant acknowledgment of Cody Rhodes finishing his long cinematic journey at Wrestlemania XL."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/IQUIT.webp',
+                title: 'I QUIT',
+                description: "\"I feed our whole family with this title.\" A brutal, uncompromising design showcasing the finality and absolute destruction of an 'I Quit' match."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/STREAK.webp',
+                title: '21-1 (F5)',
+                description: "A chilling typographic tribute to the shocking moment the greatest streak in sports entertainment history was conquered."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/STREAK - Alt.webp',
+                title: '21-1 (THE VASE)',
+                description: "An alternate, grittier variant honoring the legacy of The Undertaker at the grandest stage of them all."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/ENDOFANERA.webp',
+                title: 'END OF AN ERA',
+                description: "Capturing the emotional weight of the iconic Hell in a Cell clash between titans, marking truly the end of an era."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/SHIELD.webp',
+                title: 'IMPLOSION',
+                description: "\"There's always a plan B.\" A tactical, high-contrast homage to the architectural destruction of the most dominant faction of the modern era."
+            },
+            {
+                type: 'design',
+                src: '/assets/designs/Wrestlemania.webp',
+                title: 'VICTORY HAS A PRICE',
+                description: "\"How far will you go?\" Capturing the epic weight and physical toll of reaching the summit at Wrestlemania."
+            },
+
+            // Phase 2: High-Fidelity Cinematic Renders
             {
                 type: 'design',
                 src: '/assets/designs/RomanReigns.webp',
                 title: 'OTC',
-                description: "The superhero landing pose-right before a Superman punch-from our tribal chief makes him look like an otherworldy figure. Combined with the Samoan tattoo, the ominous lightning bolt, and the dark background, it's a great acknowledgment for the OTC."
+                description: "The superhero landing pose-right before a Superman punch. Combined with the Samoan tattoo and ominous lightning, it's a great acknowledgment for our Tribal Chief."
             },
             {
                 type: 'design',
@@ -110,21 +160,28 @@ export const projects = [
             {
                 type: 'design',
                 src: '/assets/designs/DX.webp',
-                title: 'Are You Ready?',
-                description: "My favorite WWE faction ever. I wanted to capture the rebellious energy of the Shawn Michaels and Triple H through a static poster. The neon-green glowing sticks is pretty much their most iconic piece, which made for a fantastic point of focus."
+                title: 'ARE YOU READY?',
+                description: "Capturing the rebellious energy of the most iconic faction in history through high-glow neon aesthetics."
             },
-            // Row 2: Deep Arts & Personal
+            {
+                type: 'design',
+                src: '/assets/designs/WeTheOnes.webp',
+                title: 'WE THE ONES',
+                description: "A Red Dead Redemption-styled propaganda poster inspired by the Bloodline and the aesthetics of Bioshock."
+            },
+
+            // Phase 3: Artistic, Personal & Experimental
             {
                 type: 'design',
                 src: '/assets/designs/Poetry.webp',
-                title: 'Poetry',
-                description: "My friend, Abdulrahman Mostafa, is a poet. He wrote something that resonated with me deeply, so I tried capturing how I felt with the 'Surrealist' style in typography and the emerald green color scheme."
+                title: 'POETRY',
+                description: "A surrealist typographic exploration of an emerald green color scheme, inspired by the verses of Abdulrahman Mostafa."
             },
             {
                 type: 'design',
                 src: '/assets/designs/Fin.webp',
-                title: 'Fin.',
-                description: "A surreal, double-exposure composition I made for myself marking the end of my chapter taking the EMAM Research Center leap."
+                title: 'FIN.',
+                description: "A surreal, double-exposure composition marking the end of a chapter taking the EMAM Research Center leap."
             },
             {
                 type: 'design',
@@ -132,93 +189,36 @@ export const projects = [
                 title: '21',
                 description: "A playful scrapbook-style collage poster designed for my 21st birthday, looking back at the years that built me."
             },
-            // Row 3: Event & Celebration
             {
                 type: 'design',
                 src: '/assets/designs/Eid.webp',
-                title: 'Eid Celebration',
+                title: 'EID CELEBRATION',
                 description: "A festive design celebrating the spirit and joy of Eid."
             },
             {
                 type: 'design',
                 src: '/assets/designs/SonicCU.webp',
-                title: 'Sonic & Co. Visit Cairo University',
-                description: "I'm a huge Sonic T. Hedgehog fan, and a student at Cairo University. I also love autumn. And it all clicked so naturally when I wanted a challenging project---changing the university atmosphere from summer to autumn."
+                title: 'SONIC & CO.',
+                description: "Changing the Cairo University atmosphere from summer to autumn, featuring the blue blur himself."
             },
+
+            // Phase 4: Grand Finales & Expanded Sets
             {
                 type: 'design',
                 src: '/assets/designs/Wargames.webp',
-                title: 'WarGames 2025: Civil War',
-                description: "A 10-piece expansive character poster set I developed mimicking electoral campaign cards for the monumental 2025 Bloodline WarGames event."
+                title: 'WARGAMES 2025: CIVIL WAR',
+                description: "A 10-piece expansive character poster set mimicking electoral campaign cards for the monumental 2025 Bloodline WarGames event."
             },
-            // Row 4: Bold, Graphic, & Epic
-            {
-                type: 'design',
-                src: '/assets/designs/WeTheOnes.webp',
-                title: 'We The Ones',
-                description: "I wanted to design a motivating poster with the 'pointing up' gesture from the WWE faction, the Bloodline. Inspired by the brilliant propaganda posters from Bioshock. Ended up with a Red Dead Redemption-styled poster. Couldn't have turned out better."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/PIPEBOMB.webp',
-                title: 'Pipebomb',
-                description: "A tribute to CM Punk's iconic Pipebomb promo, capturing the gritty reality of that revolutionary moment."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/Wrestlemania.webp',
-                title: 'The Grandest Stage',
-                description: "Capturing the epic scale and magnitude of Wrestlemania in a single frame."
-            },
-            // Row 5: The Undisputed Promos
-            {
-                type: 'design',
-                src: '/assets/designs/STREAK.webp',
-                title: '21-1',
-                description: "A chilling typographic tribute to the greatest streak in sports entertainment history, and the shocking moment it was conquered."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/STREAK - Alt.webp',
-                title: 'The Streak',
-                description: "An alternate, grittier variant honoring the legacy of The Undertaker at the grandest stage of them all."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/ENDOFANERA.webp',
-                title: 'End of an Era',
-                description: "Capturing the emotional weight of the iconic Hell in a Cell clash between titans, marking truly the end of an era."
-            },
-            // Row 6: Modern Icons
-            {
-                type: 'design',
-                src: '/assets/designs/IQUIT.webp',
-                title: 'I Quit',
-                description: "A brutal, uncompromising design showcasing the finality and absolute destruction of an 'I Quit' match."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/STORY.webp',
-                title: 'Finish The Story',
-                description: "A triumphant, motivational piece dedicated to the long, grueling cinematic journey of finishing the story."
-            },
-            {
-                type: 'design',
-                src: '/assets/designs/SHIELD.webp',
-                title: 'Hounds of Justice',
-                description: "SIERRA, HOTEL, INDIA, ECHO, LIMA, DELTA. A tactical, high-contrast homage to the most dominant faction of the modern era."
-            },
-            // Row 7: The Duality Sequence
             {
                 type: 'design',
                 src: '/assets/designs/1316 - Light.webp',
-                title: '1316: The Light Era',
+                title: '1316: THE LIGHT ERA',
                 description: "A light-themed variant complementing the Roman Reigns scrollytelling project."
             },
             {
                 type: 'design',
                 src: '/assets/designs/1316 - Dark.webp',
-                title: '1316: The Dark Era',
+                title: '1316: THE DARK ERA',
                 description: "A dark-themed poster inspired by Roman Reigns' historical title reign."
             }
         ]
