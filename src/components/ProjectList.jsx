@@ -1363,11 +1363,12 @@ export default function ProjectList({ theme }) {
                                         </div>
                                     ) : project.gallery && project.gallery.length > 0 ? (
                                         <div style={{
-                                            display: project.id === 6 ? 'grid' : 'flex',
-                                            gridTemplateColumns: project.id === 6 ? (isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)') : undefined,
-                                            flexDirection: 'column',
-                                            gap: project.id === 6 ? '1.5rem' : '2rem',
-                                            padding: project.id === 6 ? '0 1rem 2rem 0' : '0 2rem 2rem 0'
+                                            display: project.id === 6 ? 'block' : 'flex',
+                                            columnCount: project.id === 6 ? (isMobile ? 2 : 3) : undefined,
+                                            columnGap: project.id === 6 ? '1.5rem' : undefined,
+                                            flexDirection: project.id === 6 ? undefined : 'column',
+                                            gap: project.id === 6 ? undefined : '2rem',
+                                            padding: project.id === 6 ? '0 1.5rem 2rem 0' : '0 2rem 2rem 0'
                                         }}>
                                             {project.gallery.map((item, i) => {
                                                 const isObject = typeof item === 'object';
@@ -1390,7 +1391,8 @@ export default function ProjectList({ theme }) {
                                                             }}
                                                             style={{
                                                                 width: '100%',
-                                                                aspectRatio: '1', // Square thumbnails
+                                                                marginBottom: '1.5rem',
+                                                                breakInside: 'avoid',
                                                                 borderRadius: '8px',
                                                                 overflow: 'hidden',
                                                                 boxShadow: `0 4px 15px ${project.color}11`,
@@ -1403,7 +1405,7 @@ export default function ProjectList({ theme }) {
                                                                 transform: 'translateZ(0)' // Hardware Acceleration for lag
                                                             }}
                                                             onMouseEnter={(e) => {
-                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1.05)';
+                                                                e.currentTarget.style.transform = 'translateZ(0) scale(1.02)';
                                                                 e.currentTarget.style.borderColor = project.color;
                                                                 e.currentTarget.style.zIndex = '10';
                                                                 e.currentTarget.querySelector('.design-thumb-overlay').style.opacity = '1';
@@ -1420,8 +1422,7 @@ export default function ProjectList({ theme }) {
                                                                 alt={item.title}
                                                                 style={{
                                                                     width: '100%',
-                                                                    height: '100%',
-                                                                    objectFit: 'cover',
+                                                                    height: 'auto',
                                                                     display: 'block'
                                                                 }}
                                                                 loading="lazy"
