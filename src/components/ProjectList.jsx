@@ -209,6 +209,23 @@ export default function ProjectList({ theme }) {
                                     }} />
                                 )}
 
+                                {project.id === 2 && (
+                                    <div className="tribal-gradient" style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        background: 'linear-gradient(to bottom right, #2e1065, #000000)', // Deep Violet to Black
+                                        zIndex: 0,
+                                        pointerEvents: 'none'
+                                    }}>
+                                        <div style={{
+                                            position: 'absolute', inset: 0,
+                                            backgroundImage: 'radial-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px)',
+                                            backgroundSize: '24px 24px',
+                                            opacity: 0.4
+                                        }} />
+                                    </div>
+                                )}
+
 
 
                                 {/* --- INHERITED GRID VISUALS --- */}
@@ -599,8 +616,10 @@ export default function ProjectList({ theme }) {
                     const isDark = theme === 'dark';
                     overlayBg = isDark ? '#3A2D23' : '#ffffff';
                     // STRICT MONOCHROME: No overrides
-                } else if (item === 1) { // Roman Reigns
+                } else if (item === 1) { // 1316: The Reign
                     overlayBg = 'var(--roman-overlay-bg)';
+                } else if (item === 2) { // Romanfolio
+                    overlayBg = '#0f021a'; // Ultra Deep Purple
                 } else if (item === 0) { // SSC2
                     overlayBg = '#0f172a'; // Enforce Dark Mode Background
                     // STRICT MONOCHROME: No overrides

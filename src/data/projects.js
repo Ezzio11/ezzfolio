@@ -7,11 +7,33 @@ import {
     siReact, siNextdotjs, siSupabase, siTailwindcss, siVite,
     siFramer, siPhotopea, siD3, siMapbox, siNodedotjs, siHuggingface,
     siPython, siVuedotjs, siSass, siLatex,
-    siPandas, siScikitlearn, siPlotly, siHtml5, siJavascript, siTypescript, siGoogle
+    siPandas, siScikitlearn, siPlotly, siHtml5, siJavascript, siTypescript, siGoogle, siThreedotjs
 } from 'simple-icons';
 import OverseerIcon from '../components/icons/OverseerIcon';
 
 export const projects = [
+    {
+        id: 2,
+        title: 'Roman Reigns — Tribal Chief',
+        category: 'Thematic Portfolio',
+        color: '#94a3b8', // Silver/Grey
+        lightColor: '#475569', // Slate-600
+        description: "A narrative-driven, cinematic professional portfolio dedicated to WWE Superstar Roman Reigns. This project blends creative coding with a premium aesthetic, featuring real-time statistics, smooth scroll transitions, and a deep-dive into the 'Island of Relevancy'. It's my most ambitious work in terms of thematic storytelling and visual engagement.",
+        link: 'https://romanfolio.ezzio.me',
+        darkPattern: true,
+        techStack: ['Next.js 15', 'Tailwind v4', 'Three.js', 'Framer Motion'],
+        stamp: '/assets/romanfolio/stamp.webp',
+        gallery: [
+            '/assets/romanfolio/hero.webp',
+            '/assets/romanfolio/bio.webp',
+            '/assets/romanfolio/dominance.webp',
+            '/assets/romanfolio/ledger.webp',
+            '/assets/romanfolio/highlights.webp',
+            '/assets/romanfolio/bloodline.webp',
+            '/assets/romanfolio/origins.webp',
+            '/assets/romanfolio/testimonials.webp'
+        ]
+    },
     {
         id: 0,
         title: 'SSC2 League',
@@ -615,6 +637,7 @@ export const techIcons = {
     'Next.js 15': siNextdotjs,
     'Recharts': siReact, // Using React icon for Recharts
     'Tailwind': siTailwindcss,
+    'Three.js': siThreedotjs,
 };
 
 export const getCategoryIcon = (category) => {
@@ -625,6 +648,7 @@ export const getCategoryIcon = (category) => {
         case 'Learning Platform': return School; // Educational
         case 'Startup Platform': return Zap; // Innovation/energy
         case 'Scrollytelling': return Feather; // Story/narrative
+        case 'Thematic Portfolio': return Feather;
         case 'Art': return PenTool;
         case 'Machine Learning': return Zap;
         case 'Interactive Story': return Feather;
