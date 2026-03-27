@@ -10,7 +10,6 @@ export default function FreeLoot() {
         { id: 'epic-games-store', label: 'EPIC', color: '#f43f5e' },
         { id: 'steam', label: 'STEAM', color: '#10b981' },
         { id: 'gog-com', label: 'GOG', color: '#6366f1' },
-        { id: 'all', label: 'ALL', color: '#8b5cf6' }
     ];
 
     const cyclePlatform = () => {
@@ -24,7 +23,7 @@ export default function FreeLoot() {
         const fetchLoot = async () => {
             const CACHE_KEY = `ezz_loot_cache_${platform}`;
             const CACHE_TIME = 21600000; // 6 hours
-            
+
             const cached = localStorage.getItem(CACHE_KEY);
             if (cached) {
                 const { loot: cachedLoot, timestamp } = JSON.parse(cached);
@@ -38,7 +37,7 @@ export default function FreeLoot() {
             setLoading(true);
             try {
                 const proxyUrl = `/api/loot?platform=${platform}`;
-                
+
                 const response = await fetch(proxyUrl);
                 const data = await response.json();
 
@@ -87,8 +86,8 @@ export default function FreeLoot() {
             height: 'fit-content',
             cursor: 'pointer'
         }}
-        onClick={cyclePlatform}
-        title={`Showing ${currentPlatform.label} deals - Click to cycle`}
+            onClick={cyclePlatform}
+            title={`Showing ${currentPlatform.label} deals - Click to cycle`}
         >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.7, color: currentPlatform.color }}>
                 <Package size={14} />
@@ -102,13 +101,13 @@ export default function FreeLoot() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {loot ? (
                     <>
-                        <a 
-                            href={loot.open_giveaway_url} 
-                            target="_blank" 
+                        <a
+                            href={loot.open_giveaway_url}
+                            target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            style={{ 
-                                fontWeight: 'bold', 
+                            style={{
+                                fontWeight: 'bold',
                                 color: 'var(--neon-blue)',
                                 textDecoration: 'none',
                                 borderBottom: '1px solid var(--neon-blue)'

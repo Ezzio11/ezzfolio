@@ -191,6 +191,12 @@ export const projects = [
                 title: 'WE THE ONES',
                 description: "A Red Dead Redemption-styled propaganda poster inspired by the Bloodline and the aesthetics of Bioshock."
             },
+            {
+                type: 'design',
+                src: '/assets/designs/SPEARIT.webp',
+                title: 'SPEAR IT',
+                description: "\"Road to Wrestlemania XLII.\" A cinematic, typographic tribute to the most devastating move in sports entertainment, capturing the raw impact of a perfectly executed spear."
+            },
 
             // Phase 3: Artistic, Personal & Experimental
             {
