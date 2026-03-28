@@ -111,7 +111,7 @@ export const projects = [
         category: 'Art',
         color: '#FF0055', // Neon Pink/Red
         lightColor: '#be123c', // Rose-700
-        description: "Whenever I'm burnout from coding, I like to do some graphic design. I've been using Photopea for a while now, and it's been an absolute blast to just let my creativity flow.",
+        description: "I might be a system developer, but I'm also a graphic designer (polymathy, baby!). These are some of my designs---mostly posters. See why I'm good at UI/UX.",
         link: null,
         techStack: ['Photopea', 'Figma'],
         stamp: PenTool,
@@ -121,19 +121,19 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/PIPEBOMB.webp',
                 title: 'THE PIPEBOMB',
-                description: "A tribute to CM Punk's iconic Pipebomb promo, capturing the gritty reality of that revolutionary moment."
+                description: "\"I have a lot of things I want to get off my chest.\" Sitting menancingly with his legs crossed, CM Punk delivered one of the most iconic promos of all time."
             },
             {
                 type: 'design',
                 src: '/assets/designs/STORY.webp',
                 title: 'STORY, FINISHED.',
-                description: "\"Sorry it took me so long.\" A triumphant acknowledgment of Cody Rhodes finishing his long cinematic journey at Wrestlemania XL."
+                description: "\"Sorry it took me so long.\" This one is for you, Dusty. Cody Rhodes finally finishing his story and becoming the first Rhodes to win a WWE championship at Wrestlemania XL."
             },
             {
                 type: 'design',
                 src: '/assets/designs/IQUIT.webp',
                 title: 'I QUIT',
-                description: "\"I feed our whole family with this title.\" A brutal, uncompromising design showcasing the finality and absolute destruction of an 'I Quit' match."
+                description: "\"I feed our whole family with this title.\" Roman Reigns becoming the tribal chief after brutally beating down Jey Uso. Peak cinema."
             },
             {
                 type: 'design',
@@ -151,19 +151,19 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/ENDOFANERA.webp',
                 title: 'END OF AN ERA',
-                description: "Capturing the emotional weight of the iconic Hell in a Cell clash between titans, marking truly the end of an era."
+                description: "\"STREAK'S OVER, STREAK'S OVER!\" The match marking the end of the attitude era. The Undertaker kicking out of sweet chin music + pedigree is something I'll never forget."
             },
             {
                 type: 'design',
                 src: '/assets/designs/SHIELD.webp',
                 title: 'IMPLOSION',
-                description: "\"There's always a plan B.\" A tactical, high-contrast homage to the architectural destruction of the most dominant faction of the modern era."
+                description: "\"There's always a plan B.\" Remember when Seth Rollins betrayed The Shield? The effect is still haunting us till this day."
             },
             {
                 type: 'design',
                 src: '/assets/designs/Wrestlemania.webp',
                 title: 'VICTORY HAS A PRICE',
-                description: "\"How far will you go?\" Capturing the epic weight and physical toll of reaching the summit at Wrestlemania."
+                description: "\"How far will you go?\" Randy busted Cody's head open, CM Punk said he'd bur Roman next to his fateher. Capturing the epic weight and physical toll of reaching the summit at Wrestlemania."
             },
 
             // Phase 2: High-Fidelity Cinematic Renders
@@ -177,7 +177,7 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/LAKnight.webp',
                 title: 'YEAH!',
-                description: "A high-energy tribute poster for the megastar LA Knight. Let me talk to ya!"
+                description: "Streetwear-styled poster for the Megastar. Loved it so much I ended up prining it on a notebook. YEAH!"
             },
             {
                 type: 'design',
@@ -195,7 +195,7 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/SPEARIT.webp',
                 title: 'SPEAR IT',
-                description: "\"Road to Wrestlemania XLII.\" A cinematic, typographic tribute to the most devastating move in sports entertainment, capturing the raw impact of a perfectly executed spear."
+                description: "I was singing 'Beat It', then my sister said 'Spear It'. The poster made itself."
             },
 
             // Phase 3: Artistic, Personal & Experimental
@@ -203,13 +203,13 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/Poetry.webp',
                 title: 'POETRY',
-                description: "A surrealist typographic exploration of an emerald green color scheme, inspired by the verses of Abdulrahman Mostafa."
+                description: "A surrealist typographic exploration of an emerald green color scheme, inspired by the verses of my friend Abdulrahman Mostafa."
             },
             {
                 type: 'design',
                 src: '/assets/designs/Fin.webp',
                 title: 'FIN.',
-                description: "A surreal, double-exposure composition marking the end of a chapter taking the EMAM Research Center leap."
+                description: "I made this poster to mark the end of my journey at EMAM Research Center. It was a bittersweet moment, but I'm proud of what we accomplished there."
             },
             {
                 type: 'design',
@@ -221,13 +221,13 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/Eid.webp',
                 title: 'EID CELEBRATION',
-                description: "A festive design celebrating the spirit and joy of Eid."
+                description: "A Sonic The Hedgehog-themed poster for Eid Al-Fitr. Look at Eggman go!"
             },
             {
                 type: 'design',
                 src: '/assets/designs/SonicCU.webp',
                 title: 'SONIC & CO.',
-                description: "Changing the Cairo University atmosphere from summer to autumn, featuring the blue blur himself."
+                description: "Changing the Cairo University atmosphere from summer to autumn because we never have this atmosphere IRL, featuring the blue blur and the gang."
             },
 
             // Phase 4: Grand Finales & Expanded Sets
@@ -235,19 +235,19 @@ export const projects = [
                 type: 'design',
                 src: '/assets/designs/Wargames.webp',
                 title: 'WARGAMES 2025: CIVIL WAR',
-                description: "A 10-piece expansive character poster set mimicking electoral campaign cards for the monumental 2025 Bloodline WarGames event."
+                description: "A really weird project. I don't think I need to say anything else. Just look at it."
             },
             {
                 type: 'design',
                 src: '/assets/designs/1316 - Light.webp',
                 title: '1316: THE LIGHT ERA',
-                description: "A light-themed variant complementing the Roman Reigns scrollytelling project."
+                description: "Started as a minimalist movie poster-ish thingy, ended up with a completely different result. It's a poster for the 4th longest-reigning champion in WWE history."
             },
             {
                 type: 'design',
                 src: '/assets/designs/1316 - Dark.webp',
                 title: '1316: THE DARK ERA',
-                description: "A dark-themed poster inspired by Roman Reigns' historical title reign."
+                description: "Started as a minimalist movie poster-ish thingy, ended up with a completely different result. It's a poster for the 4th longest-reigning champion in WWE history."
             }
         ]
     },
