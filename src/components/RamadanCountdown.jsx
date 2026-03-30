@@ -6,6 +6,50 @@ export default function RamadanCountdown() {
     const [nextPrayer, setNextPrayer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [city, setCity] = useState("Cairo");
+    const [timings, setTimings] = useState(null);
+
+    const calculateTimeLeft = (timings) => {
+        const now = new Date();
+
+        const getMinutes = (timeStr) => {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        };
+
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const currentSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+
+        const maghribMinutes = getMinutes(timings.Maghrib);
+        const fajrMinutes = getMinutes(timings.Fajr);
+
+        // Convert target times to seconds for smooth countdown
+        let targetSeconds, nextName;
+
+        if (currentMinutes < fajrMinutes) {
+            targetSeconds = fajrMinutes * 60;
+            nextName = "Suhoor";
+        } else if (currentMinutes < maghribMinutes) {
+            targetSeconds = maghribMinutes * 60;
+            nextName = "Iftar";
+        } else {
+            targetSeconds = (fajrMinutes + 24 * 60) * 60; // Next day Fajr approx
+            nextName = "Suhoor";
+        }
+
+        let diff = targetSeconds - currentSeconds;
+        if (diff < 0) diff += 24 * 3600;
+
+        const h = Math.floor(diff / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+
+        const hoursStr = h < 10 ? `0${h}` : h;
+        const minsStr = m < 10 ? `0${m}` : m;
+        const secsStr = s < 10 ? `0${s}` : s;
+
+        setTimeLeft(`${hoursStr}:${minsStr}:${secsStr}`);
+        setNextPrayer(nextName);
+    };
 
     useEffect(() => {
         const fetchTimings = async (lat, lng, cityName = null) => {
@@ -65,7 +109,6 @@ export default function RamadanCountdown() {
         return () => clearInterval(refreshInterval);
     }, []);
 
-    const [timings, setTimings] = useState(null);
 
     useEffect(() => {
         if (!timings) return;
@@ -76,48 +119,6 @@ export default function RamadanCountdown() {
     }, [timings]);
 
 
-    const calculateTimeLeft = (timings) => {
-        const now = new Date();
-
-        const getMinutes = (timeStr) => {
-            const [h, m] = timeStr.split(':').map(Number);
-            return h * 60 + m;
-        };
-
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
-        const currentSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-
-        const maghribMinutes = getMinutes(timings.Maghrib);
-        const fajrMinutes = getMinutes(timings.Fajr);
-
-        // Convert target times to seconds for smooth countdown
-        let targetSeconds, nextName;
-
-        if (currentMinutes < fajrMinutes) {
-            targetSeconds = fajrMinutes * 60;
-            nextName = "Suhoor";
-        } else if (currentMinutes < maghribMinutes) {
-            targetSeconds = maghribMinutes * 60;
-            nextName = "Iftar";
-        } else {
-            targetSeconds = (fajrMinutes + 24 * 60) * 60; // Next day Fajr approx
-            nextName = "Suhoor";
-        }
-
-        let diff = targetSeconds - currentSeconds;
-        if (diff < 0) diff += 24 * 3600;
-
-        const h = Math.floor(diff / 3600);
-        const m = Math.floor((diff % 3600) / 60);
-        const s = diff % 60;
-
-        const hoursStr = h < 10 ? `0${h}` : h;
-        const minsStr = m < 10 ? `0${m}` : m;
-        const secsStr = s < 10 ? `0${s}` : s;
-
-        setTimeLeft(`${hoursStr}:${minsStr}:${secsStr}`);
-        setNextPrayer(nextName);
-    };
 
     if (loading) return null;
 

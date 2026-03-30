@@ -4,6 +4,7 @@ import ExchangeRate from './ExchangeRate';
 import GoldPrice from './GoldPrice';
 import FootballMatch from './FootballMatch';
 import FreeLoot from './FreeLoot';
+// import StatusBadge from './StatusBadge'; // Removed per user request
 
 export default function Hero({ currentTheme }) {
     const [activeSocial, setActiveSocial] = useState(null);
@@ -33,70 +34,94 @@ export default function Hero({ currentTheme }) {
     ];
 
     return (
-        <div style={{ marginBottom: '3rem', textAlign: 'left' }}>
-            <h1 className="glitch-text hero-title">
-                {text}
-            </h1>
-            <div
-                className="animate-fade-up"
-                style={{
-                    color: 'var(--text-dim)', // Base color
-                    fontSize: '1.1rem', // Slightly larger
-                    maxWidth: '540px', // More breathing room
-                    lineHeight: '1.6',
-                    animationDelay: '0.8s',
-                    fontWeight: 400 // Normal weight for better legibility
-                }}
-            >
-                <div style={{ marginBottom: '2rem' }}>
-                    <p style={{ margin: 0, marginBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Statistics Major</span> turned <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Full-Stack Systems Developer</span>.
-                    </p>
-                    <p style={{ margin: 0 }}>
-                        I love all things design, development, or analysis. Always up for a challenge or a collaboration (or a challenging collaboration..?)
-                    </p>
-                    <p style={{ marginTop: '1rem', fontSize: '0.95rem', fontStyle: 'italic' }}>
-                        PSA: If you enjoy creative engineering and interactive data, bookmark this site. I ship new experiments frequently. :D
-                    </p>
+        <div className="hero-flex-layout" style={{ marginBottom: '3rem' }}>
+            <div style={{ flex: 1, minWidth: '0' }}>
+                <h1 className="glitch-text hero-title">
+                    {text}
+                </h1>
+                <div
+                    className="animate-fade-up"
+                    style={{
+                        color: 'var(--text-dim)', // Base color
+                        fontSize: '1.1rem', // Slightly larger
+                        maxWidth: '540px', // More breathing room
+                        lineHeight: '1.6',
+                        animationDelay: '0.8s',
+                        fontWeight: 400 // Normal weight for better legibility
+                    }}
+                >
+                    <div style={{ marginBottom: '2rem' }}>
+                        <p style={{ margin: 0, marginBottom: '0.5rem' }}>
+                            <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Statistics Major</span> turned <span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Full-Stack Systems Developer</span>.
+                        </p>
+                        <p style={{ margin: 0 }}>
+                            I love all things design, development, or analysis. Always up for a challenge or a collaboration (or a challenging collaboration..?)
+                        </p>
+                        <p style={{ marginTop: '1rem', fontSize: '0.95rem', fontStyle: 'italic' }}>
+                            PSA: If you enjoy creative engineering and interactive data, bookmark this site. I ship new experiments frequently :D
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                        {socialItems.map((social, index) => (
+                            <a
+                                key={social.id}
+                                href={social.url}
+                                target={social.id === 'em' ? undefined : "_blank"}
+                                rel={social.id === 'em' ? undefined : "noopener noreferrer"}
+                                className={`social-link ${activeSocial === social.id ? 'is-active' : ''} animate-pop-in`}
+                                aria-label={`Open ${social.label}`}
+                                title={social.label}
+                                style={{ animationDelay: `${1 + (index * 0.1)}s` }}
+
+                                onClick={(e) => {
+                                    if (activeSocial !== social.id) {
+                                        e.preventDefault();
+                                        setActiveSocial(social.id);
+                                    }
+                                }}
+                                onMouseLeave={() => setActiveSocial(null)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    {social.icon}
+                                </svg>
+                            </a>
+                        ))}
+
+                        {/* Ramadan Widget (Inline) */}
+                        {currentTheme === 'ramadan' && <RamadanCountdown />}
+
+                        {/* Exchange Rate Widget */}
+                        <ExchangeRate />
+
+                        {/* New Economic & Game Widgets */}
+                        <GoldPrice />
+                        <FootballMatch />
+                        <FreeLoot />
+
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Side Column (Photo + Signature) */}
+            <div className="hero-image-column animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <div className="hero-image-wrapper">
+                    <div className="hero-image-frame">
+                        <img
+                            src="/assets/image.webp"
+                            alt="Ezz Eldin Ahmed"
+                            className="hero-image"
+                            onError={(e) => {
+                                e.target.src = "https://ui-avatars.com/api/?name=Ezz+Eldin+Ahmed&background=0a0a12&color=05d9e8&bold=true";
+                            }}
+                        />
+                        <div className="hero-image-overlay"></div>
+                    </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                    {socialItems.map((social, index) => (
-                        <a
-                            key={social.id}
-                            href={social.url}
-                            target={social.id === 'em' ? undefined : "_blank"}
-                            rel={social.id === 'em' ? undefined : "noopener noreferrer"}
-                            className={`social-link ${activeSocial === social.id ? 'is-active' : ''} animate-pop-in`}
-                            aria-label={`Open ${social.label}`}
-                            title={social.label}
-                            style={{ animationDelay: `${1 + (index * 0.1)}s` }}
-
-                            onClick={(e) => {
-                                if (activeSocial !== social.id) {
-                                    e.preventDefault();
-                                    setActiveSocial(social.id);
-                                }
-                            }}
-                            onMouseLeave={() => setActiveSocial(null)}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                {social.icon}
-                            </svg>
-                        </a>
-                    ))}
-
-                    {/* Ramadan Widget (Inline) */}
-                    {currentTheme === 'ramadan' && <RamadanCountdown />}
-
-                    {/* Exchange Rate Widget */}
-                    <ExchangeRate />
-
-                    {/* New Economic & Game Widgets */}
-                    <GoldPrice />
-                    <FootballMatch />
-                    <FreeLoot />
-
+                {/* Signature Placeholder relocated from left side */}
+                <div className="signature-container">
+                    {/* Real signature will be placed here by user later */}
                 </div>
             </div>
         </div>

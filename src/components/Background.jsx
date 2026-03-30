@@ -68,7 +68,13 @@ export default React.memo(function Background() {
                     willChange: 'transform',
                     transition: 'transform 0.1s ease-out'
                 }}
-            />
+            >
+                {/* Logo Instances joining the slashes/circles */}
+                <img src="/assets/logo.svg" className="background-logo" style={{ top: '15%', left: '10%', width: '120px' }} alt="" />
+                <img src="/assets/logo.svg" className="background-logo" style={{ top: '65%', left: '85%', width: '90px', transform: 'rotate(15deg)' }} alt="" />
+                <img src="/assets/logo.svg" className="background-logo" style={{ top: '40%', left: '70%', width: '140px', transform: 'rotate(-10deg)' }} alt="" />
+                <img src="/assets/logo.svg" className="background-logo" style={{ top: '80%', left: '20%', width: '80px' }} alt="" />
+            </div>
 
             {/* Layer 3: Editorial Accents (Registration Marks) */}
             <div className="parallax-layer layer-accents">

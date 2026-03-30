@@ -36,7 +36,7 @@ export default async function handler(req, res) {
           goldPriceUsdOunce = parseFloat(binanceData.price);
         }
       }
-    } catch (e) {
+    } catch {
       console.warn("Binance API fetch failed, trying CoinGecko fallback...");
     }
 

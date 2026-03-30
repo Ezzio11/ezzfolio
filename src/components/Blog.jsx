@@ -86,7 +86,7 @@ export default function Blog({ theme }) {
             if (!localResponse.ok) throw new Error('Post not found');
             const text = await localResponse.text();
             setContent(text);
-        } catch (error) {
+        } catch {
             setContent("# 404\n\nGhost in the machine. Post not found.");
         }
     };
@@ -108,15 +108,15 @@ export default function Blog({ theme }) {
                 setSelectedPost(null);
             }
         }
-    }, [searchParams, posts]);
+    }, [searchParams, posts, selectedPost]);
 
     const openPost = (post) => {
         setSearchParams({ post: post.slug });
     };
 
-    const closePost = () => {
+    const closePost = React.useCallback(() => {
         setSearchParams({});
-    };
+    }, [setSearchParams]);
 
     const handleShare = () => {
         const url = window.location.href;
@@ -141,7 +141,7 @@ export default function Blog({ theme }) {
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [selectedPost]);
+    }, [selectedPost, closePost]);
 
     return (
         <div style={{ position: 'relative' }}>
@@ -498,10 +498,10 @@ export default function Blog({ theme }) {
                                 remarkPlugins={[remarkMath, remarkGfm]}
                                 rehypePlugins={[rehypeKatex]}
                                 components={{
-                                    h1: ({ node, ...props }) => <h1 style={{ display: 'none' }} {...props} />, // Hide markdown h1 since we render title manually
-                                    h2: ({ node, ...props }) => <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 700, marginTop: '4rem', marginBottom: '1.5rem', color: textMain, letterSpacing: '-0.5px' }} {...props} />,
-                                    h3: ({ node, ...props }) => <h3 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginTop: '3rem', marginBottom: '1rem', color: textMain }} {...props} />,
-                                    p: ({ node, children, ...props }) => {
+                                    h1: ({ _node, ...props }) => <h1 style={{ display: 'none' }} {...props} />, // Hide markdown h1 since we render title manually
+                                    h2: ({ _node, ...props }) => <h2 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 700, marginTop: '4rem', marginBottom: '1.5rem', color: textMain, letterSpacing: '-0.5px' }} {...props} />,
+                                    h3: ({ _node, ...props }) => <h3 style={{ fontFamily: 'Syne', fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, marginTop: '3rem', marginBottom: '1rem', color: textMain }} {...props} />,
+                                    p: ({ _node, children, ...props }) => {
                                         // Check if children contains a figure element (our img wrapper)
                                         // If so, return children directly to avoid <p><figure> nesting
                                         const hasBlockElement = React.Children.toArray(children).some(
@@ -514,9 +514,9 @@ export default function Blog({ theme }) {
 
                                         return <p style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.8', fontSize: '1.2rem', marginBottom: '2rem', color: textMain, maxWidth: '65ch', opacity: 0.9 }} {...props}>{children}</p>;
                                     },
-                                    li: ({ node, ...props }) => <li style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.6', marginBottom: '0.5rem', color: textMain, fontSize: '1.1rem', opacity: 0.9 }} {...props} />,
-                                    strong: ({ node, ...props }) => <strong style={{ color: textMain, fontWeight: 700 }} {...props} />,
-                                    blockquote: ({ node, ...props }) => (
+                                    li: ({ _node, ...props }) => <li style={{ fontFamily: 'Space Grotesk, sans-serif', lineHeight: '1.6', marginBottom: '0.5rem', color: textMain, fontSize: '1.1rem', opacity: 0.9 }} {...props} />,
+                                    strong: ({ _node, ...props }) => <strong style={{ color: textMain, fontWeight: 700 }} {...props} />,
+                                    blockquote: ({ _node, ...props }) => (
                                         <blockquote style={{
                                             borderLeft: '4px solid var(--neon-yellow)',
                                             paddingLeft: '2rem',
@@ -531,8 +531,8 @@ export default function Blog({ theme }) {
                                             fontSize: '1.2rem'
                                         }} {...props} />
                                     ),
-                                    code: ({ node, inline, className, children, ...props }) => {
-                                        const match = /language-(\w+)/.exec(className || '');
+                                    code: ({ _node, inline, className, children, ...props }) => {
+                                        const _match = /language-(\w+)/.exec(className || '');
                                         return !inline ? (
                                             <pre style={{
                                                 background: codeBg,
@@ -559,7 +559,7 @@ export default function Blog({ theme }) {
                                             </code>
                                         );
                                     },
-                                    img: ({ node, src, alt, ...props }) => {
+                                    img: ({ _node, src, alt, ...props }) => {
                                         return (
                                             <figure style={{ margin: '3rem 0', width: '100%' }}>
                                                 <img

@@ -9,7 +9,7 @@ const WORLD_PATH = `M48 94l-3-4-2-14c0-3-1-5-3-8-4-5-6-9-4-11l1-4 1-3c2-1 9 0 11
 // We want to transform translates by 189 units.
 // 189 / 432 = 0.4375 (43.75%)
 
-export default function OverseerIcon({ size = 80, strokeWidth = 1.5, ...props }) {
+export default function OverseerIcon({ size = 80, _strokeWidth = 1.5, ...props }) {
     // We will use a dedicated container that enforces size.
 
     return (

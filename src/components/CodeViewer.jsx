@@ -5,7 +5,7 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 SyntaxHighlighter.registerLanguage('python', python);
 
-const CodeViewer = ({ code, isDark, isInput, count }) => {
+const CodeViewer = ({ code, isDark, isInput, _count }) => {
     // Custom Jupyter Themes (Matches official Jupyter colors)
     // Light Mode (Classic Notebook)
     const jupyterLight = {

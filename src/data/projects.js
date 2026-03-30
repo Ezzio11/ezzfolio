@@ -586,8 +586,8 @@ catboost                     CatBoost Handles categorical features, reduced over
         id: 7,
         title: 'The Decline of The Polymath',
         category: 'Interactive Story',
-        color: '#E0DCD3', // Beige / Parchment Text Color
-        lightColor: '#b45309', // Amber-700 (Warm paper/map color)
+        color: '#632D30', // Ox Blood Red for the title
+        lightColor: '#F2EFE8', // Parchment for the card background
         bgImage: '/assets/polymath/rice-paper.webp',
         description: "My very first data-meets-web project. I wanted to explore the idea of a 'Polymath' and whatever happened to the ones who once were. I used ECharts to create interactive visualizations and a timeline of 1000+ years of history.",
         link: '/polymath.html',
@@ -642,7 +642,6 @@ export const techIcons = {
     'Google Gemini': siGoogle,
     'Next.js 15': siNextdotjs,
     'Recharts': siReact, // Using React icon for Recharts
-    'Tailwind': siTailwindcss,
     'Three.js': siThreedotjs,
 };
 

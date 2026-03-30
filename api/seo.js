@@ -21,7 +21,6 @@ export default async function handler(req, res) {
         const title = `${targetPost.title} | Ezzio`;
         const description = targetPost.description || `Read "${targetPost.title}" on Ezzio's Portfolio.`;
         const url = `https://ezzio.me/?post=${targetPost.slug}`;
-        const image = `https://ezzio.me/assets/og-image.webp`; // Fallback or dynamic if available
 
         // 4. Fetch the original SPA shell (index.html)
         // We fetch from the current deployment URL

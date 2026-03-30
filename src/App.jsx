@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
 // Lazy load heavy variants to split bundle
 const ProjectList = React.lazy(() => import('./components/ProjectList'));
@@ -19,8 +19,7 @@ import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
     const [theme, setTheme] = useState('dark');
-    const [currentTheme, setCurrentTheme] = useState('normal'); // 'ramadan' | 'winter' | 'normal'
-    const location = useLocation();
+    const [currentTheme, _setCurrentTheme] = useState('normal'); // 'ramadan' | 'winter' | 'normal'
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -28,13 +27,6 @@ export default function App() {
         document.body.classList.toggle('light-mode');
     };
 
-    const toggleCurrentTheme = () => {
-        setCurrentTheme(prev => {
-            if (prev === 'ramadan') return 'winter';
-            if (prev === 'winter') return 'normal';
-            return 'ramadan';
-        });
-    };
 
     return (
         <div

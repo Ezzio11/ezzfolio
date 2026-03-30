@@ -5,7 +5,7 @@ const Lightbox = React.lazy(() => import('./Lightbox')); // Lazy load modal
 const CodeViewer = React.lazy(() => import('./CodeViewer')); // Lazy load syntax highlighter
 const OverseerStarfield = React.lazy(() => import('./OverseerStarfield')); // Lazy load starfield
 
-import { useSpring, useTransition, animated, config } from '@react-spring/web';
+import { useTransition, animated as Animated } from '@react-spring/web';
 
 
 export default function ProjectList({ theme }) {
@@ -13,7 +13,7 @@ export default function ProjectList({ theme }) {
     const [selectedId, setSelectedId] = useState(null);
     const [originRect, setOriginRect] = useState(null);
     const [expandedItem, setExpandedItem] = useState(null);
-    const [isAnimating, setIsAnimating] = useState(false); // For mobile optimization
+    const [_isAnimating, setIsAnimating] = useState(false); // For mobile optimization
 
     const overlayRef = useRef(null);
 
@@ -109,22 +109,33 @@ export default function ProjectList({ theme }) {
             }
             if (selectedId === null && result.finished) {
                 setOriginRect(null);
-                document.body.style.overflow = '';
             }
         }
     });
+
+    // Body scroll lock effect
+    useEffect(() => {
+        if (selectedId !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [selectedId]);
 
     const handleSelect = (id, e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setOriginRect(rect);
         setSelectedId(id);
-        document.body.style.overflow = 'hidden';
     };
 
     const handleClose = (e) => {
         if (e) e.stopPropagation();
         setSelectedId(null);
-        // Overflow reset handled in onRest
     };
 
     // Handle Escape Key
@@ -147,7 +158,6 @@ export default function ProjectList({ theme }) {
 
 
 
-    const selectedProject = projects.find(p => p.id === selectedId);
 
 
 
@@ -441,7 +451,7 @@ export default function ProjectList({ theme }) {
                                         position: 'absolute',
                                         inset: 0,
                                         zIndex: 0,
-                                        background: '#3A2D23', // Deep Brown
+                                        background: project.lightColor || '#F2EFE8', // Use Parchment
                                         pointerEvents: 'none',
                                         transition: 'background-color 0.3s ease'
                                     }} />
@@ -565,7 +575,7 @@ export default function ProjectList({ theme }) {
                                     </h3>
                                     <span className="card-category" style={{
                                         fontSize: '0.8rem',
-                                        color: 'rgba(255, 255, 255, 0.7)', // Fixed Light Text
+                                        color: project.id === 7 ? 'rgba(99, 45, 48, 0.8)' : 'rgba(255, 255, 255, 0.7)', // Dark Red for Polymath, Light for others
                                         textTransform: 'uppercase',
                                         letterSpacing: '0.5px',
                                         display: 'flex',
@@ -613,9 +623,11 @@ export default function ProjectList({ theme }) {
                     }
                     // STRICT MONOCHROME: No overrides
                 } else if (item === 7) { // Polymath
-                    const isDark = theme === 'dark';
-                    overlayBg = isDark ? '#3A2D23' : '#ffffff';
-                    // STRICT MONOCHROME: No overrides
+                    overlayBg = '#F2EFE8'; // Enforce Parchment background
+                    variableOverrides = {
+                        '--text-main': '#632D30', // Ox Blood Red for body text
+                        '--text-dim': 'rgba(99, 45, 48, 0.7)'
+                    };
                 } else if (item === 1) { // 1316: The Reign
                     overlayBg = 'var(--roman-overlay-bg)';
                 } else if (item === 2) { // Romanfolio
@@ -637,7 +649,7 @@ export default function ProjectList({ theme }) {
                 const isClosing = selectedId !== item;
 
                 return (
-                    <animated.div
+                    <Animated.div
                         ref={overlayRef}
                         style={{
                             position: 'fixed',
@@ -1592,7 +1604,7 @@ export default function ProjectList({ theme }) {
                             </div>
 
                         </div>
-                    </animated.div>
+                    </Animated.div>
                 );
             })
             }

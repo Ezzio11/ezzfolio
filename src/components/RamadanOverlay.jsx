@@ -91,7 +91,7 @@ class HangingDecoration {
     }
 
     // --- THE SECRET SAUCE: METALLIC SHADER ---
-    getMetallicGradient(ctx, width, angle) {
+    getMetallicGradient(ctx, width, _angle) {
         // Gradient runs perpendicular to the sway angle to simulate light source staying fixed
         // Simple version: just linear gradient across the width
         const gradient = ctx.createLinearGradient(-width / 2, 0, width / 2, 0);
@@ -291,19 +291,6 @@ class HangingDecoration {
         const r = this.size;
 
         // Define clean crescent path
-        const drawCrescentPath = () => {
-            ctx.beginPath();
-            ctx.arc(0, 0, r, 0, Math.PI * 2); // Outer
-            ctx.moveTo(r * 0.3, -r * 0.2); // Move to inner start?
-            // Actually, context arc doesn't automatically subtract in a single path unless structured right.
-            // But we can use the clip rule: A path with sub-paths.
-            // Simpler: Just clip to Outer, then subtract Intersect of Inner?
-            // No, the path function must define the SHAPE.
-            // Let's use two arcs in opposite directions to create a single shape path.
-
-            ctx.arc(0, 0, r, 0, Math.PI * 2);
-            // This is just a circle though.
-        };
 
         // Let's use the robust clipping method:
         ctx.save();
@@ -452,7 +439,7 @@ export default React.memo(function RamadanOverlay() {
             mouseX.current = { x: e.clientX, y: e.clientY };
         };
 
-        const animate = (time) => {
+        const animate = (_time) => {
             if (!ctx || !canvas) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 

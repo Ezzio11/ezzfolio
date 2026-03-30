@@ -125,3 +125,26 @@
         opacity: 0.6;
     }
 }
+
+/* Background Logo Instances joining the geometric shapes */
+.background-logo {
+    position: absolute;
+    opacity: 0.04;
+    filter: grayscale(100%) brightness(1.5);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+}
+
+.light-mode .background-logo {
+    opacity: 0.08; /* Slightly more visible on light cream */
+    filter: grayscale(100%) contrast(0.5);
+    mix-blend-mode: multiply;
+}
+
+@media (max-width: 768px) {
+    .background-logo {
+        width: 60px !important; /* Scale down for mobile */
+    }
+}
