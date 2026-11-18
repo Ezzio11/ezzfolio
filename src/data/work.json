@@ -1,0 +1,446 @@
+{
+ "series": [
+  {
+   "id": "bloodline",
+   "title": "The Bloodline Files",
+   "kind": "book",
+   "blurb": "A classified dossier on the Bloodline Syndicate: character files, case files for every major event, 22 pages.",
+   "items": [
+    {
+     "src": "/assets/work/wwe-bloodline/00-cover.webp",
+     "thumb": "/assets/work/wwe-bloodline/00-cover_thumb.webp",
+     "title": "Cover"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/01-toc.webp",
+     "thumb": "/assets/work/wwe-bloodline/01-toc_thumb.webp",
+     "title": "Toc"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/02-page1ish.webp",
+     "thumb": "/assets/work/wwe-bloodline/02-page1ish_thumb.webp",
+     "title": "Page1ish"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/03-treemob.webp",
+     "thumb": "/assets/work/wwe-bloodline/03-treemob_thumb.webp",
+     "title": "Treemob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/04-romanmob.webp",
+     "thumb": "/assets/work/wwe-bloodline/04-romanmob_thumb.webp",
+     "title": "Romanmob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/05-jeymob.webp",
+     "thumb": "/assets/work/wwe-bloodline/05-jeymob_thumb.webp",
+     "title": "Jeymob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/06-jimmymob.webp",
+     "thumb": "/assets/work/wwe-bloodline/06-jimmymob_thumb.webp",
+     "title": "Jimmymob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/07-solomob.webp",
+     "thumb": "/assets/work/wwe-bloodline/07-solomob_thumb.webp",
+     "title": "Solomob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/08-samimob.webp",
+     "thumb": "/assets/work/wwe-bloodline/08-samimob_thumb.webp",
+     "title": "Samimob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/09-paulmob.webp",
+     "thumb": "/assets/work/wwe-bloodline/09-paulmob_thumb.webp",
+     "title": "Paulmob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/10-itemsmob.webp",
+     "thumb": "/assets/work/wwe-bloodline/10-itemsmob_thumb.webp",
+     "title": "Itemsmob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/11-romanmob-pb20.webp",
+     "thumb": "/assets/work/wwe-bloodline/11-romanmob-pb20_thumb.webp",
+     "title": "Romanmob Pb20"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/12-romanmob-hiac20.webp",
+     "thumb": "/assets/work/wwe-bloodline/12-romanmob-hiac20_thumb.webp",
+     "title": "Romanmob Hiac20"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/13-threatsmod.webp",
+     "thumb": "/assets/work/wwe-bloodline/13-threatsmod_thumb.webp",
+     "title": "Threatsmod"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/14-romanmob-wm38.webp",
+     "thumb": "/assets/work/wwe-bloodline/14-romanmob-wm38_thumb.webp",
+     "title": "Romanmob Wm38"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/15-romanmob-catc22.webp",
+     "thumb": "/assets/work/wwe-bloodline/15-romanmob-catc22_thumb.webp",
+     "title": "Romanmob Catc22"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/16-romanmob-wg22.webp",
+     "thumb": "/assets/work/wwe-bloodline/16-romanmob-wg22_thumb.webp",
+     "title": "Romanmob Wg22"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/17-romanmob-rr23.webp",
+     "thumb": "/assets/work/wwe-bloodline/17-romanmob-rr23_thumb.webp",
+     "title": "Romanmob Rr23"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/18-romanmob-wm39.webp",
+     "thumb": "/assets/work/wwe-bloodline/18-romanmob-wm39_thumb.webp",
+     "title": "Romanmob Wm39"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/19-romanmob-noc23.webp",
+     "thumb": "/assets/work/wwe-bloodline/19-romanmob-noc23_thumb.webp",
+     "title": "Romanmob Noc23"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/20-splintermob.webp",
+     "thumb": "/assets/work/wwe-bloodline/20-splintermob_thumb.webp",
+     "title": "Splintermob"
+    },
+    {
+     "src": "/assets/work/wwe-bloodline/21-fin.webp",
+     "thumb": "/assets/work/wwe-bloodline/21-fin_thumb.webp",
+     "title": "Fin"
+    }
+   ]
+  },
+  {
+   "id": "wargames",
+   "title": "WarGames 2025",
+   "kind": "grid",
+   "blurb": "The Survivor Series WarGames roster, redone as Arabic candidate cards.",
+   "items": [
+    {
+     "src": "/assets/work/wwe-wargames2025/brock.webp",
+     "thumb": "/assets/work/wwe-wargames2025/brock_thumb.webp",
+     "title": "Brock"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/bron.webp",
+     "thumb": "/assets/work/wwe-wargames2025/bron_thumb.webp",
+     "title": "Bron"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/bronson.webp",
+     "thumb": "/assets/work/wwe-wargames2025/bronson_thumb.webp",
+     "title": "Bronson"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/cmpunk.webp",
+     "thumb": "/assets/work/wwe-wargames2025/cmpunk_thumb.webp",
+     "title": "Cmpunk"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/cody.webp",
+     "thumb": "/assets/work/wwe-wargames2025/cody_thumb.webp",
+     "title": "Cody"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/drew.webp",
+     "thumb": "/assets/work/wwe-wargames2025/drew_thumb.webp",
+     "title": "Drew"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/jey.webp",
+     "thumb": "/assets/work/wwe-wargames2025/jey_thumb.webp",
+     "title": "Jey"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/jimmy.webp",
+     "thumb": "/assets/work/wwe-wargames2025/jimmy_thumb.webp",
+     "title": "Jimmy"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/logan.webp",
+     "thumb": "/assets/work/wwe-wargames2025/logan_thumb.webp",
+     "title": "Logan"
+    },
+    {
+     "src": "/assets/work/wwe-wargames2025/roman.webp",
+     "thumb": "/assets/work/wwe-wargames2025/roman_thumb.webp",
+     "title": "Roman"
+    }
+   ]
+  },
+  {
+   "id": "jackets",
+   "title": "Jackets",
+   "blurb": "Varsity jackets, one per person.",
+   "items": [
+    {
+     "src": "/assets/work/jackets/abdullah.webp",
+     "thumb": "/assets/work/jackets/abdullah_thumb.webp",
+     "title": "Abdullah"
+    },
+    {
+     "src": "/assets/work/jackets/abdulrahman.webp",
+     "thumb": "/assets/work/jackets/abdulrahman_thumb.webp",
+     "title": "Abdulrahman"
+    },
+    {
+     "src": "/assets/work/jackets/al-samahy.webp",
+     "thumb": "/assets/work/jackets/al-samahy_thumb.webp",
+     "title": "Al Samahy"
+    },
+    {
+     "src": "/assets/work/jackets/ali.webp",
+     "thumb": "/assets/work/jackets/ali_thumb.webp",
+     "title": "Ali"
+    },
+    {
+     "src": "/assets/work/jackets/azz.webp",
+     "thumb": "/assets/work/jackets/azz_thumb.webp",
+     "title": "Azz"
+    }
+   ]
+  },
+  {
+   "id": "nile-league",
+   "title": "Nile League",
+   "blurb": "Thumbnail series.",
+   "items": [
+    {
+     "src": "/assets/work/thumbnails/nileleague.webp",
+     "thumb": "/assets/work/thumbnails/nileleague_thumb.webp",
+     "title": "Nileleague"
+    },
+    {
+     "src": "/assets/work/thumbnails/nileleague2.webp",
+     "thumb": "/assets/work/thumbnails/nileleague2_thumb.webp",
+     "title": "Nileleague2"
+    },
+    {
+     "src": "/assets/work/thumbnails/nileleague3.webp",
+     "thumb": "/assets/work/thumbnails/nileleague3_thumb.webp",
+     "title": "Nileleague3"
+    },
+    {
+     "src": "/assets/work/thumbnails/nileleague4.webp",
+     "thumb": "/assets/work/thumbnails/nileleague4_thumb.webp",
+     "title": "Nileleague4"
+    },
+    {
+     "src": "/assets/work/thumbnails/nileleague5.webp",
+     "thumb": "/assets/work/thumbnails/nileleague5_thumb.webp",
+     "title": "Nileleague5"
+    }
+   ]
+  }
+ ],
+ "singles": [
+  {
+   "id": "recent",
+   "title": "Recent",
+   "items": [
+    {
+     "src": "/assets/work/recent/ezio.webp",
+     "thumb": "/assets/work/recent/ezio_thumb.webp",
+     "title": "Ezio"
+    },
+    {
+     "src": "/assets/work/recent/ezionail.webp",
+     "thumb": "/assets/work/recent/ezionail_thumb.webp",
+     "title": "Ezionail"
+    },
+    {
+     "src": "/assets/work/recent/thumbnail.webp",
+     "thumb": "/assets/work/recent/thumbnail_thumb.webp",
+     "title": "Thumbnail"
+    }
+   ]
+  },
+  {
+   "id": "wwe",
+   "title": "Wrestling",
+   "items": [
+    {
+     "src": "/assets/work/wwe/dx.webp",
+     "thumb": "/assets/work/wwe/dx_thumb.webp",
+     "title": "Dx"
+    },
+    {
+     "src": "/assets/work/wwe/laknight-v2.webp",
+     "thumb": "/assets/work/wwe/laknight-v2_thumb.webp",
+     "title": "Laknight V2"
+    },
+    {
+     "src": "/assets/work/wwe/lifeisntfairandstill.webp",
+     "thumb": "/assets/work/wwe/lifeisntfairandstill_thumb.webp",
+     "title": "Lifeisntfairandstill"
+    },
+    {
+     "src": "/assets/work/wwe/romanmob.webp",
+     "thumb": "/assets/work/wwe/romanmob_thumb.webp",
+     "title": "Romanmob"
+    },
+    {
+     "src": "/assets/work/wwe/romanreigns.webp",
+     "thumb": "/assets/work/wwe/romanreigns_thumb.webp",
+     "title": "Romanreigns"
+    },
+    {
+     "src": "/assets/work/wwe/spearit.webp",
+     "thumb": "/assets/work/wwe/spearit_thumb.webp",
+     "title": "Spearit"
+    },
+    {
+     "src": "/assets/work/wwe/sz.webp",
+     "thumb": "/assets/work/wwe/sz_thumb.webp",
+     "title": "Sz"
+    },
+    {
+     "src": "/assets/work/wwe/wetheones.webp",
+     "thumb": "/assets/work/wwe/wetheones_thumb.webp",
+     "title": "Wetheones"
+    },
+    {
+     "src": "/assets/work/wwe/wm42n1.webp",
+     "thumb": "/assets/work/wwe/wm42n1_thumb.webp",
+     "title": "Wm42n1"
+    },
+    {
+     "src": "/assets/work/wwe/wrestlemania.webp",
+     "thumb": "/assets/work/wwe/wrestlemania_thumb.webp",
+     "title": "Wrestlemania"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/endofanera.webp",
+     "thumb": "/assets/work/wwe-minimalist/endofanera_thumb.webp",
+     "title": "Endofanera"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/iquit.webp",
+     "thumb": "/assets/work/wwe-minimalist/iquit_thumb.webp",
+     "title": "Iquit"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/pipebomb.webp",
+     "thumb": "/assets/work/wwe-minimalist/pipebomb_thumb.webp",
+     "title": "Pipebomb"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/shield.webp",
+     "thumb": "/assets/work/wwe-minimalist/shield_thumb.webp",
+     "title": "Shield"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/story.webp",
+     "thumb": "/assets/work/wwe-minimalist/story_thumb.webp",
+     "title": "Story"
+    },
+    {
+     "src": "/assets/work/wwe-minimalist/streak.webp",
+     "thumb": "/assets/work/wwe-minimalist/streak_thumb.webp",
+     "title": "Streak"
+    }
+   ]
+  },
+  {
+   "id": "football",
+   "title": "Football",
+   "items": [
+    {
+     "src": "/assets/work/football/bellingham.webp",
+     "thumb": "/assets/work/football/bellingham_thumb.webp",
+     "title": "Bellingham"
+    },
+    {
+     "src": "/assets/work/football/lewa.webp",
+     "thumb": "/assets/work/football/lewa_thumb.webp",
+     "title": "Lewa"
+    },
+    {
+     "src": "/assets/work/football/palmer.webp",
+     "thumb": "/assets/work/football/palmer_thumb.webp",
+     "title": "Palmer"
+    }
+   ]
+  },
+  {
+   "id": "attitude",
+   "title": "Attitude",
+   "items": [
+    {
+     "src": "/assets/work/attitude/game.webp",
+     "thumb": "/assets/work/attitude/game_thumb.webp",
+     "title": "Game"
+    },
+    {
+     "src": "/assets/work/attitude/iconvsicon.webp",
+     "thumb": "/assets/work/attitude/iconvsicon_thumb.webp",
+     "title": "Iconvsicon"
+    },
+    {
+     "src": "/assets/work/attitude/iknowfosho.webp",
+     "thumb": "/assets/work/attitude/iknowfosho_thumb.webp",
+     "title": "Iknowfosho"
+    },
+    {
+     "src": "/assets/work/attitude/rocky.webp",
+     "thumb": "/assets/work/attitude/rocky_thumb.webp",
+     "title": "Rocky"
+    }
+   ]
+  },
+  {
+   "id": "archive",
+   "title": "Archive",
+   "items": [
+    {
+     "src": "/assets/work/archive/back.webp",
+     "thumb": "/assets/work/archive/back_thumb.webp",
+     "title": "Back"
+    },
+    {
+     "src": "/assets/work/archive/bday.webp",
+     "thumb": "/assets/work/archive/bday_thumb.webp",
+     "title": "Bday"
+    },
+    {
+     "src": "/assets/work/archive/cooked.webp",
+     "thumb": "/assets/work/archive/cooked_thumb.webp",
+     "title": "Cooked"
+    },
+    {
+     "src": "/assets/work/archive/eid.webp",
+     "thumb": "/assets/work/archive/eid_thumb.webp",
+     "title": "Eid"
+    },
+    {
+     "src": "/assets/work/archive/fin.webp",
+     "thumb": "/assets/work/archive/fin_thumb.webp",
+     "title": "Fin"
+    },
+    {
+     "src": "/assets/work/archive/front.webp",
+     "thumb": "/assets/work/archive/front_thumb.webp",
+     "title": "Front"
+    },
+    {
+     "src": "/assets/work/archive/poetry.webp",
+     "thumb": "/assets/work/archive/poetry_thumb.webp",
+     "title": "Poetry"
+    },
+    {
+     "src": "/assets/work/archive/soniccu.webp",
+     "thumb": "/assets/work/archive/soniccu_thumb.webp",
+     "title": "Soniccu"
+    }
+   ]
+  }
+ ]
+}
