@@ -8,6 +8,7 @@ const { series, singles } = work;
 const projects = [
     { title: 'Roman Reigns — Tribal Chief', note: 'A cinematic tribute site to the Tribal Chief.', link: 'https://romanfolio.ezzio.me', img: '/assets/romanfolio/hero.webp' },
     { title: 'FlickBall', note: 'A comic-book tribute to Barça under Hansi Flick.', link: 'https://flickball.ezzio.me', img: '/assets/flickball/gallery-1.webp' },
+    { title: 'Fun2Night Online', note: 'An Attitude Era TV room and Windows 98 desk: VCR, AIM chat, Minesweeper, guestbook.', link: 'https://f2n.ezzio.me', img: '/assets/f2n/hero.webp' },
 ];
 const pad = (n) => String(n).padStart(2, '0');
 const all = [...series, ...singles];
